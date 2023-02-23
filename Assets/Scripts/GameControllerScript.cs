@@ -16,7 +16,7 @@ public class GameControllerScript : MonoBehaviour
         {
             for (int j = i + 1; j < tiles.Length; j++)
             {
-                if (Vector3.Distance(tiles[i].transform.position, tiles[j].transform.position) < 1.1f) {
+                if (Vector3.Distance(tiles[i].transform.position, tiles[j].transform.position) < 2.1f) {
                     tiles[i].getNeighbors().Add(tiles[j]);
                     tiles[j].getNeighbors().Add(tiles[i]);
                 }
@@ -81,7 +81,7 @@ public class GameControllerScript : MonoBehaviour
                         tileQueue.Add(current.getNeighbors()[i]);
                     }
 
-                    float discreteDistance = current.getDistance() + 1;
+                    float discreteDistance = current.getDistance() + 2;
                     if (current.getNeighbors()[i].getDistance() > discreteDistance)
                     {
                         current.getNeighbors()[i].setDistance(discreteDistance);
