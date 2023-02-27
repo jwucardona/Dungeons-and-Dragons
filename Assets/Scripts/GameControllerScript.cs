@@ -1,16 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameControllerScript : MonoBehaviour
 {
     TileScript[] tiles;
 
     public TileScript start, end;
+    public GameObject characterButton;
+    public GameObject wizardParentButton;
+    public GameObject clericParentButton;
+    public Button wizardButton;
+    public Button clericButton; 
+    
+    private static GameControllerScript theGameController;
+
+    public static GameControllerScript getInstance()
+    {
+        return theGameController;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        theGameController = this;
+
+        characterButton.SetActive(false);
+        wizardParentButton.SetActive(false);
+        clericParentButton.SetActive(false);
+        wizardButton.GetComponent<Button>().onClick.AddListener(WizTaskOnClick);
+        clericButton.GetComponent<Button>().onClick.AddListener(CleTaskOnClick);
+
+
         tiles = FindObjectsOfType<TileScript>();
         for (int i = 0; i < tiles.Length; i++)
         {
@@ -23,13 +45,30 @@ public class GameControllerScript : MonoBehaviour
             }
         }
 
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         computerPath(start, end);
+        if (Input.GetKey(KeyCode.T))
+        {
+            characterButton.SetActive(true);
+        }
+        
+
+    }
+
+    void WizTaskOnClick()
+    {
+        characterButton.SetActive(false);
+        wizardParentButton.SetActive(true);
+    }
+
+    void CleTaskOnClick()
+    {
+        characterButton.SetActive(false);
+        clericParentButton.SetActive(true);
     }
 
     List<TileScript> tileQueue = new List<TileScript>();
