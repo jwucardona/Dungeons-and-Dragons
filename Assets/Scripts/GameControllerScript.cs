@@ -1,35 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameControllerScript : MonoBehaviour
 {
     TileScript[] tiles;
 
     public TileScript start, end;
+    public GameObject characterButton;
+    public GameObject wizardParentButton;
+    public GameObject clericParentButton;
+    public Button wizardButton;
+    public Button clericButton; 
+    
+    private static GameControllerScript theGameController;
+
+    public static GameControllerScript getInstance()
+    {
+        return theGameController;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        theGameController = this;
+
+        characterButton.SetActive(false);
+        wizardParentButton.SetActive(false);
+        clericParentButton.SetActive(false);
+        wizardButton.GetComponent<Button>().onClick.AddListener(WizTaskOnClick);
+        clericButton.GetComponent<Button>().onClick.AddListener(CleTaskOnClick);
+
+
         tiles = FindObjectsOfType<TileScript>();
         for (int i = 0; i < tiles.Length; i++)
         {
             for (int j = i + 1; j < tiles.Length; j++)
             {
-                if (Vector3.Distance(tiles[i].transform.position, tiles[j].transform.position) < 1.1f) {
+                if (Vector3.Distance(tiles[i].transform.position, tiles[j].transform.position) < 2.1f) {
                     tiles[i].getNeighbors().Add(tiles[j]);
                     tiles[j].getNeighbors().Add(tiles[i]);
                 }
             }
         }
 
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         computerPath(start, end);
+        if (Input.GetKey(KeyCode.T))
+        {
+            characterButton.SetActive(true);
+        }
+        
+
+    }
+
+    void WizTaskOnClick()
+    {
+        characterButton.SetActive(false);
+        wizardParentButton.SetActive(true);
+    }
+
+    void CleTaskOnClick()
+    {
+        characterButton.SetActive(false);
+        clericParentButton.SetActive(true);
     }
 
     List<TileScript> tileQueue = new List<TileScript>();
@@ -81,7 +120,7 @@ public class GameControllerScript : MonoBehaviour
                         tileQueue.Add(current.getNeighbors()[i]);
                     }
 
-                    float discreteDistance = current.getDistance() + 1;
+                    float discreteDistance = current.getDistance() + 2;
                     if (current.getNeighbors()[i].getDistance() > discreteDistance)
                     {
                         current.getNeighbors()[i].setDistance(discreteDistance);
