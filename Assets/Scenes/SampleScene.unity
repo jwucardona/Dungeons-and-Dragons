@@ -8808,12 +8808,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1458269897}
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 1135896583145232562, guid: f0a71cd31be22af41ac5eadad68b162a,
         type: 3}
       propertyPath: wizardPrefab
       value: 
       objectReference: {fileID: 5551378039063252320, guid: fea2cdcfc68814f1b88d8bf4211ff492,
         type: 3}
+=======
+>>>>>>> parent of ac0c039 (added attack selection menu and ray of frost (WIP))
 =======
 >>>>>>> parent of ac0c039 (added attack selection menu and ray of frost (WIP))
     - target: {fileID: 1135896583145232563, guid: f0a71cd31be22af41ac5eadad68b162a,
