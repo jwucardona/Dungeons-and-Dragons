@@ -7316,6 +7316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   A: {fileID: 2504349611172771154}
   B: {fileID: 1801159331491973491}
+  activateAttack: 0
 --- !u!1 &8276079971333880024
 GameObject:
   m_ObjectHideFlags: 0
