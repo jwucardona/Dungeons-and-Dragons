@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 46.7, y: -28.7}
+  m_AnchoredPosition: {x: 48.5, y: -28.7}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9044122622314526941
@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 7748886518806018858}
   - component: {fileID: 8256492482168684195}
   - component: {fileID: 6156345480985570740}
+  - component: {fileID: 129548695168520186}
   m_Layer: 5
   m_Name: Dice
   m_TagString: Untagged
@@ -212,3 +213,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &129548695168520186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4021848396247126163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9476792d1b4833543980cda1faedaa74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sides: 0
+  rollNum: 0

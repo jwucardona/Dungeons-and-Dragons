@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6449148316856502757}
   - component: {fileID: 6449148316856502758}
   - component: {fileID: 6449148316856502759}
-  - component: {fileID: 6449148316856502752}
+  - component: {fileID: 1094527695478901345}
   m_Layer: 5
   m_Name: RollDice
   m_TagString: Untagged
@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -18, y: -163}
+  m_AnchoredPosition: {x: -25.8, y: -163}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6449148316856502757
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6449148316856502752}
+      - m_Target: {fileID: 1094527695478901345}
         m_TargetAssemblyTypeName: RollScript, Assembly-CSharp
         m_MethodName: Roll
         m_Mode: 1
@@ -135,7 +135,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6449148316856502752
+--- !u!114 &1094527695478901345
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6449148316856502754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71597ce71de2a924f9189227bd611815, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f5a7c90768ac2d469bd9d0a047661fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   texts: []
