@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-import "System.String.Format";
+using System.Text;
 
 public class AbstractUnit : MonoBehaviour
 {
@@ -25,30 +24,30 @@ public class AbstractUnit : MonoBehaviour
     }
 
     public void addWeapon(string weapon){
-        if (String.Equals("Club", weapon)) {
+        if (weapon.Equals("Club")) {
             this.weapon = "Club";
-            damage.add("d4");
+            damage.Add("d4");
         }
-        if (String.Equals("HandAxe", weapon)) {
+        if (weapon.Equals("HandAxe")) {
             this.weapon = "HandAxe";
-            damage.add("d6");
+            damage.Add("d6");
         }
-        if (String.Equals("GreatClub", weapon)) {
+        if (weapon.Equals("GreatClub")) {
             this.weapon = "GreatClub";
-            damage.add("d8");
+            damage.Add("d8");
         }
     }
 
     public void addArmor(string armor){
-        if (String.Equals("Padded", armor)) {
+        if (armor.Equals("Padded")) {
             this.armor = "Padded";
             armorC = 11;
         }
-        if (String.Equals("Studded Leather", armor)) {
+        if (armor.Equals("Studded Leather")) {
             this.armor = "Studded Leather";
             armorC = 12;
         }
-        if (String.Equals("Leather", armor)) {
+        if (armor.Equals("Leather")) {
             this.armor = "Leather";
             armorC = 11;
         }
