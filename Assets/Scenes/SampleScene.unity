@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7648,7 +7648,7 @@ PrefabInstance:
     - target: {fileID: 9089574323080084684, guid: adbb52e32770be74c95811182199b5fe,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 8.06
       objectReference: {fileID: 0}
     - target: {fileID: 9089574323080084684, guid: adbb52e32770be74c95811182199b5fe,
         type: 3}
@@ -11464,9 +11464,33 @@ PrefabInstance:
       objectReference: {fileID: 495712009}
     - target: {fileID: 1135896583145232562, guid: f0a71cd31be22af41ac5eadad68b162a,
         type: 3}
+      propertyPath: clericPrefab
+      value: 
+      objectReference: {fileID: 7088731274168482358, guid: 52fd2cac2b16e4698b55dfa40cc16225,
+        type: 3}
+    - target: {fileID: 1135896583145232562, guid: f0a71cd31be22af41ac5eadad68b162a,
+        type: 3}
       propertyPath: wizardButton
       value: 
       objectReference: {fileID: 1073605102}
+    - target: {fileID: 1135896583145232562, guid: f0a71cd31be22af41ac5eadad68b162a,
+        type: 3}
+      propertyPath: wizardPrefab
+      value: 
+      objectReference: {fileID: 5551378039063252320, guid: fea2cdcfc68814f1b88d8bf4211ff492,
+        type: 3}
+    - target: {fileID: 1135896583145232562, guid: f0a71cd31be22af41ac5eadad68b162a,
+        type: 3}
+      propertyPath: skeletonPrefab
+      value: 
+      objectReference: {fileID: 360649036812697002, guid: 03d838096e3ab4951b0607300ab32116,
+        type: 3}
+    - target: {fileID: 1135896583145232562, guid: f0a71cd31be22af41ac5eadad68b162a,
+        type: 3}
+      propertyPath: warhorsePrefab
+      value: 
+      objectReference: {fileID: 803961896674862629, guid: 619908c5fcb5f42f499abb77953c4905,
+        type: 3}
     - target: {fileID: 1135896583145232562, guid: f0a71cd31be22af41ac5eadad68b162a,
         type: 3}
       propertyPath: characterButton

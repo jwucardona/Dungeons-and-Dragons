@@ -2,11 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameControllerScript : MonoBehaviour
 {
     TileScript[] tiles;
 
     public TileScript start, end;
+
+    public GameObject wizardPrefab;
+    public GameObject clericPrefab;
+
+    public GameObject skeletonPrefab;
+    public GameObject warhorsePrefab;
+
+    System.Random rnd = new System.Random();
+
+    List<GameObject> enemyPrefabList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +34,71 @@ public class GameControllerScript : MonoBehaviour
             }
         }
 
-        
+        //fill enemy prefab list for random selection
+        enemyPrefabList.Add(skeletonPrefab);
+        enemyPrefabList.Add(warhorsePrefab);
+
+        // code to instantiate wizards on run
+        int howManyWizards = CharacterMenuScript.getWizardInput();
+        for(int i = 0; i < howManyWizards; i++){
+            bool validPosition = false;
+            int x;
+            int z;
+            do{
+                x = rnd.Next(19/2) * 2; //ensure that random int is even
+                z = rnd.Next(11/2) * 2; //ensure that random int is even
+
+                for(int j = 0; j < tiles.Length; j++){
+                    if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
+                        validPosition = true;
+                        tiles[j].setTaken(true);
+                    }
+                }
+
+            }while(!validPosition);
+            Instantiate(wizardPrefab, new Vector3(x, 1.25f, z), Quaternion.identity);
+        }
+        int howManyClerics = CharacterMenuScript.getClericInput();
+        for(int i = 0; i < howManyWizards; i++){
+            bool validPosition = false;
+            int x;
+            int z;
+            do{
+                x = rnd.Next(19/2) * 2; //ensure that random int is even
+                z = rnd.Next(11/2) * 2; //ensure that random int is even
+
+                for(int j = 0; j < tiles.Length; j++){
+                    if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
+                        validPosition = true;
+                        tiles[j].setTaken(true);
+                    }
+                }
+
+            }while(!validPosition);
+
+            Instantiate(clericPrefab, new Vector3(x, 1.25f, z), Quaternion.identity);
+        }
+        int howManyEnemies = CharacterMenuScript.getEnemyInput();
+        for(int i = 0; i < howManyEnemies; i++){
+            int prefabIndex = rnd.Next(2);
+            bool validPosition = false;
+            int x;
+            int z;
+            do{
+                x = rnd.Next(19/2) * 2; //ensure that random int is even
+                z = rnd.Next(12/2,25/2) * 2; //ensure that random int is even
+
+                for(int j = 0; j < tiles.Length; j++){
+                    if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
+                        validPosition = true;
+                        tiles[j].setTaken(true);
+                    }
+                }
+
+            }while(!validPosition);
+            
+            Instantiate(enemyPrefabList[prefabIndex], new Vector3(x, 1.25f, z), transform.rotation * Quaternion.Euler (0f, 180f, 0f));
+        }
     }
 
     // Update is called once per frame

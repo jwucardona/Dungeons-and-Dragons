@@ -8,6 +8,7 @@ public class TileScript : MonoBehaviour
     float distance;
     TileScript backPointer;
     bool hasVisited;
+    bool taken = false;
 
     public GameObject[] borders;
 
@@ -36,6 +37,12 @@ public class TileScript : MonoBehaviour
     public float getDistance()
     {
         return distance;
+    }
+    public void setTaken(bool taken_in){
+        taken = taken_in;
+    }
+    public bool getTaken(){
+        return taken;
     }
 
     public void setVisited(bool visited_in)
