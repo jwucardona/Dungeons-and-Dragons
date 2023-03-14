@@ -1132,7 +1132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 248940016098998710}
-  - component: {fileID: 7604416747267309008}
+  - component: {fileID: 5279311490593433927}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Untagged
@@ -1167,7 +1167,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7604416747267309008
+--- !u!114 &5279311490593433927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1176,7 +1176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5551378039063252320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d767805b7ea514b939ca91596cdeb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 99a5089c25d7d4f0994edc3911125472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fireBolt: {fileID: 8722839020796396846, guid: 927e84bcb4acd2840b5d06c058a70374,

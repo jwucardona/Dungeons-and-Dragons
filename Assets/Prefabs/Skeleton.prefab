@@ -106,6 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5972751883556921744}
+  - component: {fileID: 3741146283063413109}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -142,6 +143,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3741146283063413109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360649036812697002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ccdb2b19e2d4854a91510bafaa334c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  A: {fileID: 2504349611172771154}
+  B: {fileID: 1801159331491973491}
+  arm: {fileID: 8270001817536263629}
+  activateAttack: 0
 --- !u!1 &397307048296412397
 GameObject:
   m_ObjectHideFlags: 0
