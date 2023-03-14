@@ -21,6 +21,7 @@ public class AbstractUnit : MonoBehaviour
         this.armorC = armorC;
         this.movement = movement;
         this.type = type;
+        setDamage(type);
     }
 
     public void addWeapon(string weapon){
@@ -58,6 +59,24 @@ public class AbstractUnit : MonoBehaviour
         if(hp < 0){
             hp = 0;
             die();
+        }
+    }
+
+    public void setDamage(string type){
+        if (type.Equals("Wiz"))
+            damage.Add("d4");
+        if (type.Equals("Cle")) {
+            damage.Add("d6");
+            damage.Add("d6");
+        }
+        if (type.Equals("Sk")) {
+            damage.Add("d6");
+            damage.Add("2");
+        }
+        if (type.Equals("SkH")) {
+            damage.Add("d6");
+            damage.Add("d6");
+            damage.Add("4");
         }
     }
 
