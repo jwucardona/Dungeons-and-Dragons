@@ -2,48 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+import "System.String.Format";
+
 public class AbstractUnit : MonoBehaviour
 {
+
     private int hp;
     private int armorC;
     private int movement;
-    private vector<string> damage;
-    private string weapon = 'None';
-    private string armor = 'None';
+    private string type;
+    private List<string> damage;
+    private string weapon = "None";
+    private string armor = "None";
 
-    public AbstractUnit(int hp, int armorC, int movement, vector<string> damage){
+    // types of units:
+    // Wizard = Wiz, Cleric = Cle, Skeleton = Sk, Skeleton Horse = SkH
+    public AbstractUnit(int hp, int armorC, int movement, string type){
         this.hp = hp;
         this.armorC = armorC;
         this.movement = movement;
-        this.damage = damage;
+        this.type = type;
     }
 
     public void addWeapon(string weapon){
-        if (weapon.equals('Club')) {
-            this.weapon = 'Club';
-            damage.pushBack('d4');
+        if (String.Equals("Club", weapon)) {
+            this.weapon = "Club";
+            damage.add("d4");
         }
-        if (weapon.equals('HandAxe')) {
-            this.weapon = 'HandAxe';
-            damage.pushBack('d6');
+        if (String.Equals("HandAxe", weapon)) {
+            this.weapon = "HandAxe";
+            damage.add("d6");
         }
-        if (weapon.equals('GreatClub')) {
-            this.weapon = 'GreatClub';
-            damage.pushBack('d8');
+        if (String.Equals("GreatClub", weapon)) {
+            this.weapon = "GreatClub";
+            damage.add("d8");
         }
     }
 
     public void addArmor(string armor){
-        if (armor.equals('Padded')) {
-            this.armor = 'Padded';
+        if (String.Equals("Padded", armor)) {
+            this.armor = "Padded";
             armorC = 11;
         }
-        if (armor.equals('Studded Leather')) {
-            this.armor = 'Studded Leather';
+        if (String.Equals("Studded Leather", armor)) {
+            this.armor = "Studded Leather";
             armorC = 12;
         }
-        if (armor.equals('Leather')) {
-            this.armor = 'Leather';
+        if (String.Equals("Leather", armor)) {
+            this.armor = "Leather";
             armorC = 11;
         }
     }
@@ -71,6 +77,8 @@ public class AbstractUnit : MonoBehaviour
     public void die(){
         //remove everything about this unit here
     }
+
+    
     
     // Start is called before the first frame update
     void Start()

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wizard : AbstractUnit
+public class WizardUnit : AbstractUnit
 {
-    public WazardUnit(){
-        super(75, 12, 6, ['d4']);
+    //List<string> damage = new List<string>(){"d4"};
+    public WizardUnit() : base(75, 12, 6, "Wiz"){
     }
 
     // Start is called before the first frame update
