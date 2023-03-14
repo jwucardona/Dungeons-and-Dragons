@@ -26,6 +26,15 @@
             clericDropdownMenu.onValueChanged.AddListener(delegate{
                 setClericInput();
             });
+
+            //Trying to gray out options based on other gameobjects selected
+            /*Toggle toggle = wizardDropdownMenu.GetComponent<Toggle>();
+            Debug.Log(toggle);
+            print(Int32.Parse(toggle.name))
+            if (toggle != null && Int32.Parse(toggle.name) > 5-clericInput)
+            {
+                toggle.interactable = false;
+            }*/
         }
 
 

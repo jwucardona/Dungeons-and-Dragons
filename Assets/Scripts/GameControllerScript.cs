@@ -97,7 +97,7 @@ public class GameControllerScript : MonoBehaviour
 
             }while(!validPosition);
             
-            Instantiate(enemyPrefabList[prefabIndex], new Vector3(x, 1.25f, z), Quaternion.identity);
+            Instantiate(enemyPrefabList[prefabIndex], new Vector3(x, 1.25f, z), transform.rotation * Quaternion.Euler (0f, 180f, 0f));
         }
     }
 
