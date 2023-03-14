@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ClericUnit : AbstractUnit
 {
-    public ClericUnit(int damage){
-        super(60, 10, 5, int damage);
+    public ClericUnit(){
+        super(60, 10, 5, ['d6', 'd6']);
     }
     
     // Start is called before the first frame update

@@ -5,28 +5,55 @@ using UnityEngine;
 public class AbstractUnit : MonoBehaviour
 {
     private int hp;
-    private int armor;
+    private int armorC;
     private int movement;
-    private int damage;
+    private vector<string> damage;
+    private string weapon = 'None'
+    private string armor = 'None'
 
-    public AbstractUnit(int hp, int armor, int movement, int damage){
+    public AbstractUnit(int hp, int armorC, int movement, vector<string> damage){
         this.hp = hp;
-        this.armor = armor;
+        this.armorC = armorC;
         this.movement = movement;
         this.damage = damage;
     }
 
     public void addWeapon(string weapon){
-        // add weapon to damage
+        if (weapon.equals('Club')) {
+            this.weapon = 'Club';
+            damage.pushBack('d4');
+        }
+        if (weapon.equals('HandAxe')) {
+            this.weapon = 'HandAxe';
+            damage.pushBack('d6');
+        }
+        if (weapon.equals('GreatClub')) {
+            this.weapon = 'GreatClub';
+            damage.pushBack('d8');
+        }
     }
 
     public void addArmor(string armor){
-        // add armor to AC
+        if (armor.equals('Padded')) {
+            this.armor = 'Padded';
+            armorC = 11;
+        }
+        if (armor.equals('Studded Leather')) {
+            this.armor = 'Studded Leather';
+            armorC = 12;
+        }
+        if (armor.equals('Leather')) {
+            this.armor = 'Leather';
+            armorC = 11;
+        }
     }
 
     public void takeDamage(int damageTaken){
         hp -= damageTaken;
-        if(hp < 0)  hp = 0;
+        if(hp < 0){
+            hp = 0;
+            die();
+        }
     }
 
     public int getHp(){

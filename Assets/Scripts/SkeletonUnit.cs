@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SkeletonUnit : AbstractUnit
 {
-    public SkeletonUnit(int damage){
-        super(13, 13, 6, int damage);
+    public SkeletonUnit(){
+        super(13, 13, 6, ['d6', '2']);
     }
     
     // Start is called before the first frame update

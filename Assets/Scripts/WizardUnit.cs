@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Wizard : AbstractUnit
 {
-    public WazardUnit(int damage){
-        super(75, 12, 6, int damage);
+    public WazardUnit(){
+        super(75, 12, 6, ['d4']);
     }
 
     // Start is called before the first frame update
