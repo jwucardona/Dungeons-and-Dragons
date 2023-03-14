@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ClericUnit : AbstractUnit
 {
-    public ClericUnit(){
-        super(60, 10, 5, ['d6', 'd6']);
+    //List<string> damage = new List<string>(){"d6", "d6"};
+    public ClericUnit() : base(60, 10, 5, "Cle"){
     }
     
     // Start is called before the first frame update

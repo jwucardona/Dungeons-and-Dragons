@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SkeletonUnit : AbstractUnit
 {
-    public SkeletonUnit(){
-        super(13, 13, 6, ['d6', '2']);
+    //List<string> damage = new List<string>(){"d6", "2"};
+    public SkeletonUnit() : base(13, 13, 6, "Sk"){
     }
     
     // Start is called before the first frame update

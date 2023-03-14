@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SkelHorseUnit : AbstractUnit
 {
-    public SkelHorseUnit(){
-        super(22, 13, 12, ['d6', 'd6', '4']);
+    //List<string> damage = new List<string>(){"d6", "d6", "4"};
+    public SkelHorseUnit() : base(22, 13, 12, "SkH"){
     }
 
     // Start is called before the first frame update
