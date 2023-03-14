@@ -8,8 +8,8 @@ public class AbstractUnit : MonoBehaviour
     private int armorC;
     private int movement;
     private vector<string> damage;
-    private string weapon = 'None'
-    private string armor = 'None'
+    private string weapon = 'None';
+    private string armor = 'None';
 
     public AbstractUnit(int hp, int armorC, int movement, vector<string> damage){
         this.hp = hp;
@@ -61,7 +61,7 @@ public class AbstractUnit : MonoBehaviour
     }
 
     public int getArmor(){
-        return armor;
+        return armorC;
     }
 
     public int getMove(){
