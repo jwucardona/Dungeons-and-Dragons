@@ -19,9 +19,12 @@ public class GameControllerScript : MonoBehaviour
 
     List<GameObject> enemyPrefabList = new List<GameObject>();
 
+    WizardScript wiz = new WizardScript();
+
     // Start is called before the first frame update
     void Start()
     {
+
         tiles = FindObjectsOfType<TileScript>();
         for (int i = 0; i < tiles.Length; i++)
         {
@@ -186,4 +189,23 @@ public class GameControllerScript : MonoBehaviour
 
     public List<TileScript> temp = new List<TileScript>();
     public List<TileScript> path = new List<TileScript>();
+    
+    int currentPlayer;
+    public void setPlayer(int player)
+    {
+        currentPlayer = player;
+    }
+   // bool didHit = false;
+
+    /*public void setHit(bool hit)
+    {
+        didHit = hit;
+    }*/
+
+    public void TakeTurn()
+    {
+        //if current player is wizard and chooses attack
+        wiz.wizAttack(); //this will call attack and set the bool didHit to true or false
+        //if hit attack
+    }
 }

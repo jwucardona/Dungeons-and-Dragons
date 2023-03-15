@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -11,9 +11,9 @@ public class RollScript : MonoBehaviour
   private void Start()
   {
 		diceRoll = new DiceRoll();
-		for(int i = 0; i < 5; i++)
+		for(int i = 0; i < 2 i++)
 		{
-			diceRoll.addDice(20); //adding 5 6 sided dice can change
+			diceRoll.addDice(20); //2 D20s
 		}
   }
   public void Roll()
@@ -31,4 +31,4 @@ public class RollScript : MonoBehaviour
 			}
 		}
   }
-}
+}*/

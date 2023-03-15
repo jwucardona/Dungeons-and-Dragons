@@ -34,13 +34,4 @@ public class DiceRoll
 			dice[i].roll();
 		}
 	}
-	public int total()
-	{
-		int t = 0;
-		for(int i = 0; i < dice.Count; i++)
-		{
-			t += dice[i].rollNum;
-		}
-		return t;
-	}
 }
