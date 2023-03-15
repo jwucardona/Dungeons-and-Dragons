@@ -97,4 +97,8 @@ public class ClericUnit : AbstractUnit
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
     }
+
+    public override void die() {
+        Destroy(gameObject);
+    }
 }

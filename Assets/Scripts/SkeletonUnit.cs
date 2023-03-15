@@ -45,4 +45,8 @@ public class SkeletonUnit : AbstractUnit
         activateAttack = false;
         transform.rotation = new Quaternion(0, 0, 0, 0);
     }
+
+    public override void die() {
+        Destroy(gameObject);
+    }
 }

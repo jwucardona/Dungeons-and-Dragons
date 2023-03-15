@@ -106,12 +106,11 @@ public class AbstractUnit : MonoBehaviour
     public int getMove(){
         return movement;
     }
-
-    public void die(){
-        // Destory(gameObject);
+    // override in children
+    public virtual void die(){
+        //Destory(go);
         print("Dies");
     }
-
     
     
     // Start is called before the first frame update
