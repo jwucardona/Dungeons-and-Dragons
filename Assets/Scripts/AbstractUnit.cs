@@ -5,7 +5,7 @@ using System.Text;
 
 public class AbstractUnit : MonoBehaviour
 {
-
+    
     private int hp;
     private int armorC;
     private int movement;
@@ -112,7 +112,18 @@ public class AbstractUnit : MonoBehaviour
         print("Dies");
     }
     
-    
+    public void rollForAttack()
+    {
+        //iterate through damage list
+        for(int i = 0; i < damage.Count; i++)
+        {
+            int totalDam = 0;
+            if(damage[i].Eqausl("d4"))
+                totalDam += rollD4();
+            if(damage[i].Equals("d6"))
+                totalDam += rollD6();
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {

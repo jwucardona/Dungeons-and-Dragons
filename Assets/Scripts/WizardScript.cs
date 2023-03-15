@@ -21,7 +21,7 @@ public class WizardScript : MonoBehaviour
     void Start()
     {
     }
-    public void wizAttack()
+   /* public void wizAttack()
     {
         attackRoll = new DiceRoll();
 		attackRoll.addDice(20); //add a D20
@@ -49,7 +49,7 @@ public class WizardScript : MonoBehaviour
          //Destroy(wizDice, 2.0f);
          //Destroy(wizResult,2.0f);
          //Destroy(wizRollBut, 2.0f);
-  }
+  }*/
     // Update is called once per frame
     void Update()
     {

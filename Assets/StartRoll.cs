@@ -42,20 +42,20 @@ public class StartRoll : MonoBehaviour
 		{
 			winText.text = "Player starts";
 			gcs.setPlayer(1);
-			/*Destroy(startTxt, 2.0f);
+			Destroy(startTxt, 2.0f);
 			Destroy(startButton, 2.0f);
 		    Destroy(startButton, 2.0f);
 			Destroy(d1, 2.0f);
-			Destroy(d2, 2.0f);*/
+			Destroy(d2, 2.0f);
 		}
 		else if(diceRoll.dice[0].rollNum < diceRoll.dice[1].rollNum)
 		{
 			winText.text = "enemy starts";
 			gcs.setPlayer(2);
-			/*Destroy(startTxt, 2.0f);
+			Destroy(startTxt, 2.0f);
 			Destroy(startButton, 2.0f);
 			Destroy(d1, 2.0f);
-			Destroy(d2, 2.0f);*/
+			Destroy(d2, 2.0f);
 		}
 		else if(diceRoll.dice[0].rollNum == diceRoll.dice[1].rollNum)
 		{
