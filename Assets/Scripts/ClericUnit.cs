@@ -72,8 +72,8 @@ public class ClericUnit : AbstractUnit
         if (shot.transform.position.x < (target.transform.position.x + 1) && shot.transform.position.x > (target.transform.position.x - 1) && shot.transform.position.z < (target.transform.position.z + 1) && shot.transform.position.z > (target.transform.position.z - 1))
         {
             Destroy(shot);
+            shotFired = false;
         }
-        shotFired = false;
     }
 
     GameObject shot;
