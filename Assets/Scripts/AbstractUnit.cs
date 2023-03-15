@@ -21,6 +21,7 @@ public class AbstractUnit : MonoBehaviour
         this.armorC = armorC;
         this.movement = movement;
         this.type = type;
+        damage = new List<string>();
         setDamage(type);
     }
 
