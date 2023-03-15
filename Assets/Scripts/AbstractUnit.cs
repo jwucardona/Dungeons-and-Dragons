@@ -14,6 +14,7 @@ public class AbstractUnit : MonoBehaviour
     private List<string> damage;
     private string weapon = "None";
     private string armor = "None";
+    private string className = "None";
     public UnitStatsHud hud;
 
 
@@ -80,20 +81,26 @@ public class AbstractUnit : MonoBehaviour
     }
 
     public void setDamage(string type){
-        if (type.Equals("Wiz"))
+        if (type.Equals("Wiz")){
             damage.Add("d4");
+            className = "Wizard";
+        }
+            
         if (type.Equals("Cle")) {
             damage.Add("d6");
             damage.Add("d6");
+            className = "Cleric";
         }
         if (type.Equals("Sk")) {
             damage.Add("d6");
             damage.Add("2");
+            className = "Skeleton";
         }
         if (type.Equals("SkH")) {
             damage.Add("d6");
             damage.Add("d6");
             damage.Add("4");
+            className = "Skel Horse";
         }
     }
 
@@ -128,6 +135,7 @@ public class AbstractUnit : MonoBehaviour
     void Start()
     {
         getReferences();
+        hud.createStats(className, armorC, movement);
         
     }
 

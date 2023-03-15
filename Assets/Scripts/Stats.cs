@@ -1,35 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class Stats
+public class Stats : MonoBehaviour
 {
-    public int hp;
-    public int armor;
-    public int movement;
-    public int damage;
+    [SerializeField] private TextMeshProUGUI classType;
+    [SerializeField] private TextMeshProUGUI ac;
+    [SerializeField] private TextMeshProUGUI mov;
+    
 
-    public Stats(int hp, int armor, int movement, int damage){
-        this.hp = hp;
-        this.armor = armor;
-        this.movement = movement;
-        this.damage = damage;
-    }
-
-    public void takeDamage(int damageTaken){
-        hp -= damageTaken;
-        if(hp < 0)  hp = 0;
-    }
-
-    public int getHp(){
-        return hp;
-    }
-
-    public int getArmor(){
-        return armor;
-    }
-
-    public int getMove(){
-        return movement;
+    public void setStats(string classIn, int acIn, int movIn){
+        classType.text = classIn;
+        ac.text = acIn.ToString();
+        mov.text = movIn.ToString();
     }
 }
