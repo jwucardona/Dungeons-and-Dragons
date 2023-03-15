@@ -18,6 +18,8 @@ public class AbstractUnit : MonoBehaviour
 
     private int maxHeatlh;
 
+    public RollScript rs = new RollScript();
+
     // types of units:
     // Wizard = Wiz, Cleric = Cle, Skeleton = Sk, Skeleton Horse = SkH
     public AbstractUnit(int hp, int armorC, int movement, string type){
@@ -118,10 +120,10 @@ public class AbstractUnit : MonoBehaviour
         for(int i = 0; i < damage.Count; i++)
         {
             int totalDam = 0;
-            if(damage[i].Eqausl("d4"))
-                totalDam += rollD4();
+            if(damage[i].Equals("d4"))
+                totalDam += rs.rollD4();
             if(damage[i].Equals("d6"))
-                totalDam += rollD6();
+                totalDam += rs.rollD6();
         }
     }
     // Start is called before the first frame update
