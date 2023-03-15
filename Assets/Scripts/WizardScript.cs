@@ -31,12 +31,10 @@ public class WizardScript : MonoBehaviour
 		if(rollResult > 12 ) //greater than whatever the amor class is
         {
            attackText.text = "rolled a " + rollResult + " and hit";
-          // gcs.setHit(true);
         }
 		else
         {
             attackText.text = "rolled a " + rollResult + " and didn't hit";
-          //  gcs.setHit(false);
         }
     }
   private void UpdateText()

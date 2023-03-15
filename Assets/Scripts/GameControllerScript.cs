@@ -191,21 +191,14 @@ public class GameControllerScript : MonoBehaviour
     public List<TileScript> path = new List<TileScript>();
     
     int currentPlayer;
-    public void setPlayer(int player)
+    public void setPlayer(int player) //the start roll will determine who goes first
     {
         currentPlayer = player;
     }
-   // bool didHit = false;
-
-    /*public void setHit(bool hit)
-    {
-        didHit = hit;
-    }*/
 
     public void TakeTurn()
     {
         //if current player is wizard and chooses attack
-        wiz.wizAttack(); //this will call attack and set the bool didHit to true or false
-        //if hit attack
+        wiz.wizAttack(); //this will call attack and in attack method it is determined whether or not wizard hits
     }
 }
