@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d2ca51e8bb9d8c841bdf972d1da84916, type: 2}
+  - {fileID: 2100000, guid: 9dbc52bb02232c147b4d68cbe394f949, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,7 +120,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 32735a10291065d4ab3407facb9866ec, type: 2}
+  - {fileID: 2100000, guid: 16f41823b8720af4ea380362557f7c5a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -171,7 +171,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.10196078, g: 0.4987348, b: 0.93333334, a: 1}
+      key0: {r: 0.9339623, g: 0.7876939, b: 0.10279448, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0.80784315}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 8147413973397532976}
   - component: {fileID: 1181164235981808152}
   m_Layer: 0
-  m_Name: Ray of Frost
+  m_Name: Scorching Ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
