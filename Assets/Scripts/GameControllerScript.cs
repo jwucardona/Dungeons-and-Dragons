@@ -252,7 +252,7 @@ List<TileScript> tileQueue = new List<TileScript>();
     {
         //if current player is wizard and chooses attack
 
-        wiz.wizAttack(); //this will call attack and in attack method it is determined whether or not wizard hits
+        //wiz.wizAttack(); //this will call attack and in attack method it is determined whether or not wizard hits
     }
 
 
