@@ -77,6 +77,7 @@ public class WizardUnit : AbstractUnit
         {
             Destroy(shot);
         }
+        shotFired = false;
     }
 
     GameObject shot;

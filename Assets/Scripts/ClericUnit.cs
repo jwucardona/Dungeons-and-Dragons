@@ -73,6 +73,7 @@ public class ClericUnit : AbstractUnit
         {
             Destroy(shot);
         }
+        shotFired = false;
     }
 
     GameObject shot;
