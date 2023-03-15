@@ -7,22 +7,21 @@ public class AbstractUnit : MonoBehaviour
 {
 
     private int hp;
+    private int maxHp;
     private int armorC;
     private int movement;
     private string type;
     private List<string> damage;
     private string weapon = "None";
     private string armor = "None";
-    private UnityEngine.UIElements.ProgressBar healthBar;
-    public GameObject figurine;
+    public UnitStatsHud hud;
 
-    private int maxHeatlh;
 
     // types of units:
     // Wizard = Wiz, Cleric = Cle, Skeleton = Sk, Skeleton Horse = SkH
     public AbstractUnit(int hp, int armorC, int movement, string type){
         this.hp = hp;
-        // maxHealth = hp;
+        maxHp = hp;
         this.armorC = armorC;
         this.movement = movement;
         this.type = type;
@@ -70,12 +69,13 @@ public class AbstractUnit : MonoBehaviour
         }
     }
 
-    // public void setupHealthBar(Canvas canvas, Camera camera){
-    //     healthBar.transform.SetParent(Canvas.transform);
-    //     if (healthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera)) {
-    //         faceCamera.Camera = Camera;
-    //     }
-    // }
+    private void getReferences(){
+        hud = GetComponent<UnitStatsHud>();
+    }
+
+    public void checkHealth(){
+        hud.UpdateHealth(hp, maxHp);
+    }
 
     public void setDamage(string type){
         if (type.Equals("Wiz"))
@@ -108,21 +108,20 @@ public class AbstractUnit : MonoBehaviour
     }
     // override in children
     public virtual void die(){
-        //Destory(go);
-        print("Dies");
     }
     
     
     // Start is called before the first frame update
     void Start()
     {
-        figurine = GetComponent<GameObject>();
+        getReferences();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        checkHealth();
     }
 
 }
