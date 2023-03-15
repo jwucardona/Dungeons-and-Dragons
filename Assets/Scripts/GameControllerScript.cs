@@ -22,6 +22,7 @@ public class GameControllerScript : MonoBehaviour
     public Button wizardButton;
     public Button clericButton; 
     
+    
     private static GameControllerScript theGameController;
 
     public static GameControllerScript getInstance()
@@ -33,9 +34,12 @@ System.Random rnd = new System.Random();
 
     List<GameObject> enemyPrefabList = new List<GameObject>();
 
+    WizardScript wiz = new WizardScript();
+
     // Start is called before the first frame update
     void Start()
     {
+
         theGameController = this;
         
         characterButton.SetActive(false);
@@ -43,6 +47,7 @@ System.Random rnd = new System.Random();
         clericParentButton.SetActive(false);
         wizardButton.GetComponent<Button>().onClick.AddListener(WizTaskOnClick);
         clericButton.GetComponent<Button>().onClick.AddListener(CleTaskOnClick);
+
 
         tiles = FindObjectsOfType<TileScript>();
         for (int i = 0; i < tiles.Length; i++)
@@ -232,4 +237,19 @@ List<TileScript> tileQueue = new List<TileScript>();
 
     public List<TileScript> temp = new List<TileScript>();
     public List<TileScript> path = new List<TileScript>();
+    
+    int currentPlayer;
+    public void setPlayer(int player) //the start roll will determine who goes first
+    {
+        currentPlayer = player;
+    }
+
+    public void TakeTurn()
+    {
+        //if current player is wizard and chooses attack
+
+        wiz.wizAttack(); //this will call attack and in attack method it is determined whether or not wizard hits
+    }
+
+
 }
