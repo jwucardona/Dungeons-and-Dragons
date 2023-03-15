@@ -1181,6 +1181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireBolt: {fileID: 8722839020796396846, guid: 927e84bcb4acd2840b5d06c058a70374,
     type: 3}
+  rayOfFrost: {fileID: 0}
   wandEnd: {fileID: 5786489285009433831}
 --- !u!1 &5567559159960966757
 GameObject:

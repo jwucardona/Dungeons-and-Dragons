@@ -28,7 +28,10 @@ public class WizardUnit : AbstractUnit
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKey(KeyCode.K))
+        {
+            takeDamage(100);
+        }
     }
 
     public void FireBolt()
