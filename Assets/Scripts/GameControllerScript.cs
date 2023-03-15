@@ -19,6 +19,8 @@ public class GameControllerScript : MonoBehaviour
     public GameObject characterButton;
     public GameObject wizardParentButton;
     public GameObject clericParentButton;
+    public GameObject wizSpellSlotsParent;
+    public GameObject cleSpellSlotsParent;
     public Button wizardButton;
     public Button clericButton; 
     
@@ -34,7 +36,7 @@ System.Random rnd = new System.Random();
 
     List<GameObject> enemyPrefabList = new List<GameObject>();
 
-   // WizardScript wiz = new WizardScript();
+    WizardScript wiz = new WizardScript();
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,8 @@ System.Random rnd = new System.Random();
         characterButton.SetActive(false);
         wizardParentButton.SetActive(false);
         clericParentButton.SetActive(false);
+        wizSpellSlotsParent.SetActive(false);
+        cleSpellSlotsParent.SetActive(false);
         wizardButton.GetComponent<Button>().onClick.AddListener(WizTaskOnClick);
         clericButton.GetComponent<Button>().onClick.AddListener(CleTaskOnClick);
 
@@ -248,7 +252,7 @@ List<TileScript> tileQueue = new List<TileScript>();
     {
         //if current player is wizard and chooses attack
 
-      
+        wiz.wizAttack(); //this will call attack and in attack method it is determined whether or not wizard hits
     }
 
 
