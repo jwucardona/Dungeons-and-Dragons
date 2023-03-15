@@ -5,7 +5,7 @@ using System.Text;
 
 public class AbstractUnit : MonoBehaviour
 {
-
+    
     private int hp;
     private int maxHp;
     private int armorC;
@@ -16,6 +16,8 @@ public class AbstractUnit : MonoBehaviour
     private string armor = "None";
     public UnitStatsHud hud;
 
+
+    public RollScript rs = new RollScript();
 
     // types of units:
     // Wizard = Wiz, Cleric = Cle, Skeleton = Sk, Skeleton Horse = SkH
@@ -110,7 +112,18 @@ public class AbstractUnit : MonoBehaviour
     public virtual void die(){
     }
     
-    
+    public void rollForAttack()
+    {
+        //iterate through damage list
+        for(int i = 0; i < damage.Count; i++)
+        {
+            int totalDam = 0;
+            if(damage[i].Equals("d4"))
+                totalDam += rs.rollD4();
+            if(damage[i].Equals("d6"))
+                totalDam += rs.rollD6();
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {

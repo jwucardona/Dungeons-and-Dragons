@@ -21,35 +21,6 @@ public class WizardScript : MonoBehaviour
     void Start()
     {
     }
-    public void wizAttack()
-    {
-        attackRoll = new DiceRoll();
-		attackRoll.addDice(20); //add a D20
-		attackRoll.Roll();
-		UpdateText();
-        int rollResult = attackRoll.dice[0].rollNum + 3; 
-		if(rollResult > 12 ) //greater than whatever the amor class is
-        {
-           attackText.text = "rolled a " + rollResult + " and hit";
-        }
-		else
-        {
-            attackText.text = "rolled a " + rollResult + " and didn't hit";
-        }
-    }
-  private void UpdateText()
-  {
-		for(int i = 0; i < AD.Count; i++)
-		{
-			if(i < attackRoll.dice.Count)
-			{
-				AD[i].text = attackRoll.dice[i].rollNum.ToString();
-			}
-		}
-         //Destroy(wizDice, 2.0f);
-         //Destroy(wizResult,2.0f);
-         //Destroy(wizRollBut, 2.0f);
-  }
     // Update is called once per frame
     void Update()
     {

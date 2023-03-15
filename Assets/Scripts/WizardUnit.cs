@@ -15,6 +15,8 @@ public class WizardUnit : AbstractUnit
 
     private static WizardUnit theWizard;
 
+    private int ss1, ss2, ss3;
+
     public static WizardUnit getInstance()
     {
         return theWizard;
@@ -28,6 +30,41 @@ public class WizardUnit : AbstractUnit
     void Start()
     {
         theWizard = this;
+        ss1 = 2;
+        ss2 = 2;
+        ss3 = 1;
+    }
+
+    public int getSS1()
+    {
+        return ss1;
+    }
+    public void setSS1(int input)
+    {
+        ss1 = input;
+    }
+
+    public int getSS2()
+    {
+        return ss2;
+    }
+    public void setSS2(int input)
+    {
+        ss2 = input;
+    }
+
+    public int getSS3()
+    {
+        return ss3;
+    }
+    public void setSS3(int input)
+    {
+        ss3 = input;
+    }
+
+    public void startAttack()
+    {
+        activateAttack = true;
     }
 
     // Update is called once per frame
@@ -36,10 +73,6 @@ public class WizardUnit : AbstractUnit
         if (Input.GetKey(KeyCode.K))
         {
             takeDamage(100);
-        }
-        if (Input.GetKey(KeyCode.T))
-        {
-            activateAttack = true;
         }
         if (activateAttack)
         {
