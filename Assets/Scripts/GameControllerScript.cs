@@ -22,6 +22,7 @@ public class GameControllerScript : MonoBehaviour
     public Button wizardButton;
     public Button clericButton; 
     
+    
     private static GameControllerScript theGameController;
 
     public static GameControllerScript getInstance()
@@ -232,4 +233,17 @@ List<TileScript> tileQueue = new List<TileScript>();
 
     public List<TileScript> temp = new List<TileScript>();
     public List<TileScript> path = new List<TileScript>();
+    
+    int currentPlayer;
+    public void setPlayer(int player) //the start roll will determine who goes first
+    {
+        currentPlayer = player;
+    }
+
+    public void TakeTurn()
+    {
+        //if current player is wizard and chooses attack
+        //wiz.wizAttack(); //this will call attack and in attack method it is determined whether or not wizard hits
+    }
+
 }
