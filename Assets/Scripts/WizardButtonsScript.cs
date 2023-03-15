@@ -39,11 +39,13 @@ public class WizardButtonsScript : MonoBehaviour
 
     void MMTaskOnClick()
     {
+        WizardUnit.getInstance().MagicMissile();
         GameControllerScript.getInstance().wizardParentButton.SetActive(false);
     }
 
     void SRTaskOnClick()
     {
+        WizardUnit.getInstance().ScorchingRay();
         GameControllerScript.getInstance().wizardParentButton.SetActive(false);
     }
 }

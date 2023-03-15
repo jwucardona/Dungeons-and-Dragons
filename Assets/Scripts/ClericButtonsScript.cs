@@ -25,16 +25,19 @@ public class ClericButtonsScript : MonoBehaviour
 
     void HWTaskOnClick()
     {
+        ClericUnit.getInstance().HealingWord();
         GameControllerScript.getInstance().clericParentButton.SetActive(false);
     }
 
     void MHWTaskOnClick()
     {
+        ClericUnit.getInstance().MassHealingWord();
         GameControllerScript.getInstance().clericParentButton.SetActive(false);
     }
 
     void ATaskOnClick()
     {
+        ClericUnit.getInstance().Aid();
         GameControllerScript.getInstance().clericParentButton.SetActive(false);
     }
 }
