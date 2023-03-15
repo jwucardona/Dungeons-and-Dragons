@@ -8,7 +8,7 @@ public class GameControllerScript : MonoBehaviour
 {
     TileScript[] tiles;
 
-    public TileScript start, end;
+    private TileScript start, end;
 
     public GameObject wizardPrefab;
     public GameObject clericPrefab;
@@ -131,6 +131,14 @@ System.Random rnd = new System.Random();
         {
             characterButton.SetActive(true);
         }
+    }
+
+    void setStart(TileScript start){
+        this.start = start;
+    }
+
+    void setEnd(TileScript end){
+        this.end = end;
     }
 
     void WizTaskOnClick()

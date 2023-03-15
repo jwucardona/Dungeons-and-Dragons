@@ -10,6 +10,8 @@ public class TileScript : MonoBehaviour
     bool hasVisited;
     bool taken = false;
 
+    private GameControllerScript theGameController = GameControllerScript.getInstance();
+
     public GameObject[] borders;
 
     public List<TileScript> getNeighbors()
@@ -71,5 +73,11 @@ public class TileScript : MonoBehaviour
         borders[1].GetComponent<MeshRenderer>().material.SetColor("_BaseColor", theColor);
         borders[2].GetComponent<MeshRenderer>().material.SetColor("_BaseColor", theColor);
         borders[3].GetComponent<MeshRenderer>().material.SetColor("_BaseColor", theColor);
+    }
+    void Start(){
+        
+    }
+    private void OnMouseEnter(){
+        //theGameController.setEnd();
     }
 }
