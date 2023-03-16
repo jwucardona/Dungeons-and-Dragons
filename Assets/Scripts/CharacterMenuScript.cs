@@ -39,7 +39,7 @@
 
 
         public void done(){
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("MainScene");
         }
         //store value of wizard guys
         public void setWizardInput(){

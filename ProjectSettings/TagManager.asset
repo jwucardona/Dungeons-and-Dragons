@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WizResult
   - WizDice
+  - Tile
   layers:
   - Default
   - TransparentFX
