@@ -37,8 +37,6 @@ System.Random rnd = new System.Random();
 
     List<GameObject> enemyPrefabList = new List<GameObject>();
 
-    WizardScript wiz = new WizardScript();
-    //public TurnControl tc = new TurnControl();
 
     // Start is called before the first frame update
     void Start()
@@ -90,8 +88,8 @@ System.Random rnd = new System.Random();
                 }
 
             }while(!validPosition);
-            GameObject wiz = Instantiate(wizardPrefab, new Vector3(x, 1.25f, z), Quaternion.identity);
-            tc.addWiz(wiz);
+            GameObject wizObj = Instantiate(wizardPrefab, new Vector3(x, 1.25f, z), Quaternion.identity);
+            tc.addWiz(wizObj);
         }
         int howManyClerics = CharacterMenuScript.getClericInput();
        
@@ -136,11 +134,11 @@ System.Random rnd = new System.Random();
             }while(!validPosition);
             
            GameObject enemy = Instantiate(enemyPrefabList[prefabIndex], new Vector3(x, 1.25f, z), transform.rotation * Quaternion.Euler (0f, 180f, 0f));
-           if(enemy.tag.Equals("Skel")
+           if(enemy.tag.Equals("Skel"))
            {
                tc.addSkel(enemy);
            }
-           if(enemy.tag.Equals("SkelHorse")
+           if(enemy.tag.Equals("SkelHorse"))
            {
               tc.addSkelHorse(enemy);
            }

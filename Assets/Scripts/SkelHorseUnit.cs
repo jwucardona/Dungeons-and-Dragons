@@ -6,6 +6,7 @@ public class SkelHorseUnit : AbstractUnit
 {
     public GameObject A, B, arm;
     public bool activateAttack;
+    private static SkelHorseUnit shu;
 
     //List<string> damage = new List<string>(){"d6", "d6", "4"};
     public SkelHorseUnit() : base(22, 13, 12, "SkH"){
@@ -16,7 +17,10 @@ public class SkelHorseUnit : AbstractUnit
     {
         
     }
-
+    public static SkelHorseUnit getInstance()
+    {
+        return shu;
+    }
     // Update is called once per frame
     void Update()
     {

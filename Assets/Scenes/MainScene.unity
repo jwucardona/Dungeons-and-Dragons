@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5117,6 +5117,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915699a3e6446484fa78446b26fa96e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wizardPrefab: {fileID: 5551378039063252320, guid: fea2cdcfc68814f1b88d8bf4211ff492,
+    type: 3}
+  clericPrefab: {fileID: 7088731274168482358, guid: 52fd2cac2b16e4698b55dfa40cc16225,
+    type: 3}
+  skeletonPrefab: {fileID: 360649036812697002, guid: 03d838096e3ab4951b0607300ab32116,
+    type: 3}
+  warhorsePrefab: {fileID: 803961896674862629, guid: 619908c5fcb5f42f499abb77953c4905,
+    type: 3}
   DiceText: {fileID: 474308407}
   instructions: {fileID: 143243996}
   state: 0
@@ -9205,6 +9213,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
+    - target: {fileID: 1135896583145232562, guid: f0a71cd31be22af41ac5eadad68b162a,
+        type: 3}
+      propertyPath: tc
+      value: 
+      objectReference: {fileID: 1253768112}
     - target: {fileID: 1135896583145232562, guid: f0a71cd31be22af41ac5eadad68b162a,
         type: 3}
       propertyPath: end

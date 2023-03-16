@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public enum TurnState { start, cleric, wizard, skelHorse, skelton, win, lose}; //change states to wizard cleric skeleton etc
 /*
@@ -28,6 +29,11 @@ public class TurnControl : MonoBehaviour
 {
     // Start is called before the first frame update
     //holds player wizard and cleric GameObjects
+    public GameObject wizardPrefab;
+    public GameObject clericPrefab;
+
+    public GameObject skeletonPrefab;
+    public GameObject warhorsePrefab;
 
    [SerializeField] TextMeshProUGUI DiceText;
    [SerializeField] TextMeshProUGUI instructions;
@@ -41,23 +47,23 @@ public class TurnControl : MonoBehaviour
    
    public void addSkelHorse(GameObject skH)
    {
-        skelHorse.Add(skH);
-        allUnits.Add(skH);
+        skelHorse.Add(skH.GetComponent<SkelHorseUnit>());
+        allUnits.Add(skH.GetComponent<SkelHorseUnit>());
    }
-   public void addCleric(GameObject cleric)
+   public void addCleric(GameObject cler)
    {
-        cleric.Add(cleric);
-        allUnits.Add(cleric);
+        cleric.Add(cler.GetComponent<ClericUnit>());
+        allUnits.Add(cler.GetComponent<ClericUnit>());
    }
    public void addSkel(GameObject Sk)
    {
-        skel.Add(Sk);
-        allUnits.Add(Sk);
+        skel.Add(Sk.GetComponent<SkeletonUnit>());
+        allUnits.Add(Sk.GetComponent<SkeletonUnit>());
    }
-   public void addWiz(GameObject wiz)
+   public void addWiz(GameObject wizard)
    {
-        wiz.Add(wiz);
-        allUnits.Add(wiz);
+       wiz.Add(wizard.GetComponent<WizardUnit>());
+       allUnits.Add(wizard.GetComponent<WizardUnit>());
    }
    public TurnState state;
     
@@ -65,46 +71,24 @@ public class TurnControl : MonoBehaviour
     {
         Dice = new RollScript();
         state = TurnState.start;
-       // StartCoroutine(SettupGame()); //will go to Start battle
+        StartCoroutine(SettupGame()); //will go to Start battle
     }
     //roll D20 for all abstract Units and sort the list to determine the order
 
     //names use .getType() and they are"Wiz" "SkH" "Sk" "Cle"
     IEnumerator SettupGame() //coroutine aka waits until switches turns etc
     {
-       //can spawn/instantiate the player and the enemy here if needed
-
-       int playerRoll = Dice.rollD("D20"); //first rollD20
-       instructions.text = "player rolls " + playerRoll;
-       DiceText.text = playerRoll.ToString();
-
-       yield return new WaitForSeconds(1f); //wait 1 second before the enemy rolls 
-
-       int enemyRoll = Dice.rollD("D20"); //enemy rollD
-       instructions.text = "enemy rolls " + enemyRoll;
-       DiceText.text = enemyRoll.ToString();
-
-       yield return new WaitForSeconds(1f);
-
-      if(playerRoll > enemyRoll)
-       {
-            instructions.text = "player starts";
+        Dictionary<string, int> turnDict = new Dictionary<string,int>();
+        for(int i = 0; i < allUnits.Count; i++)
+        {
+            int turnRoll = Dice.rollD("D20");
+            instructions.text = allUnits[i].tag + " rolls " + turnRoll;
+            
+            DiceText.text = turnRoll.ToString();
             yield return new WaitForSeconds(1f);
-            state = TurnState.player;
-            PlayerTurn();
-       }
-       else if(enemyRoll > playerRoll)
-       {
-              instructions.text = "enemy starts";
-              yield return new WaitForSeconds(1f);
-              state = TurnState.enemy;
-              EnemyTurn();
-       }
-       else if(enemyRoll == playerRoll)
-       {
-              instructions.text = "rerolling..."; //need to add the re reroll here
-       }
-
+        }
+       
+        
        //when it switches state can call the PlayerTurn() or EnemyTurn() functions and do what is needed
 
     }

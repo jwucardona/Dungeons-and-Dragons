@@ -6,6 +6,7 @@ public class SkeletonUnit : AbstractUnit
 {
     public GameObject A, B, arm;
     public bool activateAttack;
+    private static SkeletonUnit skel;
 
     //List<string> damage = new List<string>(){"d6", "2"};
     public SkeletonUnit() : base(13, 13, 6, "Sk"){
@@ -15,6 +16,10 @@ public class SkeletonUnit : AbstractUnit
     void Start()
     {
         
+    }
+    public static SkeletonUnit getInstance()
+    {
+        return skel;
     }
     // Update is called once per frame
     void Update()
