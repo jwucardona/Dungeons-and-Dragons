@@ -41,19 +41,23 @@ public class TurnControl : MonoBehaviour
    
    public void addSkelHorse(GameObject skH)
    {
-
+        skelHorse.Add(skH);
+        allUnits.Add(skH);
    }
    public void addCleric(GameObject cleric)
    {
-
+        cleric.Add(cleric);
+        allUnits.Add(cleric);
    }
    public void addSkel(GameObject Sk)
    {
-
+        skel.Add(Sk);
+        allUnits.Add(Sk);
    }
    public void addWiz(GameObject wiz)
    {
-
+        wiz.Add(wiz);
+        allUnits.Add(wiz);
    }
    public TurnState state;
     
@@ -66,7 +70,7 @@ public class TurnControl : MonoBehaviour
     //roll D20 for all abstract Units and sort the list to determine the order
 
     //names use .getType() and they are"Wiz" "SkH" "Sk" "Cle"
-  /*  IEnumerator SettupGame() //coroutine aka waits until switches turns etc
+    IEnumerator SettupGame() //coroutine aka waits until switches turns etc
     {
        //can spawn/instantiate the player and the enemy here if needed
 
@@ -106,7 +110,7 @@ public class TurnControl : MonoBehaviour
     }
     //probably instead of player and enemy it will be like wizard / cleric turns 
 
-    IEnumerator PlayerAttack()
+    /*IEnumerator PlayerAttack()
     {
         //roll the dice to see results
         int attackRoll = Dice.rollD("D20");

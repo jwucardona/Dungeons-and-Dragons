@@ -1662,7 +1662,7 @@ GameObject:
   - component: {fileID: 33038245233137104}
   m_Layer: 0
   m_Name: Cleric
-  m_TagString: Untagged
+  m_TagString: Cleric
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
