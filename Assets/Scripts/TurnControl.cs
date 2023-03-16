@@ -61,18 +61,29 @@ public class TurnControl : MonoBehaviour
 
     }
     //probably instead of player and enemy it will be like wizard / cleric turns 
-    /*IEnumerator PlayerAttack()
+    public void OnSpellButton()
+    {
+        //StartCoroutine(PlayerSpell());
+    }
+    IEnumerator PlayerAttack()
     {
         //roll the dice to see results
+        int attackRoll = Dice.rollD("D20");
+        DiceText.text = attackRoll.ToString();
+        attackRoll+=3; //add 3 for attack
+        instructions.text = "Attack Roll is " + attackRoll;
+        yield return new WaitForSeconds(2f);
+
         //either return or yield return new WaitForSeconds and then do something else
         //can check if the enemy is dead and change to win state if necessary
-    }*/
+        //if skeleton
+    }
 
     void PlayerTurn() //can make this a Corountine if needed
     {
         //what happens when it is a player's turn
         DiceText.text = " "; //remove the last roll so it is blank
-        instructions.text = "Player choose move or attack "; //ideally will have action / move buttons
+        instructions.text = "Player choose move or action ";
 
         //when done switch the state to the enemy's turn
         //state = TurnState.enemy
@@ -82,13 +93,13 @@ public class TurnControl : MonoBehaviour
     {
         //do enemy stuff then call PlayerTurn again
     }
-    public void onAttackButton() //if player clicks attack button do this stuff ...
+    public void onActionButton() //if player clicks attack button do this stuff ...
     {
         if(state != TurnState.player) //basically if action shouldn't be clicked
         {
             return; //do not do anything else
         }
-        //StartCorountine(PlayerAttack()); //do what the player has to do on its attack in the player attack method
+        instructions.text("Player choose to attack or cast a spell "); //ask player to attack or cast spell
     }
     
 }
