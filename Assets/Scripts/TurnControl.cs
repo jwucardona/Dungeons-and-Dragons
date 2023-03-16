@@ -99,7 +99,7 @@ public class TurnControl : MonoBehaviour
         {
             return; //do not do anything else
         }
-        instructions.text("Player choose to attack or cast a spell "); //ask player to attack or cast spell
+        instructions.text = "Player choose to attack or cast a spell "; //ask player to attack or cast spell
     }
     
 }
