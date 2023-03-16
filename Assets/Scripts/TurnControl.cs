@@ -79,7 +79,7 @@ public class TurnControl : MonoBehaviour
     IEnumerator SettupGame() //coroutine aka waits until switches turns etc
     {
         Dictionary<string, int> turnDict = new Dictionary<string,int>();
-        for(int i = 0; i < allUnits.Count; i++)
+        /*for(int i = 0; i < allUnits.Count; i++)
         {
             int turnRoll = Dice.rollD("D20");
             instructions.text = allUnits[i].tag + " rolls " + turnRoll;
@@ -87,9 +87,45 @@ public class TurnControl : MonoBehaviour
             string whichUnit = allUnits[i].tag + i.ToString();
             turnDict.Add(whichUnit, turnRoll);
             yield return new WaitForSeconds(1f);
+        }*/
+        for(int i = 0; i< cleric.Count; i++)
+        {
+            int turnRoll = Dice.rollD("D20");
+            instructions.text = "cleric " + i + " rolls " + turnRoll;
+            DiceText.text = turnRoll.ToString();
+            string whichUnit = "cleric" + i.ToString();
+            turnDict.Add(whichUnit, turnRoll);
+            yield return new WaitForSeconds(1f);
+        }
+        for(int i = 0; i< wiz.Count; i++)
+        {
+            int turnRoll = Dice.rollD("D20");
+            instructions.text = "Wizard " + i + " rolls " + turnRoll;
+            DiceText.text = turnRoll.ToString();
+            string whichUnit = "Wizard" + i.ToString();
+            turnDict.Add(whichUnit, turnRoll);
+            yield return new WaitForSeconds(1f);
+        }
+        for(int i = 0; i< skel.Count; i++)
+        {
+            int turnRoll = Dice.rollD("D20");
+            instructions.text = "Skeleton " + i + " rolls " + turnRoll;
+            DiceText.text = turnRoll.ToString();
+            string whichUnit = "Skeleton" + i.ToString();
+            turnDict.Add(whichUnit, turnRoll);
+            yield return new WaitForSeconds(1f);
+        }
+        for(int i = 0; i< skelHorse.Count; i++)
+        {
+            int turnRoll = Dice.rollD("D20");
+            instructions.text = "SkeletonHorse " + i + " rolls " + turnRoll;
+            DiceText.text = turnRoll.ToString();
+            string whichUnit = "SkeletonHorse" + i.ToString();
+            turnDict.Add(whichUnit, turnRoll);
+            yield return new WaitForSeconds(1f);
         }
         List<string> turnOrder = new List<string>();
-        foreach (KeyValuePair<string,int> item in turnDict.OrderBy(key => key.Value))
+        foreach (KeyValuePair<string,int> item in turnDict.OrderBy(key => key.Value)) //sort based on the rolls
         { 
            turnOrder.Add(item.Key);
         }
