@@ -52,17 +52,28 @@ public class TurnControl : MonoBehaviour
               state = TurnState.enemy;
               EnemyTurn();
        }
+       else if(enemyRoll == playerRoll)
+       {
+              instructions.text = "rerolling..."; //need to add the re reroll here
+       }
 
        //when it switches state can call the PlayerTurn() or EnemyTurn() functions and do what is needed
 
     }
     //probably instead of player and enemy it will be like wizard / cleric turns 
+    IEnumerator PlayerAttack()
+    {
+        //roll the dice to see results
+        //either return or yield return new WaitForSeconds and then do something else
+        //can check if the enemy is dead and change to win state if necessary
+    }
 
     void PlayerTurn() //can make this a Corountine if needed
     {
         //what happens when it is a player's turn
-        DiceText.text = " ";
-        instructions.text = "Player choose move or attack ";
+        DiceText.text = " "; //remove the last roll so it is blank
+        instructions.text = "Player choose move or attack "; //ideally will have action / move buttons
+
         //when done switch the state to the enemy's turn
         //state = TurnState.enemy
         //EnemyTurn() 
@@ -73,7 +84,11 @@ public class TurnControl : MonoBehaviour
     }
     public void onAttackButton() //if player clicks attack button do this stuff ...
     {
-
+        if(state != TurnState.player) //basically if action shouldn't be clicked
+        {
+            return; //do not do anything else
+        }
+        StartCorountine(PlayerAttack()); //do what the player has to do on its attack in the player attack method
     }
     
 }
