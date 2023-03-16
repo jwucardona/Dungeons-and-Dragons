@@ -61,12 +61,12 @@ public class TurnControl : MonoBehaviour
 
     }
     //probably instead of player and enemy it will be like wizard / cleric turns 
-    IEnumerator PlayerAttack()
+    /*IEnumerator PlayerAttack()
     {
         //roll the dice to see results
         //either return or yield return new WaitForSeconds and then do something else
         //can check if the enemy is dead and change to win state if necessary
-    }
+    }*/
 
     void PlayerTurn() //can make this a Corountine if needed
     {
@@ -88,7 +88,7 @@ public class TurnControl : MonoBehaviour
         {
             return; //do not do anything else
         }
-        StartCorountine(PlayerAttack()); //do what the player has to do on its attack in the player attack method
+        //StartCorountine(PlayerAttack()); //do what the player has to do on its attack in the player attack method
     }
     
 }
