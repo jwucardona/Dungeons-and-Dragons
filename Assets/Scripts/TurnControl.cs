@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public enum TurnState { start, player, enemy, win, lose};
+public enum TurnState { start, player, enemy, win, lose}; //change states to wizard cleric skeleton etc
 
 public class TurnControl : MonoBehaviour
 {
@@ -104,12 +104,13 @@ public class TurnControl : MonoBehaviour
     }
     public void onSpellButton()
     {
-        //StartCoroutine PlayerSpell()
+        StartCoroutine(PlayerSpell());
     }
     IEnumerator PlayerSpell()
     {
         instructions.text = "Choose spell from spell slot ";
         yield return new WaitForSeconds(2f);
+
     }
     
 }
