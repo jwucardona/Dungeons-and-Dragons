@@ -101,5 +101,9 @@ public class TurnControl : MonoBehaviour
         }
         instructions.text = "Player choose to attack or cast a spell "; //ask player to attack or cast spell
     }
+    public void onAttackButton()
+    {
+        //do whatever attack is 
+    }
     
 }
