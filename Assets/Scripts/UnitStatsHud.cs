@@ -12,7 +12,7 @@ public class UnitStatsHud : MonoBehaviour
         healthBar.setValues(currentHealth, maxHealth);
     }
 
-    public void createStats(string classIn, int acIn, int movIn){
-       stats.setStats(classIn, acIn, movIn);
+    public void createStats(string classIn, string armorIn, string weaponIn, int acIn, int movIn){
+       stats.setStats(classIn, armorIn, weaponIn, acIn, movIn);
     }
 }

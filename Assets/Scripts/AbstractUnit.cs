@@ -135,7 +135,7 @@ public class AbstractUnit : MonoBehaviour
     void Start()
     {
         getReferences();
-        hud.createStats(className, armorC, movement);
+        hud.createStats(className, armor, weapon, armorC, movement);
         
     }
 
