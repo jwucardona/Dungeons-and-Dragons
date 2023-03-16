@@ -61,6 +61,7 @@ public class TurnControl : MonoBehaviour
     void PlayerTurn() //can make this a Corountine if needed
     {
         //what happens when it is a player's turn
+        DiceText.text = " ";
         instructions.text = "Player choose move or attack ";
         //when done switch the state to the enemy's turn
         //state = TurnState.enemy
