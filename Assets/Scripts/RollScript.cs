@@ -7,6 +7,7 @@ public class RollScript : MonoBehaviour
 {
 //allow the player to choose move then action move move action action
   DiceRoll D20;
+  DiceRoll D8;
   DiceRoll D6;
   DiceRoll D4;
   DiceRoll D20start;
@@ -39,6 +40,13 @@ public class RollScript : MonoBehaviour
 		D6.addDice(6);
 		D6.Roll();
 		return D6.dice[0].rollNum;
+	}
+	else if(which.Equals("D8"))
+	{
+		D8 = new DiceRoll();
+		D8.addDice(8);
+		D8.Roll();
+		return D8.dice[0].rollNum;
 	}
 	return -1;
   }
