@@ -8,9 +8,13 @@ public class PlayerMover : MonoBehaviour
     public GameObject currCharacter;
     private GameObject moveToTile;
 
+    Material oldColor;
+    Material newColor;
+
     // Start is called before the first frame update
     void Start()
     {
+
         
     }
 
@@ -28,7 +32,12 @@ public class PlayerMover : MonoBehaviour
                 {
                     if(!hit.transform.gameObject.GetComponent<TileScript>().getTaken())
                     {
+                        if(moveToTile != null){ //change color back to gray
+                            newColor.color = Color.gray;
+                        }
                         moveToTile = hit.transform.gameObject;
+                        oldColor = moveToTile.transform.gameObject.GetComponent<Renderer>().material;
+                        newColor = moveToTile.transform.gameObject.GetComponent<Renderer>().material;
                         print(hit.transform.name);
                     }
                 }
@@ -37,7 +46,8 @@ public class PlayerMover : MonoBehaviour
         if(moveToTile != null){
              float x = moveToTile.transform.position.x;
              float z = moveToTile.transform.position.z;
-            currCharacter.transform.position = new Vector3(x, 1.25f, z);
+             newColor.color = Color.blue;
+             currCharacter.transform.position = new Vector3(x, 1.25f, z);
         }
     }
 }
