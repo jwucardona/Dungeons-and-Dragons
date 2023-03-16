@@ -3,6 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/*
+    This is how turns should work.
+    1. create a list of units in order by turn(turns determined by a d20 roll for each unit at the beginning of the game)
+    2. during each units turn they have 3 scenarios: move then attack, attack then move, move then move(again)
+    3. units can only move within their movement range(accessable by getMovement() in the AbstractUnit class)
+    4. units cannot move to a tile with another unit on it, we need to implement a checker which should be isMovePossible(TileScript tileToMoveTo)
+    5. units cannot attack allies, we need to implemet a checker for this as well isAttackPossible(string attackName, AbstractUnit enemy)
+        This should check the team of the enemey unit
+    6. units can only attack based on the range of their spells/melee attacks, we need to implement a checker for this as well inAttackRange(string attackName).
+        This function can be called inside of isAttackPossible().
+    7. if a unit chose to attack for their first move, remove attack from the list of options, we could use a function called attackedFirst() or just use a boolean
+    8. once the unit does 2 interactions, iterate to the next unit in the list of turns
+    9. when all the units have done their turn, restart the list
+    10. if a unit dies, remove it from the list of turns, we can impleemt this in a function public void removeTurn() and call it in the die() function in the AbstractUnit class
+    11. everytime a move is made, check the list if all 'good' or 'bad' units are dead, if this is true then end the game
+*/
+
 public enum TurnState { start, player, enemy, win, lose};
 
 public class TurnControl : MonoBehaviour
