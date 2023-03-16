@@ -14,10 +14,12 @@ using TMPro;
     6. units can only attack based on the range of their spells/melee attacks, we need to implement a checker for this as well inAttackRange(string attackName).
         This function can be called inside of isAttackPossible().
     7. if a unit chose to attack for their first move, remove attack from the list of options, we could use a function called attackedFirst() or just use a boolean
-    8. once the unit does 2 interactions, iterate to the next unit in the list of turns
-    9. when all the units have done their turn, restart the list
-    10. if a unit dies, remove it from the list of turns, we can impleemt this in a function public void removeTurn() and call it in the die() function in the AbstractUnit class
-    11. everytime a move is made, check the list if all 'good' or 'bad' units are dead, if this is true then end the game
+    8. when a unit chooses to attack, if they have spells, give them a list of spells avaliable to use, once they choose a spell(or melee attack) give them a range
+        based off of that attack
+    9. once the unit does 2 interactions, iterate to the next unit in the list of turns
+    10. when all the units have done their turn, restart the list
+    11. if a unit dies, remove it from the list of turns, we can impleemt this in a function public void removeTurn() and call it in the die() function in the AbstractUnit class
+    12. everytime a move is made, check the list if all 'good' or 'bad' units are dead, if this is true then end the game
 */
 
 public enum TurnState { start, player, enemy, win, lose};
