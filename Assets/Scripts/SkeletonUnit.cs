@@ -16,7 +16,6 @@ public class SkeletonUnit : AbstractUnit
     {
         
     }
-
     // Update is called once per frame
     void Update()
     {

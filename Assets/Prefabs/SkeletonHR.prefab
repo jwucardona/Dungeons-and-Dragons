@@ -1186,7 +1186,7 @@ GameObject:
   - component: {fileID: 5301539860532942840}
   m_Layer: 0
   m_Name: SkeletonHR
-  m_TagString: Untagged
+  m_TagString: SkelHorse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 3741146283063413109}
   m_Layer: 0
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Skel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 4314631806818769678}
+  rs: {fileID: 0}
   A: {fileID: 2504349611172771154}
   B: {fileID: 1801159331491973491}
   arm: {fileID: 8270001817536263629}

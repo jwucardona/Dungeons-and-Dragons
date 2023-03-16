@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public enum TurnState { start, player, enemy, win, lose}; //change states to wizard cleric skeleton etc
+public enum TurnState { start, cleric, wizard, skelHorse, skelton, win, lose}; //change states to wizard cleric skeleton etc
 /*
     This is how turns should work.
     1. create a list of units in order by turn(turns determined by a d20 roll for each unit at the beginning of the game)
@@ -32,16 +32,41 @@ public class TurnControl : MonoBehaviour
    [SerializeField] TextMeshProUGUI DiceText;
    [SerializeField] TextMeshProUGUI instructions;
    RollScript Dice;
+   //5 good players
+   List<WizardUnit> wiz = new List<WizardUnit>();
+   List<ClericUnit> cleric = new List<ClericUnit>();
+   List<SkelHorseUnit> skelHorse = new List<SkelHorseUnit>();
+   List<SkeletonUnit> skel = new List<SkeletonUnit>();
+   List<AbstractUnit> allUnits = new List<AbstractUnit>();
+   
+   public void addSkelHorse(GameObject skH)
+   {
 
+   }
+   public void addCleric(GameObject cleric)
+   {
+
+   }
+   public void addSkel(GameObject Sk)
+   {
+
+   }
+   public void addWiz(GameObject wiz)
+   {
+
+   }
    public TurnState state;
     
     void Start()
     {
         Dice = new RollScript();
         state = TurnState.start;
-        StartCoroutine(SettupGame()); //will go to Start battle
+       // StartCoroutine(SettupGame()); //will go to Start battle
     }
-    IEnumerator SettupGame() //coroutine aka waits until switches turns etc
+    //roll D20 for all abstract Units and sort the list to determine the order
+
+    //names use .getType() and they are"Wiz" "SkH" "Sk" "Cle"
+  /*  IEnumerator SettupGame() //coroutine aka waits until switches turns etc
     {
        //can spawn/instantiate the player and the enemy here if needed
 
@@ -49,25 +74,25 @@ public class TurnControl : MonoBehaviour
        instructions.text = "player rolls " + playerRoll;
        DiceText.text = playerRoll.ToString();
 
-       yield return new WaitForSeconds(2f); //wait 1 second before the enemy rolls 
+       yield return new WaitForSeconds(1f); //wait 1 second before the enemy rolls 
 
        int enemyRoll = Dice.rollD("D20"); //enemy rollD
        instructions.text = "enemy rolls " + enemyRoll;
        DiceText.text = enemyRoll.ToString();
 
-       yield return new WaitForSeconds(2f);
+       yield return new WaitForSeconds(1f);
 
       if(playerRoll > enemyRoll)
        {
             instructions.text = "player starts";
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             state = TurnState.player;
             PlayerTurn();
        }
        else if(enemyRoll > playerRoll)
        {
               instructions.text = "enemy starts";
-              yield return new WaitForSeconds(2f);
+              yield return new WaitForSeconds(1f);
               state = TurnState.enemy;
               EnemyTurn();
        }
@@ -130,6 +155,6 @@ public class TurnControl : MonoBehaviour
         instructions.text = "Choose spell from spell slot ";
         yield return new WaitForSeconds(2f);
 
-    }
+    }*/
     
 }

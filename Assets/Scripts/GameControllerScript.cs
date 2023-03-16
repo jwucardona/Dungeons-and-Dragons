@@ -23,7 +23,8 @@ public class GameControllerScript : MonoBehaviour
     public GameObject cleSpellSlotsParent;
     public Button wizardButton;
     public Button clericButton; 
-    
+
+    public TurnControl tc = new TurnControl();
     
     private static GameControllerScript theGameController;
 
@@ -37,6 +38,7 @@ System.Random rnd = new System.Random();
     List<GameObject> enemyPrefabList = new List<GameObject>();
 
     WizardScript wiz = new WizardScript();
+    //public TurnControl tc = new TurnControl();
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +73,7 @@ System.Random rnd = new System.Random();
 
         // code to instantiate wizards on run
         int howManyWizards = CharacterMenuScript.getWizardInput();
+        
         for(int i = 0; i < howManyWizards; i++){
             bool validPosition = false;
             int x;
@@ -87,9 +90,11 @@ System.Random rnd = new System.Random();
                 }
 
             }while(!validPosition);
-            Instantiate(wizardPrefab, new Vector3(x, 1.25f, z), Quaternion.identity);
+            GameObject wiz = Instantiate(wizardPrefab, new Vector3(x, 1.25f, z), Quaternion.identity);
+            tc.addWiz(wiz);
         }
         int howManyClerics = CharacterMenuScript.getClericInput();
+       
         for(int i = 0; i < howManyWizards; i++){
             bool validPosition = false;
             int x;
@@ -107,9 +112,11 @@ System.Random rnd = new System.Random();
 
             }while(!validPosition);
 
-            Instantiate(clericPrefab, new Vector3(x, 1.25f, z), Quaternion.identity);
+            GameObject newCleric = Instantiate(clericPrefab, new Vector3(x, 1.25f, z), Quaternion.identity);
+            tc.addCleric(newCleric);
         }
         int howManyEnemies = CharacterMenuScript.getEnemyInput();
+
         for(int i = 0; i < howManyEnemies; i++){
             int prefabIndex = rnd.Next(2);
             bool validPosition = false;
@@ -128,7 +135,16 @@ System.Random rnd = new System.Random();
 
             }while(!validPosition);
             
-            Instantiate(enemyPrefabList[prefabIndex], new Vector3(x, 1.25f, z), transform.rotation * Quaternion.Euler (0f, 180f, 0f));
+           GameObject enemy = Instantiate(enemyPrefabList[prefabIndex], new Vector3(x, 1.25f, z), transform.rotation * Quaternion.Euler (0f, 180f, 0f));
+           if(enemy.tag.Equals("Skel")
+           {
+               tc.addSkel(enemy);
+           }
+           if(enemy.tag.Equals("SkelHorse")
+           {
+              tc.addSkelHorse(enemy);
+           }
+          //if tag skel add skel if tag skel horse add skel horse 
         }
     }
 
@@ -241,19 +257,4 @@ List<TileScript> tileQueue = new List<TileScript>();
 
     public List<TileScript> temp = new List<TileScript>();
     public List<TileScript> path = new List<TileScript>();
-    
-    int currentPlayer;
-    public void setPlayer(int player) //the start roll will determine who goes first
-    {
-        currentPlayer = player;
-    }
-
-    public void TakeTurn()
-    {
-        //if current player is wizard and chooses attack
-
-        //wiz.wizAttack(); //this will call attack and in attack method it is determined whether or not wizard hits
-    }
-
-
 }
