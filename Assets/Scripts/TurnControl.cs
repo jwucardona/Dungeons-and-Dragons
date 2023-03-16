@@ -61,10 +61,7 @@ public class TurnControl : MonoBehaviour
 
     }
     //probably instead of player and enemy it will be like wizard / cleric turns 
-    public void OnSpellButton()
-    {
-        //StartCoroutine(PlayerSpell());
-    }
+
     IEnumerator PlayerAttack()
     {
         //roll the dice to see results
@@ -104,6 +101,15 @@ public class TurnControl : MonoBehaviour
     public void onAttackButton()
     {
         //do whatever attack is 
+    }
+    public void onSpellButton()
+    {
+        //StartCoroutine PlayerSpell()
+    }
+    IEnumerator PlayerSpell()
+    {
+        instructions.text = "Choose spell from spell slot ";
+        yield return new WaitForSeconds(2f);
     }
     
 }
