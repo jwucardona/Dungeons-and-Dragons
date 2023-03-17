@@ -78,15 +78,17 @@ public class TurnControl : MonoBehaviour
     //names use .getType() and they are"Wiz" "SkH" "Sk" "Cle"
     IEnumerator SettupGame() //coroutine aka waits until switches turns etc
     {
-        Dictionary<string, int> turnDict = new Dictionary<string,int>();
+        //Dictionary<string, int> turnDict = new Dictionary<string,int>();
+        Dictionary<AbstractUnit, int> turnDict = new Dictionary<AbstractUnit,int>();
 
+        
         for(int i = 0; i< cleric.Count; i++)
         {
             int turnRoll = Dice.rollD("D20");
             instructions.text = "cleric " + i + " rolls " + turnRoll;
             DiceText.text = turnRoll.ToString();
-            string whichUnit = "cleric" + i.ToString();
-            turnDict.Add(whichUnit, turnRoll);
+            //string whichUnit = "cleric" + i.ToString();
+            turnDict.Add(cleric[i], turnRoll);
             yield return new WaitForSeconds(1f);
         }
         for(int i = 0; i< wiz.Count; i++)
@@ -95,7 +97,7 @@ public class TurnControl : MonoBehaviour
             instructions.text = "Wizard " + i + " rolls " + turnRoll;
             DiceText.text = turnRoll.ToString();
             string whichUnit = "Wizard" + i.ToString();
-            turnDict.Add(whichUnit, turnRoll);
+            turnDict.Add(wiz[i], turnRoll);
             yield return new WaitForSeconds(1f);
         }
         for(int i = 0; i< skel.Count; i++)
@@ -104,7 +106,7 @@ public class TurnControl : MonoBehaviour
             instructions.text = "Skeleton " + i + " rolls " + turnRoll;
             DiceText.text = turnRoll.ToString();
             string whichUnit = "Skeleton" + i.ToString();
-            turnDict.Add(whichUnit, turnRoll);
+            turnDict.Add(skel[i], turnRoll);
             yield return new WaitForSeconds(1f);
         }
         for(int i = 0; i< skelHorse.Count; i++)
@@ -113,26 +115,37 @@ public class TurnControl : MonoBehaviour
             instructions.text = "SkeletonHorse " + i + " rolls " + turnRoll;
             DiceText.text = turnRoll.ToString();
             string whichUnit = "SkeletonHorse" + i.ToString();
-            turnDict.Add(whichUnit, turnRoll);
+            turnDict.Add(skelHorse[i], turnRoll);
             yield return new WaitForSeconds(1f);
         }
-        List<string> turnOrder = new List<string>();
-        foreach (KeyValuePair<string,int> item in turnDict.OrderBy(key => key.Value)) //sort based on the rolls
+        List<AbstractUnit> turnOrder = new List<AbstractUnit>();
+        foreach (KeyValuePair<AbstractUnit,int> item in turnDict.OrderBy(key => key.Value)) //sort based on the rolls
         { 
            turnOrder.Add(item.Key);
         }
         turnOrder.Reverse(); //reverse the list so it is in the right order
         for(int i = 0; i < turnOrder.Count; i++)
         {
-            instructions.text = "order " + turnOrder[i];    
+            instructions.text = "order " + turnOrder[i].tag;    
             yield return new WaitForSeconds(1f);
         }
-        //list of the correct order of abstract units 
+        
+        //turnOrder contains all the units in their correct order
+        //int count = 0
+        //if turnOrder[count].tag.Equals("Cleric")
+        //clericAction()
+        //else if turnOrder[count].tag.Equals("Skel")
+        //skelAction()
+        //else if turnOrder[count].tag.Equals("SkelHorse")
+        //skelHorseAction()
     }
-
-   /* IEnumerator wizAction()
+    
+   /* IEnumerator clericAction()
     {
-
+        //working with turnOrder[count] object -- so can call cleric methods on this object
+        //before switching turns make sure it incriment counter
+        //if count == turnOrder.Count --> count = 0 //start from beginning again
+        //do the if statements and looking at tags again to see which turn to switch to next
     }*/
 
 }
