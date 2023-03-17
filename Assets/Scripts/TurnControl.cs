@@ -79,15 +79,7 @@ public class TurnControl : MonoBehaviour
     IEnumerator SettupGame() //coroutine aka waits until switches turns etc
     {
         Dictionary<string, int> turnDict = new Dictionary<string,int>();
-        /*for(int i = 0; i < allUnits.Count; i++)
-        {
-            int turnRoll = Dice.rollD("D20");
-            instructions.text = allUnits[i].tag + " rolls " + turnRoll;
-            DiceText.text = turnRoll.ToString();
-            string whichUnit = allUnits[i].tag + i.ToString();
-            turnDict.Add(whichUnit, turnRoll);
-            yield return new WaitForSeconds(1f);
-        }*/
+
         for(int i = 0; i< cleric.Count; i++)
         {
             int turnRoll = Dice.rollD("D20");
@@ -132,10 +124,15 @@ public class TurnControl : MonoBehaviour
         turnOrder.Reverse(); //reverse the list so it is in the right order
         for(int i = 0; i < turnOrder.Count; i++)
         {
-            instructions.text = "order " + turnOrder[i];
+            instructions.text = "order " + turnOrder[i];    
             yield return new WaitForSeconds(1f);
         }
-
+        //list of the correct order of abstract units 
     }
-    
+
+   /* IEnumerator wizAction()
+    {
+
+    }*/
+
 }
