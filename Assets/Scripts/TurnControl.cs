@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 
-public enum TurnState { start, cleric, wizard, skelHorse, skelton, win, lose}; //change states to wizard cleric skeleton etc
+public enum TurnState { start, cleric, wizard, skelHorse, skeleton, win, lose}; //change states to wizard cleric skeleton etc
 /*
     This is how turns should work.
     1. create a list of units in order by turn(turns determined by a d20 roll for each unit at the beginning of the game)
@@ -45,6 +45,7 @@ public class TurnControl : MonoBehaviour
    List<SkeletonUnit> skel = new List<SkeletonUnit>();
    List<AbstractUnit> allUnits = new List<AbstractUnit>();
    int turnCount = 0;
+   List<AbstractUnit> turnOrder = new List<AbstractUnit>();
    
    public void addSkelHorse(GameObject skH)
    {
@@ -120,7 +121,7 @@ public class TurnControl : MonoBehaviour
             turnDict.Add(skelHorse[i], turnRoll);
             yield return new WaitForSeconds(1f);
         }
-        List<AbstractUnit> turnOrder = new List<AbstractUnit>();
+        
         foreach (KeyValuePair<AbstractUnit,int> item in turnDict.OrderBy(key => key.Value)) //sort based on the rolls
         { 
            turnOrder.Add(item.Key);
@@ -140,21 +141,22 @@ public class TurnControl : MonoBehaviour
         if(turnOrder[turnCount].tag.Equals("Cleric"))
         {
             state = TurnState.cleric;
-            clericAction()
+            //clericAction();
         }
         else if(turnOrder[turnCount].tag.Equals("Skel"))
         {
             state = TurnState.skeleton;
-            SkeletonAction()
+           // SkeletonAction();
         }
         else if(turnOrder[turnCount].tag.Equals("Wiz"))
         {
             state = TurnState.wizard;
+           // WizardAction();
         }
         else if(turnOrder[turnCount].tag.Equals("SkelHorse"))
         {
             state = TurnState.skelHorse;
-            SkeletonHorseAction()
+           // SkeletonHorseAction();
         }
     }
     
