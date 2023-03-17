@@ -44,6 +44,7 @@ public class TurnControl : MonoBehaviour
    List<SkelHorseUnit> skelHorse = new List<SkelHorseUnit>();
    List<SkeletonUnit> skel = new List<SkeletonUnit>();
    List<AbstractUnit> allUnits = new List<AbstractUnit>();
+   int turnCount = 0;
    
    public void addSkelHorse(GameObject skH)
    {
@@ -81,7 +82,8 @@ public class TurnControl : MonoBehaviour
         //Dictionary<string, int> turnDict = new Dictionary<string,int>();
         Dictionary<AbstractUnit, int> turnDict = new Dictionary<AbstractUnit,int>();
 
-        
+        instructions.text = "Rolling for order...";
+        yield return new WaitForSeconds(1f);
         for(int i = 0; i< cleric.Count; i++)
         {
             int turnRoll = Dice.rollD("D20");
@@ -124,20 +126,36 @@ public class TurnControl : MonoBehaviour
            turnOrder.Add(item.Key);
         }
         turnOrder.Reverse(); //reverse the list so it is in the right order
-        for(int i = 0; i < turnOrder.Count; i++)
+        /*for(int i = 0; i < turnOrder.Count; i++)
         {
-            instructions.text = "order " + turnOrder[i].tag;    
-            yield return new WaitForSeconds(1f);
+            //instructions.text = "order " + turnOrder[i].tag;    
+           // yield return new WaitForSeconds(1f);
+        }*/
+        switchTurn(turnCount);
+        turnCount++; //add one to the turn count after switching
+    }
+    
+    void switchTurn(int turnCount)
+    {
+        if(turnOrder[turnCount].tag.Equals("Cleric"))
+        {
+            state = TurnState.cleric;
+            clericAction()
         }
-        
-        //turnOrder contains all the units in their correct order
-        //int count = 0
-        //if turnOrder[count].tag.Equals("Cleric")
-        //clericAction()
-        //else if turnOrder[count].tag.Equals("Skel")
-        //skelAction()
-        //else if turnOrder[count].tag.Equals("SkelHorse")
-        //skelHorseAction()
+        else if(turnOrder[turnCount].tag.Equals("Skel"))
+        {
+            state = TurnState.skeleton;
+            SkeletonAction()
+        }
+        else if(turnOrder[turnCount].tag.Equals("Wiz"))
+        {
+            state = TurnState.wizard;
+        }
+        else if(turnOrder[turnCount].tag.Equals("SkelHorse"))
+        {
+            state = TurnState.skelHorse;
+            SkeletonHorseAction()
+        }
     }
     
    /* IEnumerator clericAction()
@@ -147,10 +165,17 @@ public class TurnControl : MonoBehaviour
         //if count == turnOrder.Count --> count = 0 //start from beginning again
         //do the if statements and looking at tags again to see which turn to switch to next
     }*/
-
-
-    void SkeletonHorseAction(){
+    IEnumerator SkeletonHorseAction()
+    {
         //always moves towards an enemy unless it can attack immedietly
-        
+        instructions.text = "SkeletonHorse's turn ";
+        yield return new WaitForSeconds(1f);
+        switchTurn(turnCount);
+        turnCount++;
+
+    }
+    void SkeletonAction()
+    {
+        //TurnControl
     }
 }
