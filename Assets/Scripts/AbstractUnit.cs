@@ -127,8 +127,14 @@ public class AbstractUnit : MonoBehaviour
             int totalDam = 0;
             if(damage[i].Equals("d4"))
                 totalDam += rs.rollD("D4");
-            if(damage[i].Equals("d6"))
+            else if(damage[i].Equals("d6"))
                 totalDam += rs.rollD("D6");
+            else if(damage[i].Equals("d8"))
+                totalDam += rs.rollD("D8");
+            else if(damage[i].Equals("2"))
+                totalDam += 2;
+            else if(damage[i].Equals("4"))
+                totalDam += 4;
         }
     }
     // Start is called before the first frame update

@@ -148,4 +148,9 @@ public class TurnControl : MonoBehaviour
         //do the if statements and looking at tags again to see which turn to switch to next
     }*/
 
+
+    void SkeletonHorseAction(){
+        //always moves towards an enemy unless it can attack immedietly
+        
+    }
 }
