@@ -34,6 +34,7 @@ public class TurnControl : MonoBehaviour
 
     public GameObject skeletonPrefab;
     public GameObject warhorsePrefab;
+    TileScript tiles;
 
    [SerializeField] TextMeshProUGUI DiceText;
    [SerializeField] TextMeshProUGUI instructions;
@@ -127,6 +128,7 @@ public class TurnControl : MonoBehaviour
            turnOrder.Add(item.Key);
         }
         turnOrder.Reverse(); //reverse the list so it is in the right order
+        //print order 
         /*for(int i = 0; i < turnOrder.Count; i++)
         {
             //instructions.text = "order " + turnOrder[i].tag;    
@@ -172,12 +174,19 @@ public class TurnControl : MonoBehaviour
         //always moves towards an enemy unless it can attack immedietly
         instructions.text = "SkeletonHorse's turn ";
         yield return new WaitForSeconds(1f);
-        switchTurn(turnCount);
-        turnCount++;
+       // switchTurn(turnCount);
+       // turnCount++;
 
     }
     void SkeletonAction()
     {
         //TurnControl
     }
+    //each tile is 5 feet
+    int enemyDistance(AbstractUnit good, AbstractUnit bad)
+    {
+        good.getTile().getNeighbors();
+        return 0;
+    }
+    
 }

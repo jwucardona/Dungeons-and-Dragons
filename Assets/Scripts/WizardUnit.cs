@@ -9,6 +9,7 @@ public class WizardUnit : AbstractUnit
     public GameObject magicMissile;
     public GameObject scorchingRay;
     public Transform wandEnd;
+    TileScript WizLoc;
 
     public GameObject A, B, arm, target, wand, sword;
     private bool activateAttack, shotFired;
@@ -21,7 +22,14 @@ public class WizardUnit : AbstractUnit
     {
         return theWizard;
     }
-
+    public void setTile(TileScript tile)
+    {
+        WizLoc = tile;
+    }
+    public TileScript getTile()
+    {
+        return WizLoc;
+    }
     //List<string> damage = new List<string>(){"d4"};
     public WizardUnit() : base(75, 12, 6, "Wiz"){
     }

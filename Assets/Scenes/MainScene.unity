@@ -7200,6 +7200,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1561026401}
     m_Modifications:
+    - target: {fileID: 5325595867858152096, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
+      propertyPath: m_text
+      value: Action
+      objectReference: {fileID: 0}
     - target: {fileID: 5608975223187546453, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
       propertyPath: m_Pivot.x
@@ -7304,6 +7309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5818110200599611449, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
+      propertyPath: m_Name
+      value: ActionButton
       objectReference: {fileID: 0}
     - target: {fileID: 7591912836065197763, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}

@@ -73,6 +73,7 @@ System.Random rnd = new System.Random();
         int howManyWizards = CharacterMenuScript.getWizardInput();
         
         for(int i = 0; i < howManyWizards; i++){
+            
             bool validPosition = false;
             int x;
             int z;
@@ -84,10 +85,12 @@ System.Random rnd = new System.Random();
                     if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
                         validPosition = true;
                         tiles[j].setTaken(true);
+                        wizardPrefab.GetComponent<WizardUnit>().setTile(tiles[j]);
                     }
                 }
 
             }while(!validPosition);
+            
             GameObject wizObj = Instantiate(wizardPrefab, new Vector3(x, 1.25f, z), Quaternion.identity);
             tc.addWiz(wizObj);
         }
@@ -105,6 +108,7 @@ System.Random rnd = new System.Random();
                     if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
                         validPosition = true;
                         tiles[j].setTaken(true);
+                        clericPrefab.GetComponent<ClericUnit>().setTile(tiles[j]);
                     }
                 }
 
@@ -114,7 +118,7 @@ System.Random rnd = new System.Random();
             tc.addCleric(newCleric);
         }
         int howManyEnemies = CharacterMenuScript.getEnemyInput();
-
+        int enemyTile = 0;
         for(int i = 0; i < howManyEnemies; i++){
             int prefabIndex = rnd.Next(2);
             bool validPosition = false;
@@ -128,6 +132,7 @@ System.Random rnd = new System.Random();
                     if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
                         validPosition = true;
                         tiles[j].setTaken(true);
+                        enemyTile = j;
                     }
                 }
 
@@ -137,10 +142,12 @@ System.Random rnd = new System.Random();
            if(enemy.tag.Equals("Skel"))
            {
                tc.addSkel(enemy);
+               enemy.GetComponent<SkeletonUnit>().setTile(tiles[enemyTile]);
            }
            if(enemy.tag.Equals("SkelHorse"))
            {
               tc.addSkelHorse(enemy);
+              enemy.GetComponent<SkelHorseUnit>().setTile(tiles[enemyTile]);
            }
           //if tag skel add skel if tag skel horse add skel horse 
         }

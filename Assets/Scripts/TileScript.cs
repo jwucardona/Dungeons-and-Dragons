@@ -74,6 +74,7 @@ public class TileScript : MonoBehaviour
         borders[2].GetComponent<MeshRenderer>().material.SetColor("_BaseColor", theColor);
         borders[3].GetComponent<MeshRenderer>().material.SetColor("_BaseColor", theColor);
     }
+   
     void Start(){
         
     }
