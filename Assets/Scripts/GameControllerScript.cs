@@ -8,7 +8,7 @@ public class GameControllerScript : MonoBehaviour
 {
     TileScript[] tiles;
 
-    public TileScript start, end;
+    private TileScript start, end;
 
     public GameObject wizardPrefab;
     public GameObject clericPrefab;
@@ -24,6 +24,8 @@ public class GameControllerScript : MonoBehaviour
     public Button wizardButton;
     public Button clericButton; 
 
+    public List<TileScript> temp = new List<TileScript>();
+    public List<TileScript> path = new List<TileScript>();
     public TurnControl tc = new TurnControl();
     
     private static GameControllerScript theGameController;
@@ -156,10 +158,12 @@ System.Random rnd = new System.Random();
     // Update is called once per frame
     void Update()
     {
-        computerPath(start, end);
-        if (Input.GetKey(KeyCode.T))
-        {
-            characterButton.SetActive(true);
+        if(start != null && end != null){
+            computerPath(start, end);
+            if (Input.GetKey(KeyCode.T))
+            {
+                characterButton.SetActive(true);
+            }
         }
     }
 
@@ -260,6 +264,10 @@ List<TileScript> tileQueue = new List<TileScript>();
         }
     }
 
-    public List<TileScript> temp = new List<TileScript>();
-    public List<TileScript> path = new List<TileScript>();
+    public TileScript[] getTiles(){
+        return tiles;
+    }
+    public List<TileScript> getPath(){
+        return path;
+    }
 }
