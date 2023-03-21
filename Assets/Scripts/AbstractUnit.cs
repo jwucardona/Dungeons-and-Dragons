@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 
-public class AbstractUnit : MonoBehaviour
+public class AbstractUnit : MonoBehavior
 {
     
     private int hp;
