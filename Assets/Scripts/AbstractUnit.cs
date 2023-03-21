@@ -72,11 +72,17 @@ public class AbstractUnit : MonoBehaviour
     public void takeDamage(int damageTaken){
         hp -= damageTaken;
 
-        // healthBar.SetProgress(hp / maxHealth, 3);
+        checkHealth();
         if(hp < 0){
             hp = 0;
             die();
         }
+    }
+
+    public void addHealth(int amountHealed) {
+        hp += amountHealed;
+        if(hp > maxHp)  hp = maxHp;
+        checkHealth();
     }
 
     private void getReferences(){
