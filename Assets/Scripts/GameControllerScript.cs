@@ -87,7 +87,7 @@ System.Random rnd = new System.Random();
                     if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
                         validPosition = true;
                         tiles[j].setTaken(true);
-                        wizardPrefab.GetComponent<WizardUnit>().setTile(tiles[j]);
+                        wizardPrefab.GetComponent<AbstractUnit>().setTile(tiles[j]);
                     }
                 }
 

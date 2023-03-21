@@ -45,7 +45,7 @@ public class TurnControl : MonoBehaviour
    List<SkelHorseUnit> skelHorse = new List<SkelHorseUnit>();
    List<SkeletonUnit> skel = new List<SkeletonUnit>();
    List<AbstractUnit> allUnits = new List<AbstractUnit>();
-   int turnCount = 0;
+   private int turnCount = 0;
    List<AbstractUnit> turnOrder = new List<AbstractUnit>();
    
    public void addSkelHorse(GameObject skH)
@@ -134,12 +134,12 @@ public class TurnControl : MonoBehaviour
             //instructions.text = "order " + turnOrder[i].tag;    
            // yield return new WaitForSeconds(1f);
         }*/
-        switchTurn(turnCount);
-        turnCount++; //add one to the turn count after switching
+        switchTurn();
     }
     
-    void switchTurn(int turnCount)
+    void switchTurn()
     {
+        instructions.text = turnOrder[turnCount].tag + " turn";
         if(turnOrder[turnCount].tag.Equals("Cleric"))
         {
             state = TurnState.cleric;
@@ -160,12 +160,12 @@ public class TurnControl : MonoBehaviour
             state = TurnState.skelHorse;
            // SkeletonHorseAction();
         }
+        turnCount++; //incriment the count after it is switched 
     }
     
    /* IEnumerator clericAction()
     {
         //working with turnOrder[count] object -- so can call cleric methods on this object
-        //before switching turns make sure it incriment counter
         //if count == turnOrder.Count --> count = 0 //start from beginning again
         //do the if statements and looking at tags again to see which turn to switch to next
     }*/
@@ -175,7 +175,6 @@ public class TurnControl : MonoBehaviour
         instructions.text = "SkeletonHorse's turn ";
         yield return new WaitForSeconds(1f);
        // switchTurn(turnCount);
-       // turnCount++;
 
     }
     void SkeletonAction()
@@ -183,10 +182,14 @@ public class TurnControl : MonoBehaviour
         //TurnControl
     }
     //each tile is 5 feet
-    int enemyDistance(AbstractUnit good, AbstractUnit bad)
+
+   public GameObject getCurrentPlayer() //returns the players turn
     {
-        good.getTile().getNeighbors();
-        return 0;
+        return turnOrder[turnCount].gameObject;
     }
+    /*int playersinWizRange(WizardUnit wizard)
+    {
+
+    }*/
     
 }
