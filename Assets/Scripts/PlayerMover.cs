@@ -19,6 +19,8 @@ public class PlayerMover : MonoBehaviour
 
     private List<TileScript> possibleMoves =  new List<TileScript>();
 
+    System.Random rnd = new System.Random();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,25 @@ public class PlayerMover : MonoBehaviour
                 currTile = tilesCopy[i];
             }
         }
+        // add if enemy or if ally based on tag
+        if(currCharacter.tag == "Skel" || currCharacter.tag == "SkelHorse"){
+            startChoosing = false;
+        }
+
+        // create random move(select random tile) for enemies
+        // check if tile is taken
+        // set that tile to moveToTile
+        // startMoving = true;
+        if (!startChoosing) {
+            calculateAllMoves();
+            int rand = rnd.Next(0, possibleMoves.Count - 1);
+            if (!possibleMoves[rand].getTaken()) {
+                moveToTile = possibleMoves[rand].gameObject;
+                startMoving = true;
+            }
+            movePlayer();
+        }
+
         //if choosing has commenced?!!
         if(startChoosing){
             calculateAllMoves();
