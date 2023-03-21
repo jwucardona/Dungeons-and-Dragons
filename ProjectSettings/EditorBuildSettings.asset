@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: c32a7593be5104de895c24575e03a78d
-  - enabled: 1
-    path: Assets/Scenes/TileSelectionMenu.unity
-    guid: 3897a3a5497a6495c99512e7d691e992
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
