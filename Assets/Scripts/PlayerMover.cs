@@ -13,6 +13,7 @@ public class PlayerMover : MonoBehaviour
     private GameObject moveToTile;
     private static bool startMoving;
     private static bool startChoosing = true;
+    private bool isEnemy = false;
 
     private static int counter = 1;
     private Material newColor;
@@ -40,16 +41,19 @@ public class PlayerMover : MonoBehaviour
                 currTile = tilesCopy[i];
             }
         }
+        
         // add if enemy or if ally based on tag
         if(currCharacter.tag == "Skel" || currCharacter.tag == "SkelHorse"){
-            startChoosing = false;
+            isEnemy = true;
+        } else {
+            isEnemy = false;
         }
 
         // create random move(select random tile) for enemies
         // check if tile is taken
         // set that tile to moveToTile
         // startMoving = true;
-        if (!startChoosing) {
+        if (startChoosing && isEnemy) {
             calculateAllMoves();
             int rand = rnd.Next(0, possibleMoves.Count - 1);
             if (!possibleMoves[rand].getTaken()) {
@@ -58,9 +62,10 @@ public class PlayerMover : MonoBehaviour
             }
             movePlayer();
         }
+        
 
         //if choosing has commenced?!!
-        if(startChoosing){
+        if(startChoosing && !isEnemy){
             calculateAllMoves();
             for(int i=0; i<possibleMoves.Count ; i++){
                 possibleMoves[i].setColor(Color.blue * 2);
