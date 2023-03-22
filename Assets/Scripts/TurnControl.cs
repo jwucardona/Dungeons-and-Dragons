@@ -191,13 +191,13 @@ public class TurnControl : MonoBehaviour
         //TurnControl
     }
     //each tile is 5 feet
-/*
+
     public GameObject getCurrentPlayer() //returns the players turn
     {
         return turnOrder[turnCount].gameObject;
     }
 
-    void ActionButtonTask()
+   /* void ActionButtonTask()
     {
         if (getCurrentPlayer().tag.Equals("Wiz"))
         {
@@ -207,8 +207,8 @@ public class TurnControl : MonoBehaviour
         {
             clericParentButton.SetActive(true);
         }
-    }
-*/
+    }*/
+
 
     private List<TileScript> tq = new List<TileScript>();
     private List<TileScript> temp = new List<TileScript>();

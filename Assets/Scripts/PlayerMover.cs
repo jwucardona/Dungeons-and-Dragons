@@ -37,28 +37,25 @@ public class PlayerMover : MonoBehaviour
     void Update()
     {
         tilesCopy = gc.getTiles();
-        //currCharacter = turnControl.getCurrentPlayer();
+        currCharacter = turnControl.getCurrentPlayer();
 
-<<<<<<< HEAD
         //get the current tile that the game object is standing on
         for (int i = 0; i<tilesCopy.Length; i++){
             tilesCopy[i].setColor(Color.white);
-           /* if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
+            if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
                 currTile = tilesCopy[i];
-            }*/
+            }
         }
         
-=======
->>>>>>> 0f961058b9715443d6b0c39dc823119fbb80c375
+
         // add if enemy or if ally based on tag
-        /*if(currCharacter.tag == "Skel" || currCharacter.tag == "SkelHorse"){
+        if(currCharacter.tag == "Skel" || currCharacter.tag == "SkelHorse"){
             isEnemy = true;
         } else {
             isEnemy = false;
-<<<<<<< HEAD
-        }*/
-=======
+
         }
+
         //get the current tile that the game object is standing on
         for (int i = 0; i<tilesCopy.Length; i++){
             tilesCopy[i].setColor(Color.white);
@@ -69,7 +66,6 @@ public class PlayerMover : MonoBehaviour
             }
         }
 
->>>>>>> 0f961058b9715443d6b0c39dc823119fbb80c375
 
         // create random move(select random tile) for enemies
         // check if tile is taken
@@ -136,23 +132,22 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
+
     void calculateAllMoves(){
        //need to account for tiles ovr gapssssssss
        possibleMoves.Clear();
         for (int i = 0; i < tilesCopy.Length; i++)
         {
-           /* if (Vector3.Distance(currTile.transform.position, tilesCopy[i].transform.position) < currCharacter.GetComponent<AbstractUnit>().getMove()) {
+           if (Vector3.Distance(currTile.transform.position, tilesCopy[i].transform.position) < currCharacter.GetComponent<AbstractUnit>().getMove()) {
                 possibleMoves.Add(tilesCopy[i]);
-            }*/
+            }
 
         }
-        /* for(int i = 0; i < possibleMoves.Count ; i++){
+        for(int i = 0; i < possibleMoves.Count ; i++){
             gc.computerPath(currTile, possibleMoves[i]);
-        } */
+        } 
     }
-=======
->>>>>>> 0f961058b9715443d6b0c39dc823119fbb80c375
+
     void movePlayer(){
         float speed = 5;
         List<TileScript> myPath = gc.getPath();

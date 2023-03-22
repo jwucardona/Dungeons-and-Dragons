@@ -1,16 +1,12 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RangeCalculator : MonoBehaviour
 {
-<<<<<<< HEAD
-    private TileScript allTiles;
-    GameControllerScript gc;
-=======
+
     private GameControllerScript gc;
     private TileScript[] allTiles;
->>>>>>> 0f961058b9715443d6b0c39dc823119fbb80c375
     void Start()
     {
         gc = GameControllerScript.getInstance();
@@ -49,4 +45,4 @@ public class RangeCalculator : MonoBehaviour
         }
         return rangeTiles;
     }
-}*/
+}
