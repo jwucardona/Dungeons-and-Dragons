@@ -136,14 +136,10 @@ public class TurnControl : MonoBehaviour
            turnOrder.Add(item.Key);
         }
         turnOrder.Reverse(); //reverse the list so it is in the right order
-        //print order 
-        /*for(int i = 0; i < turnOrder.Count; i++)
-        {
-            //instructions.text = "order " + turnOrder[i].tag;    
-           // yield return new WaitForSeconds(1f);
-        }*/
+        
         IsrollDone = true;
         switchTurn();
+        
         
     }
     public bool rollDone()
@@ -152,55 +148,70 @@ public class TurnControl : MonoBehaviour
     }
     void switchTurn()
     {
-        findPath(turnOrder[0], turnOrder[1]);
-       // instructions.text = turnOrder[turnCount].tag + " turn";
+        //findPath(turnOrder[0], turnOrder[1]);
+        if(turnCount == turnOrder.Count) //start from beginning
+        {
+              turnCount = 0;
+        }
+        //instructions.text = turnOrder[turnCount].tag + " turn";
         if(turnOrder[turnCount].tag.Equals("Cleric"))
         {
             state = TurnState.cleric;
+            StartCoroutine(clericAction());
             //clericAction();
         }
-        else if(turnOrder[turnCount].tag.Equals("Skel"))
+        if(turnOrder[turnCount].tag.Equals("Skel"))
         {
             state = TurnState.skeleton;
-           // SkeletonAction();
+            StartCoroutine(SkeletonAction());
         }
-        else if(turnOrder[turnCount].tag.Equals("Wiz"))
+        if(turnOrder[turnCount].tag.Equals("Wiz"))
         {
             state = TurnState.wizard;
-           // WizardAction();
+            StartCoroutine(WizardAction());
         }
-        else if(turnOrder[turnCount].tag.Equals("SkelHorse"))
+        if(turnOrder[turnCount].tag.Equals("SkelHorse"))
         {
             state = TurnState.skelHorse;
-           // SkeletonHorseAction();
+            StartCoroutine(SkeletonHorseAction());
         }
         turnCount++; //incriment the count after it is switched 
     }
     
-   /* IEnumerator clericAction()
+    IEnumerator clericAction()
     {
         //working with turnOrder[count] object -- so can call cleric methods on this object
-        //if count == turnOrder.Count --> count = 0 //start from beginning again
+        instructions.text = "Cleric's turn select move or action ";
+        yield return new WaitForSeconds(1f);
+        switchTurn();
         //do the if statements and looking at tags again to see which turn to switch to next
-    }*/
+    }
     IEnumerator SkeletonHorseAction()
     {
         //always moves towards an enemy unless it can attack immedietly
         instructions.text = "SkeletonHorse's turn ";
         yield return new WaitForSeconds(1f);
-       // switchTurn(turnCount);
+        switchTurn();
 
     }
-    void SkeletonAction()
+    IEnumerator SkeletonAction()
     {
-        //TurnControl
+        instructions.text = "Skeleton's turn ";
+        yield return new WaitForSeconds(1f);
+        switchTurn();
+    }
+    IEnumerator WizardAction()
+    {
+        instructions.text = "Wizard's turn select move or action ";
+         yield return new WaitForSeconds(1f);
+        switchTurn();
     }
     //each tile is 5 feet
 
-    /*public GameObject getCurrentPlayer() //returns the players turn
+    public GameObject getCurrentPlayer() //returns the players turn
     {
         return turnOrder[turnCount].gameObject;
-    }*/
+    }
 
    /* void ActionButtonTask()
     {

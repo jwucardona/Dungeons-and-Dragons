@@ -37,6 +37,7 @@ public class PlayerMover : MonoBehaviour
     void Update()
     {
         tilesCopy = gc.getTiles();
+        /*
         currCharacter = turnControl.getCurrentPlayer();
 
         //get the current tile that the game object is standing on
@@ -64,7 +65,7 @@ public class PlayerMover : MonoBehaviour
                 //save starting tile so it can be set to "not taken" later
                 startTile = currTile;
             }
-        }
+        }*/
 
 
         // create random move(select random tile) for enemies
@@ -73,7 +74,7 @@ public class PlayerMover : MonoBehaviour
         // startMoving = true;
         if (startChoosing && isEnemy) {
             possibleMoves.Clear();
-            possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
+            //possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
             int rand = rnd.Next(0, possibleMoves.Count - 1);
             if (!possibleMoves[rand].getTaken()) {
                 moveToTile = possibleMoves[rand].gameObject;
@@ -85,7 +86,7 @@ public class PlayerMover : MonoBehaviour
         //if choosing has commenced?!!
         if(startChoosing && !isEnemy){
             possibleMoves.Clear();
-            possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
+           // possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
             for(int i=0; i<possibleMoves.Count ; i++){
                 possibleMoves[i].setColor(Color.blue * 2);
             }
@@ -138,9 +139,9 @@ public class PlayerMover : MonoBehaviour
        possibleMoves.Clear();
         for (int i = 0; i < tilesCopy.Length; i++)
         {
-           if (Vector3.Distance(currTile.transform.position, tilesCopy[i].transform.position) < currCharacter.GetComponent<AbstractUnit>().getMove()) {
+           /*if (Vector3.Distance(currTile.transform.position, tilesCopy[i].transform.position) < currCharacter.GetComponent<AbstractUnit>().getMove()) {
                 possibleMoves.Add(tilesCopy[i]);
-            }
+            }*/
 
         }
         for(int i = 0; i < possibleMoves.Count ; i++){
