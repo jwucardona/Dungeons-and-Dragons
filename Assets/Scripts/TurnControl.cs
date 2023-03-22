@@ -187,8 +187,8 @@ public class TurnControl : MonoBehaviour
         //TurnControl
     }
     //each tile is 5 feet
-
-   public GameObject getCurrentPlayer() //returns the players turn
+/*
+    public GameObject getCurrentPlayer() //returns the players turn
     {
         return turnOrder[turnCount].gameObject;
     }
@@ -204,6 +204,7 @@ public class TurnControl : MonoBehaviour
             clericParentButton.SetActive(true);
         }
     }
+*/
     /*int playersinWizRange(WizardUnit wizard)
     {
 

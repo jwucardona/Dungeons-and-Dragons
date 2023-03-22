@@ -34,7 +34,7 @@ public class PlayerMover : MonoBehaviour
     void Update()
     {
         tilesCopy = gc.getTiles();
-        currCharacter = turnControl.getCurrentPlayer();
+        //currCharacter = turnControl.getCurrentPlayer();
 
         //get the current tile that the game object is standing on
         for (int i = 0; i<tilesCopy.Length; i++){
