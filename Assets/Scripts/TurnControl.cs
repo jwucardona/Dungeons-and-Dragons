@@ -53,6 +53,7 @@ public class TurnControl : MonoBehaviour
     public GameObject clericParentButton;
     public GameObject wizSpellSlotsParent;
     public GameObject cleSpellSlotsParent;
+    private bool IsrollDone = false;
 
     public void addSkelHorse(GameObject skH)
    {
@@ -141,10 +142,14 @@ public class TurnControl : MonoBehaviour
             //instructions.text = "order " + turnOrder[i].tag;    
            // yield return new WaitForSeconds(1f);
         }*/
+        IsrollDone = true;
         switchTurn();
         
     }
-    
+    public bool rollDone()
+    {
+        return IsrollDone;
+    }
     void switchTurn()
     {
         findPath(turnOrder[0], turnOrder[1]);
@@ -192,10 +197,10 @@ public class TurnControl : MonoBehaviour
     }
     //each tile is 5 feet
 
-    public GameObject getCurrentPlayer() //returns the players turn
+    /*public GameObject getCurrentPlayer() //returns the players turn
     {
         return turnOrder[turnCount].gameObject;
-    }
+    }*/
 
    /* void ActionButtonTask()
     {
