@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Linq;
 
 public class WizardButtonsScript : MonoBehaviour
 {
@@ -16,11 +18,18 @@ public class WizardButtonsScript : MonoBehaviour
 
     public GameObject SS1Parent, SS2Parent, SS3Parent, MMParent, SRParent;
 
+    public TurnControl turnControl;
+    [SerializeField] TextMeshProUGUI DiceText;
+    [SerializeField] TextMeshProUGUI instructions;
+    RollScript Dice;
+    public AbstractUnit target;
+
     string spellChoice = "";
 
     // Start is called before the first frame update
     void Start()
     {
+        Dice = new RollScript();
         fireBoltButton.GetComponent<Button>().onClick.AddListener(FBTaskOnClick);
         rayOfFrostButton.GetComponent<Button>().onClick.AddListener(ROFTaskOnClick);
         magicMissileButton.GetComponent<Button>().onClick.AddListener(MMTaskOnClick);
@@ -46,78 +55,122 @@ public class WizardButtonsScript : MonoBehaviour
 
     void FBTaskOnClick()
     {
-        WizardUnit.getInstance().FireBolt();
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        if (turnRoll > target.getArmor())
+        {
+            WizardUnit.getInstance().FireBolt();
+        }
         GameControllerScript.getInstance().wizardParentButton.SetActive(false);
     }
 
     void ROFTaskOnClick()
     {
-        WizardUnit.getInstance().RayOfFrost();
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        if (turnRoll > target.getArmor())
+        {
+            WizardUnit.getInstance().RayOfFrost();
+        }
         GameControllerScript.getInstance().wizardParentButton.SetActive(false);
     }
 
     void MMTaskOnClick()
     {
         spellChoice = "MM";
-        GameControllerScript.getInstance().wizSpellSlotsParent.SetActive(true);
+
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        if (turnRoll > target.getArmor())
+        {
+            GameControllerScript.getInstance().wizSpellSlotsParent.SetActive(true);
+            if (WizardUnit.getInstance().getSS1() > 0)
+            {
+                SS1Parent.SetActive(true);
+            }
+            else
+            {
+                SS1Parent.SetActive(false);
+            }
+
+            if (WizardUnit.getInstance().getSS2() > 0)
+            {
+                SS2Parent.SetActive(true);
+            }
+            else
+            {
+                SS2Parent.SetActive(false);
+            }
+
+            if (WizardUnit.getInstance().getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
+        }
         GameControllerScript.getInstance().wizardParentButton.SetActive(false);
-        if (WizardUnit.getInstance().getSS1() > 0)
-        {
-            SS1Parent.SetActive(true);
-        }
-        else
-        {
-            SS1Parent.SetActive(false);
-        }
-
-        if (WizardUnit.getInstance().getSS2() > 0)
-        {
-            SS2Parent.SetActive(true);
-        }
-        else
-        {
-            SS2Parent.SetActive(false);
-        }
-
-        if (WizardUnit.getInstance().getSS3() > 0)
-        {
-            SS3Parent.SetActive(true);
-        }
-        else
-        {
-            SS3Parent.SetActive(false);
-        }
     }
 
     void SRTaskOnClick()
     {
         spellChoice = "SR";
-        GameControllerScript.getInstance().wizSpellSlotsParent.SetActive(true);
+
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        if (turnRoll > target.getArmor())
+        {
+            GameControllerScript.getInstance().wizSpellSlotsParent.SetActive(true);
+
+
+            SS1Parent.SetActive(false);
+
+            if (WizardUnit.getInstance().getSS2() > 0)
+            {
+                SS2Parent.SetActive(true);
+            }
+            else
+            {
+                SS2Parent.SetActive(false);
+            }
+
+            if (WizardUnit.getInstance().getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
+        }
         GameControllerScript.getInstance().wizardParentButton.SetActive(false);
-        SS1Parent.SetActive(false);
-
-        if (WizardUnit.getInstance().getSS2() > 0)
-        {
-            SS2Parent.SetActive(true);
-        }
-        else
-        {
-            SS2Parent.SetActive(false);
-        }
-
-        if (WizardUnit.getInstance().getSS3() > 0)
-        {
-            SS3Parent.SetActive(true);
-        }
-        else
-        {
-            SS3Parent.SetActive(false);
-        }
     }
 
     void AttackTaskOnClick()
     {
-        WizardUnit.getInstance().startAttack();
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        if (turnRoll > target.getArmor())
+        {
+            WizardUnit.getInstance().startAttack();
+        }
         GameControllerScript.getInstance().wizardParentButton.SetActive(false);
     }
 

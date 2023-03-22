@@ -16,13 +16,10 @@ public class GameControllerScript : MonoBehaviour
     public GameObject skeletonPrefab;
     public GameObject warhorsePrefab;
 
-    public GameObject characterButton;
     public GameObject wizardParentButton;
     public GameObject clericParentButton;
     public GameObject wizSpellSlotsParent;
     public GameObject cleSpellSlotsParent;
-    public Button wizardButton;
-    public Button clericButton; 
 
     public List<TileScript> temp = new List<TileScript>();
     public List<TileScript> path = new List<TileScript>();
@@ -46,13 +43,10 @@ System.Random rnd = new System.Random();
 
         theGameController = this;
         
-        characterButton.SetActive(false);
         wizardParentButton.SetActive(false);
         clericParentButton.SetActive(false);
         wizSpellSlotsParent.SetActive(false);
         cleSpellSlotsParent.SetActive(false);
-        wizardButton.GetComponent<Button>().onClick.AddListener(WizTaskOnClick);
-        clericButton.GetComponent<Button>().onClick.AddListener(CleTaskOnClick);
 
 
         tiles = FindObjectsOfType<TileScript>();
@@ -98,7 +92,7 @@ System.Random rnd = new System.Random();
         }
         int howManyClerics = CharacterMenuScript.getClericInput();
        
-        for(int i = 0; i < howManyWizards; i++){
+        for(int i = 0; i < howManyClerics; i++){
             bool validPosition = false;
             int x;
             int z;
@@ -160,10 +154,6 @@ System.Random rnd = new System.Random();
     {
         if(start != null && end != null){
             computerPath(start, end);
-            if (Input.GetKey(KeyCode.T))
-            {
-                characterButton.SetActive(true);
-            }
         }
     }
 
@@ -174,18 +164,6 @@ System.Random rnd = new System.Random();
     // void setEnd(TileScript end){
     //     this.end = end;
     // }
-
-    void WizTaskOnClick()
-    {
-        characterButton.SetActive(false);
-        wizardParentButton.SetActive(true);
-    }
-
-    void CleTaskOnClick()
-    {
-        characterButton.SetActive(false);
-        clericParentButton.SetActive(true);
-    }
 
 List<TileScript> tileQueue = new List<TileScript>();
 

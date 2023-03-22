@@ -21,6 +21,7 @@ public class PlayerMover : MonoBehaviour
     private List<TileScript> possibleMoves =  new List<TileScript>();
 
     System.Random rnd = new System.Random();
+    public TurnControl turnControl;
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +34,10 @@ public class PlayerMover : MonoBehaviour
     void Update()
     {
         tilesCopy = gc.getTiles();
+        currCharacter = turnControl.getCurrentPlayer();
 
         //get the current tile that the game object is standing on
-        for(int i = 0; i<tilesCopy.Length; i++){
+        for (int i = 0; i<tilesCopy.Length; i++){
             tilesCopy[i].setColor(Color.white);
             if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
                 currTile = tilesCopy[i];

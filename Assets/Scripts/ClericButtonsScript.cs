@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Linq;
 
 public class ClericButtonsScript : MonoBehaviour
 {
@@ -17,9 +19,16 @@ public class ClericButtonsScript : MonoBehaviour
 
     string spellChoice = "";
 
+    public TurnControl turnControl;
+    [SerializeField] TextMeshProUGUI DiceText;
+    [SerializeField] TextMeshProUGUI instructions;
+    RollScript Dice;
+    public AbstractUnit target;
+
     // Start is called before the first frame update
     void Start()
     {
+        Dice = new RollScript();
         healingWordButton.GetComponent<Button>().onClick.AddListener(HWTaskOnClick);
         massHealingWordButton.GetComponent<Button>().onClick.AddListener(MHWTaskOnClick);
         aidButton.GetComponent<Button>().onClick.AddListener(ATaskOnClick);
@@ -49,84 +58,118 @@ public class ClericButtonsScript : MonoBehaviour
     void HWTaskOnClick()
     {
         spellChoice = "HW";
-        GameControllerScript.getInstance().cleSpellSlotsParent.SetActive(true);
-        GameControllerScript.getInstance().clericParentButton.SetActive(false); 
-        
-        if (ClericUnit.getInstance().getSS1() > 0)
-        {
-            SS1Parent.SetActive(true);
-        }
-        else
-        {
-            SS1Parent.SetActive(false);
-        }
 
-        if (ClericUnit.getInstance().getSS2() > 0)
-        {
-            SS2Parent.SetActive(true);
-        }
-        else
-        {
-            SS2Parent.SetActive(false);
-        }
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
 
-        if (ClericUnit.getInstance().getSS3() > 0)
+        //if the roll is higher than the targets armor class, attack
+        if (turnRoll > target.getArmor())
         {
-            SS3Parent.SetActive(true);
+            GameControllerScript.getInstance().cleSpellSlotsParent.SetActive(true); 
+            if (ClericUnit.getInstance().getSS1() > 0)
+            {
+                SS1Parent.SetActive(true);
+            }
+            else
+            {
+                SS1Parent.SetActive(false);
+            }
+
+            if (ClericUnit.getInstance().getSS2() > 0)
+            {
+                SS2Parent.SetActive(true);
+            }
+            else
+            {
+                SS2Parent.SetActive(false);
+            }
+
+            if (ClericUnit.getInstance().getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
         }
-        else
-        {
-            SS3Parent.SetActive(false);
-        }
+        GameControllerScript.getInstance().wizardParentButton.SetActive(false);
     }
 
     void MHWTaskOnClick()
     {
         spellChoice = "MHW";
-        GameControllerScript.getInstance().cleSpellSlotsParent.SetActive(true);
-        GameControllerScript.getInstance().clericParentButton.SetActive(false);
         
-        SS1Parent.SetActive(false);
-        SS2Parent.SetActive(false);
-        if (ClericUnit.getInstance().getSS3() > 0)
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        if (turnRoll > target.getArmor())
         {
-            SS3Parent.SetActive(true);
+            GameControllerScript.getInstance().cleSpellSlotsParent.SetActive(true);
+
+            SS1Parent.SetActive(false);
+            SS2Parent.SetActive(false);
+            if (ClericUnit.getInstance().getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
         }
-        else
-        {
-            SS3Parent.SetActive(false);
-        }
+        GameControllerScript.getInstance().clericParentButton.SetActive(false);
     }
 
     void ATaskOnClick()
     {
         spellChoice = "A";
-        GameControllerScript.getInstance().cleSpellSlotsParent.SetActive(true);
+
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        if (turnRoll > target.getArmor())
+        {
+            GameControllerScript.getInstance().cleSpellSlotsParent.SetActive(true);
+
+            SS1Parent.SetActive(false);
+            if (ClericUnit.getInstance().getSS2() > 0)
+            {
+                SS2Parent.SetActive(true);
+            }
+            else
+            {
+                SS2Parent.SetActive(false);
+            }
+
+            if (ClericUnit.getInstance().getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
+        }
         GameControllerScript.getInstance().clericParentButton.SetActive(false);
-
-        SS1Parent.SetActive(false);
-        if (ClericUnit.getInstance().getSS2() > 0)
-        {
-            SS2Parent.SetActive(true);
-        }
-        else
-        {
-            SS2Parent.SetActive(false);
-        }
-
-        if (ClericUnit.getInstance().getSS3() > 0)
-        {
-            SS3Parent.SetActive(true);
-        }
-        else
-        {
-            SS3Parent.SetActive(false);
-        }
     }
 
     void AttackTaskOnClick()
     {
-        ClericUnit.getInstance().startAttack();
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        if (turnRoll > target.getArmor())
+        {
+            ClericUnit.getInstance().startAttack();
+        }
         GameControllerScript.getInstance().clericParentButton.SetActive(false);
     }
 

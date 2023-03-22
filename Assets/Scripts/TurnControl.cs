@@ -47,8 +47,13 @@ public class TurnControl : MonoBehaviour
    List<AbstractUnit> allUnits = new List<AbstractUnit>();
    private int turnCount = 0;
    List<AbstractUnit> turnOrder = new List<AbstractUnit>();
-   
-   public void addSkelHorse(GameObject skH)
+
+    public GameObject wizardParentButton;
+    public GameObject clericParentButton;
+    public GameObject wizSpellSlotsParent;
+    public GameObject cleSpellSlotsParent;
+
+    public void addSkelHorse(GameObject skH)
    {
         skelHorse.Add(skH.GetComponent<SkelHorseUnit>());
         allUnits.Add(skH.GetComponent<SkelHorseUnit>());
@@ -186,6 +191,18 @@ public class TurnControl : MonoBehaviour
    public GameObject getCurrentPlayer() //returns the players turn
     {
         return turnOrder[turnCount].gameObject;
+    }
+
+    void ActionButtonTask()
+    {
+        if (getCurrentPlayer().tag.Equals("Wiz"))
+        {
+            wizardParentButton.SetActive(true);
+        }
+        else if (getCurrentPlayer().tag.Equals("Cleric"))
+        {
+            clericParentButton.SetActive(true);
+        }
     }
     /*int playersinWizRange(WizardUnit wizard)
     {
