@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class RangeCalculator : MonoBehaviour
 {
+<<<<<<< HEAD
     private TileScript allTiles;
     GameControllerScript gc;
+=======
+    private GameControllerScript gc;
+    private TileScript[] allTiles;
+>>>>>>> 0f961058b9715443d6b0c39dc823119fbb80c375
     void Start()
     {
         gc = GameControllerScript.getInstance();
@@ -23,7 +28,7 @@ public class RangeCalculator : MonoBehaviour
     // right now this code is coded to work with the movement of the character, but it can be changed to work with the attack range of the character
     // because the move range is by tiles and the attack range is by distance, the attack range will have to be calculated differently
     // this code wasn't tested yet, it is more of a shell that could work for our situation
-    public List<TileScript> calculateRange(TileScript tile, int range) {
+    public static List<TileScript> calculateRange(TileScript tile, int range) {
         List<TileScript> rangeTiles = new List<TileScript>();
         List<TileScript> visited = new List<TileScript>();
         Queue<TileScript> queue = new Queue<TileScript>();

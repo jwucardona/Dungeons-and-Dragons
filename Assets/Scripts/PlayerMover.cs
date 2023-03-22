@@ -8,12 +8,14 @@ public class PlayerMover : MonoBehaviour
 
     public GameObject currCharacter;
     private TileScript currTile;
+    private TileScript startTile;
+
     private TileScript[] tilesCopy;
 
     private GameObject moveToTile;
     private static bool startMoving;
-    private static bool startChoosing = true;
-    private bool isEnemy = false;
+    private static bool startChoosing;
+    private bool isEnemy;
 
     private static int counter = 1;
     private Material newColor;
@@ -28,6 +30,7 @@ public class PlayerMover : MonoBehaviour
     {
         gc = GameControllerScript.getInstance();
         startMoving = false;
+        startChoosing = true;
     }
 
     // Update is called once per frame
@@ -36,6 +39,7 @@ public class PlayerMover : MonoBehaviour
         tilesCopy = gc.getTiles();
         //currCharacter = turnControl.getCurrentPlayer();
 
+<<<<<<< HEAD
         //get the current tile that the game object is standing on
         for (int i = 0; i<tilesCopy.Length; i++){
             tilesCopy[i].setColor(Color.white);
@@ -44,19 +48,36 @@ public class PlayerMover : MonoBehaviour
             }*/
         }
         
+=======
+>>>>>>> 0f961058b9715443d6b0c39dc823119fbb80c375
         // add if enemy or if ally based on tag
         /*if(currCharacter.tag == "Skel" || currCharacter.tag == "SkelHorse"){
             isEnemy = true;
         } else {
             isEnemy = false;
+<<<<<<< HEAD
         }*/
+=======
+        }
+        //get the current tile that the game object is standing on
+        for (int i = 0; i<tilesCopy.Length; i++){
+            tilesCopy[i].setColor(Color.white);
+            if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
+                currTile = tilesCopy[i];
+                //save starting tile so it can be set to "not taken" later
+                startTile = currTile;
+            }
+        }
+
+>>>>>>> 0f961058b9715443d6b0c39dc823119fbb80c375
 
         // create random move(select random tile) for enemies
         // check if tile is taken
         // set that tile to moveToTile
         // startMoving = true;
         if (startChoosing && isEnemy) {
-            calculateAllMoves();
+            possibleMoves.Clear();
+            possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
             int rand = rnd.Next(0, possibleMoves.Count - 1);
             if (!possibleMoves[rand].getTaken()) {
                 moveToTile = possibleMoves[rand].gameObject;
@@ -64,11 +85,11 @@ public class PlayerMover : MonoBehaviour
             }
             movePlayer();
         }
-        
 
         //if choosing has commenced?!!
         if(startChoosing && !isEnemy){
-            calculateAllMoves();
+            possibleMoves.Clear();
+            possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
             for(int i=0; i<possibleMoves.Count ; i++){
                 possibleMoves[i].setColor(Color.blue * 2);
             }
@@ -115,6 +136,7 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     void calculateAllMoves(){
        //need to account for tiles ovr gapssssssss
        possibleMoves.Clear();
@@ -129,6 +151,8 @@ public class PlayerMover : MonoBehaviour
             gc.computerPath(currTile, possibleMoves[i]);
         } */
     }
+=======
+>>>>>>> 0f961058b9715443d6b0c39dc823119fbb80c375
     void movePlayer(){
         float speed = 5;
         List<TileScript> myPath = gc.getPath();
@@ -142,8 +166,17 @@ public class PlayerMover : MonoBehaviour
         }
 
         if(currTile.transform.position == moveToTile.transform.position){
+            //setting taken status of both tiles
+            moveToTile.GetComponent<TileScript>().setTaken(true);
+            startTile.GetComponent<TileScript>().setTaken(true);
+
             startMoving = false;
             moveToTile = null;
+            startTile = null;
+            startChoosing = true;
+
+            //this is where turn in considered over... we can call to a function in
+            //turn control to continue the game?
         }
     }
 
