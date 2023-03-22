@@ -49,10 +49,7 @@ public class TurnControl : MonoBehaviour
    private int turnCount = 0;
    List<AbstractUnit> turnOrder = new List<AbstractUnit>();
 
-    public GameObject wizardParentButton;
-    public GameObject clericParentButton;
-    public GameObject wizSpellSlotsParent;
-    public GameObject cleSpellSlotsParent;
+    public GameObject wizardParentButton, clericParentButton, wizSpellSlotsParent, cleSpellSlotsParent, actionParent, moveParent;
     private bool IsrollDone = false;
 
     public void addSkelHorse(GameObject skH)
@@ -79,6 +76,8 @@ public class TurnControl : MonoBehaviour
     
     void Start()
     {
+        actionParent.SetActive(false);
+        moveParent.SetActive(false);
         Dice = new RollScript();
         state = TurnState.start;
         StartCoroutine(SettupGame()); //will go to Start battle
@@ -146,7 +145,7 @@ public class TurnControl : MonoBehaviour
     {
         return IsrollDone;
     }
-    void switchTurn()
+    public void switchTurn()
     {
         //findPath(turnOrder[0], turnOrder[1]);
         if(turnCount == turnOrder.Count) //start from beginning
@@ -156,22 +155,30 @@ public class TurnControl : MonoBehaviour
         //instructions.text = turnOrder[turnCount].tag + " turn";
         if(turnOrder[turnCount].tag.Equals("Cleric"))
         {
+            actionParent.SetActive(true);
+            moveParent.SetActive(true);
             state = TurnState.cleric;
             StartCoroutine(clericAction());
             //clericAction();
         }
         if(turnOrder[turnCount].tag.Equals("Skel"))
         {
+            actionParent.SetActive(false);
+            moveParent.SetActive(false);
             state = TurnState.skeleton;
             StartCoroutine(SkeletonAction());
         }
         if(turnOrder[turnCount].tag.Equals("Wiz"))
         {
+            actionParent.SetActive(true);
+            moveParent.SetActive(true);
             state = TurnState.wizard;
             StartCoroutine(WizardAction());
         }
         if(turnOrder[turnCount].tag.Equals("SkelHorse"))
         {
+            actionParent.SetActive(false);
+            moveParent.SetActive(false);
             state = TurnState.skelHorse;
             StartCoroutine(SkeletonHorseAction());
         }
@@ -183,7 +190,7 @@ public class TurnControl : MonoBehaviour
         //working with turnOrder[count] object -- so can call cleric methods on this object
         instructions.text = "Cleric's turn select move or action ";
         yield return new WaitForSeconds(1f);
-        switchTurn();
+        //switchTurn();
         //do the if statements and looking at tags again to see which turn to switch to next
     }
     IEnumerator SkeletonHorseAction()
@@ -191,20 +198,20 @@ public class TurnControl : MonoBehaviour
         //always moves towards an enemy unless it can attack immedietly
         instructions.text = "SkeletonHorse's turn ";
         yield return new WaitForSeconds(1f);
-        switchTurn();
+        //switchTurn();
 
     }
     IEnumerator SkeletonAction()
     {
         instructions.text = "Skeleton's turn ";
         yield return new WaitForSeconds(1f);
-        switchTurn();
+        //switchTurn();
     }
     IEnumerator WizardAction()
     {
         instructions.text = "Wizard's turn select move or action ";
          yield return new WaitForSeconds(1f);
-        switchTurn();
+        //switchTurn();
     }
     //each tile is 5 feet
 
@@ -213,7 +220,7 @@ public class TurnControl : MonoBehaviour
         return turnOrder[turnCount].gameObject;
     }
 
-   /* void ActionButtonTask()
+    void ActionButtonTask()
     {
         if (getCurrentPlayer().tag.Equals("Wiz"))
         {
@@ -223,6 +230,11 @@ public class TurnControl : MonoBehaviour
         {
             clericParentButton.SetActive(true);
         }
+    }
+
+/*    void MoveButtonTask()
+    {
+
     }*/
 
 

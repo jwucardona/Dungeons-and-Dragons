@@ -109,6 +109,11 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
+    public void startMovement()
+    {
+        startChoosing = true;
+    }
+
 
     void getMoveToTile(){
         if (Input.GetMouseButtonDown(0))
