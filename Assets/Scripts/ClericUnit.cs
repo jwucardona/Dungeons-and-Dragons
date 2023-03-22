@@ -8,7 +8,7 @@ public class ClericUnit : AbstractUnit
     public GameObject massHealingWord;
     public GameObject aid;
     public Transform staffEnd;
-    TileScript ClerLoc;
+    private int ClerLoc;
 
     public GameObject A, B, arm, target, sword1, sword2;
     private bool activateAttack, shotFired;
@@ -20,14 +20,6 @@ public class ClericUnit : AbstractUnit
     public static ClericUnit getInstance()
     {
         return theCleric;
-    }
-    public void setTile(TileScript tile)
-    {
-        ClerLoc = tile;
-    }
-    public TileScript getTile()
-    {
-        return ClerLoc;
     }
     //List<string> damage = new List<string>(){"d6", "d6"};
     public ClericUnit() : base(60, 10, 5, "Cle"){

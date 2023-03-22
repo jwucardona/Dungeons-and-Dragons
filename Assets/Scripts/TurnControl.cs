@@ -34,7 +34,8 @@ public class TurnControl : MonoBehaviour
 
     public GameObject skeletonPrefab;
     public GameObject warhorsePrefab;
-    TileScript tiles;
+    private GameControllerScript gc;
+
 
    [SerializeField] TextMeshProUGUI DiceText;
    [SerializeField] TextMeshProUGUI instructions;
@@ -80,6 +81,7 @@ public class TurnControl : MonoBehaviour
         Dice = new RollScript();
         state = TurnState.start;
         StartCoroutine(SettupGame()); //will go to Start battle
+        gc = GameControllerScript.getInstance();
     }
     //roll D20 for all abstract Units and sort the list to determine the order
 
@@ -140,11 +142,13 @@ public class TurnControl : MonoBehaviour
            // yield return new WaitForSeconds(1f);
         }*/
         switchTurn();
+        
     }
     
     void switchTurn()
     {
-        instructions.text = turnOrder[turnCount].tag + " turn";
+        findPath(turnOrder[0], turnOrder[1]);
+       // instructions.text = turnOrder[turnCount].tag + " turn";
         if(turnOrder[turnCount].tag.Equals("Cleric"))
         {
             state = TurnState.cleric;
@@ -205,9 +209,100 @@ public class TurnControl : MonoBehaviour
         }
     }
 */
-    /*int playersinWizRange(WizardUnit wizard)
-    {
 
-    }*/
+    private List<TileScript> tq = new List<TileScript>();
+    private List<TileScript> temp = new List<TileScript>();
+    private List<TileScript> path = new List<TileScript>();
+    private TileScript start, end;
+    
+    int findPath(AbstractUnit p1, AbstractUnit p2)
+    {
+        //clear all nodes from past comuting
+
+        TileScript[] tile = gc.getTiles();
+
+        for (int i = 0; i < tile.Length; i++)
+        {
+            tile[i].clear();
+        }
+        for (int i = 0; i < tile.Length; i++)
+        {
+            if(p1.transform.position.x == tile[i].transform.position.x && p1.transform.position.z == tile[i].transform.position.z)
+            {
+                start = tile[i];
+                print("setting start to " + i);
+            }
+            if(p2.transform.position.x == tile[i].transform.position.x && p2.transform.position.z == tile[i].transform.position.z)
+            {
+                end = tile[i];
+                print("setting end to " + i);
+            }
+        }
+        TileScript current;
+
+        //start this dikjkstra
+        start.setDistance(0);
+        tq.Clear();
+        tq.Add(start);
+
+        while (tq.Count > 0)
+        {
+            //find least tile
+            int smallestIndex = 0;
+            for (int i = 1; i < tq.Count; i++)
+            {
+                if (tq[i].getDistance() < tq[smallestIndex].getDistance())
+                {
+                    smallestIndex = i;
+                }
+            }
+
+            current = tq[smallestIndex];
+            tq.RemoveAt(smallestIndex);
+
+            current.setVisited(true);
+
+            if (current == end)
+            {
+                break;
+            }
+
+            for (int i = 0; i < current.getNeighbors().Count; i++)
+            {
+                if (!current.getNeighbors()[i].getVisited())
+                {
+                    //not previously seen
+                    if (current.getNeighbors()[i].getDistance() == float.MaxValue)
+                    {
+                        tq.Add(current.getNeighbors()[i]);
+                    }
+
+                    float discreteDistance = current.getDistance() + 2;
+                    if (current.getNeighbors()[i].getDistance() > discreteDistance)
+                    {
+                        current.getNeighbors()[i].setDistance(discreteDistance);
+                        current.getNeighbors()[i].setBackPointer(current);
+                    }
+                }
+            }
+        }
+
+        temp.Clear();
+        path.Clear();
+        current = end;
+        while (current != start && current != null) 
+        {
+            //current is the path from each node starting from the back to the front
+            temp.Add(current);
+            current = current.getBackPointer();
+        }
+        temp.Add(start);
+        for (int i=temp.Count-1; i>=0; i--)
+        {
+            path.Add(temp[i]);
+        }
+        instructions.text = path.Count.ToString();
+        return path.Count;
+    }
     
 }

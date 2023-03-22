@@ -16,7 +16,7 @@ public class AbstractUnit : MonoBehaviour
     private string armor = "None";
     private string className = "None";
     public UnitStatsHud hud;
-    private TileScript tileLoc;
+    private int numLoc;
 
     public RollScript rs = new RollScript();
 
@@ -30,14 +30,6 @@ public class AbstractUnit : MonoBehaviour
         this.type = type;
         damage = new List<string>();
         setDamage(type);
-    }
-    public void setTile(TileScript tile)
-    {
-        tileLoc = tile;
-    }
-    public TileScript getTile()
-    {
-        return tileLoc;
     }
     public void addWeapon(string weapon){
         if (weapon.Equals("Club")) {

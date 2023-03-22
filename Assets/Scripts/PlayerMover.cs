@@ -39,17 +39,17 @@ public class PlayerMover : MonoBehaviour
         //get the current tile that the game object is standing on
         for (int i = 0; i<tilesCopy.Length; i++){
             tilesCopy[i].setColor(Color.white);
-            if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
+           /* if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
                 currTile = tilesCopy[i];
-            }
+            }*/
         }
         
         // add if enemy or if ally based on tag
-        if(currCharacter.tag == "Skel" || currCharacter.tag == "SkelHorse"){
+        /*if(currCharacter.tag == "Skel" || currCharacter.tag == "SkelHorse"){
             isEnemy = true;
         } else {
             isEnemy = false;
-        }
+        }*/
 
         // create random move(select random tile) for enemies
         // check if tile is taken
@@ -120,9 +120,9 @@ public class PlayerMover : MonoBehaviour
        possibleMoves.Clear();
         for (int i = 0; i < tilesCopy.Length; i++)
         {
-            if (Vector3.Distance(currTile.transform.position, tilesCopy[i].transform.position) < currCharacter.GetComponent<AbstractUnit>().getMove()) {
+           /* if (Vector3.Distance(currTile.transform.position, tilesCopy[i].transform.position) < currCharacter.GetComponent<AbstractUnit>().getMove()) {
                 possibleMoves.Add(tilesCopy[i]);
-            }
+            }*/
 
         }
         /* for(int i = 0; i < possibleMoves.Count ; i++){
@@ -135,7 +135,7 @@ public class PlayerMover : MonoBehaviour
         if(counter < myPath.Count){
             float x = myPath[counter].transform.position.x;
             float z = myPath[counter].transform.position.z;
-            currCharacter.transform.position = Vector3.MoveTowards(currCharacter.transform.position, new Vector3(x, 1.25f, z), speed * Time.deltaTime);
+            //currCharacter.transform.position = Vector3.MoveTowards(currCharacter.transform.position, new Vector3(x, 1.25f, z), speed * Time.deltaTime);
             if(currTile.transform.position == myPath[counter].transform.position){
                 counter++;
             }

@@ -81,7 +81,7 @@ System.Random rnd = new System.Random();
                     if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
                         validPosition = true;
                         tiles[j].setTaken(true);
-                        wizardPrefab.GetComponent<AbstractUnit>().setTile(tiles[j]);
+                        //wizardPrefab.GetComponent<AbstractUnit>().setTile(j);
                     }
                 }
 
@@ -104,7 +104,7 @@ System.Random rnd = new System.Random();
                     if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
                         validPosition = true;
                         tiles[j].setTaken(true);
-                        clericPrefab.GetComponent<ClericUnit>().setTile(tiles[j]);
+                        //clericPrefab.GetComponent<AbstractUnit>().setTile(j);
                     }
                 }
 
@@ -128,7 +128,7 @@ System.Random rnd = new System.Random();
                     if(tiles[j].transform.position.x == x && tiles[j].transform.position.z == z && !tiles[j].getTaken()){
                         validPosition = true;
                         tiles[j].setTaken(true);
-                        enemyTile = j;
+                        //enemyTile = j;
                     }
                 }
 
@@ -137,13 +137,13 @@ System.Random rnd = new System.Random();
            GameObject enemy = Instantiate(enemyPrefabList[prefabIndex], new Vector3(x, 1.25f, z), transform.rotation * Quaternion.Euler (0f, 180f, 0f));
            if(enemy.tag.Equals("Skel"))
            {
+               //enemy.GetComponent<AbstractUnit>().setTile(enemyTile);
                tc.addSkel(enemy);
-               enemy.GetComponent<SkeletonUnit>().setTile(tiles[enemyTile]);
            }
            if(enemy.tag.Equals("SkelHorse"))
            {
+              //enemy.GetComponent<AbstractUnit>().setTile(enemyTile);
               tc.addSkelHorse(enemy);
-              enemy.GetComponent<SkelHorseUnit>().setTile(tiles[enemyTile]);
            }
           //if tag skel add skel if tag skel horse add skel horse 
         }

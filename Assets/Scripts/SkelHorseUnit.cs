@@ -7,7 +7,7 @@ public class SkelHorseUnit : AbstractUnit
     public GameObject A, B, arm;
     public bool activateAttack;
     private static SkelHorseUnit shu;
-    TileScript SkHLoc;
+    private int SkHLoc;
     //List<string> damage = new List<string>(){"d6", "d6", "4"};
     public SkelHorseUnit() : base(22, 13, 12, "SkH"){
     }
@@ -17,14 +17,14 @@ public class SkelHorseUnit : AbstractUnit
     {
         
     }
-    public void setTile(TileScript tile)
+   /* public void setTile(int tileNum)
     {
-        SkHLoc = tile;
+        SkHLoc = tileNum;
     }
-    public TileScript getTile()
+    public int getTileNum()
     {
         return SkHLoc;
-    }
+    }*/
     public static SkelHorseUnit getInstance()
     {
         return shu;
