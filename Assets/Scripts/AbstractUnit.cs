@@ -17,17 +17,21 @@ public class AbstractUnit : MonoBehaviour
     private string className = "None";
     public UnitStatsHud hud;
     private int numLoc;
+    private int ss1, ss2, ss3;
 
     public RollScript rs = new RollScript();
 
     // types of units:
     // Wizard = Wiz, Cleric = Cle, Skeleton = Sk, Skeleton Horse = SkH
-    public AbstractUnit(int hp, int armorC, int movement, string type){
+    public AbstractUnit(int hp, int armorC, int movement, string type, int ss1, int ss2, int ss3){
         this.hp = hp;
         maxHp = hp;
         this.armorC = armorC;
         this.movement = movement;
         this.type = type;
+        this.ss1 = ss1;
+        this.ss2 = ss2;
+        this.ss3 = ss3;
         damage = new List<string>();
         setDamage(type);
     }
@@ -119,6 +123,33 @@ public class AbstractUnit : MonoBehaviour
 
     public int getMove(){
         return movement;
+    }
+
+    public int getSS1()
+    {
+        return ss1;
+    }
+    public void setSS1(int input)
+    {
+        ss1 = input;
+    }
+
+    public int getSS2()
+    {
+        return ss2;
+    }
+    public void setSS2(int input)
+    {
+        ss2 = input;
+    }
+
+    public int getSS3()
+    {
+        return ss3;
+    }
+    public void setSS3(int input)
+    {
+        ss3 = input;
     }
     // override in children
     public virtual void die(){

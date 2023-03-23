@@ -10,7 +10,7 @@ public class SkeletonUnit : AbstractUnit
     private int SkelLoc;
 
     //List<string> damage = new List<string>(){"d6", "2"};
-    public SkeletonUnit() : base(13, 13, 6, "Sk"){
+    public SkeletonUnit() : base(13, 13, 6, "Sk", 0, 0, 0){
     }
     
     // Start is called before the first frame update

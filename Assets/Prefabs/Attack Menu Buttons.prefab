@@ -426,7 +426,6 @@ GameObject:
   m_Component:
   - component: {fileID: 628309309970720224}
   - component: {fileID: 628309309970720227}
-  - component: {fileID: 628309309970720226}
   m_Layer: 5
   m_Name: Wizard Buttons
   m_TagString: Untagged
@@ -473,31 +472,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 0
---- !u!114 &628309309970720226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628309309970720225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39341d8cc1b70304fac5686bd883ef3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireBoltButton: {fileID: 628309310761758061}
-  rayOfFrostButton: {fileID: 628309310999803827}
-  magicMissileButton: {fileID: 628309309915436815}
-  scorchingRayButton: {fileID: 628309311004342051}
-  attackButton: {fileID: 628309310829325423}
-  spellSlot1Button: {fileID: 628309311869326715}
-  spellSlot2Button: {fileID: 628309310808411181}
-  spellSlot3Button: {fileID: 628309311830872699}
-  SS1Parent: {fileID: 628309310060189425}
-  SS2Parent: {fileID: 628309310220081895}
-  SS3Parent: {fileID: 628309311082754710}
-  MMParent: {fileID: 628309310734484794}
-  SRParent: {fileID: 628309310571665534}
 --- !u!1 &628309309988594235
 GameObject:
   m_ObjectHideFlags: 0
@@ -2184,7 +2158,6 @@ GameObject:
   m_Component:
   - component: {fileID: 628309310846535766}
   - component: {fileID: 628309310846535768}
-  - component: {fileID: 628309310846535771}
   m_Layer: 5
   m_Name: Cleric Buttons
   m_TagString: Untagged
@@ -2230,31 +2203,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 0
---- !u!114 &628309310846535771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628309310846535767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3b876d4b5553ce468dd2c16ab453b2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healingWordButton: {fileID: 628309311100317003}
-  massHealingWordButton: {fileID: 628309311810585122}
-  aidButton: {fileID: 628309309928387685}
-  attackButton: {fileID: 628309311704389671}
-  spellSlot1Button: {fileID: 628309311654067601}
-  spellSlot2Button: {fileID: 628309311293594774}
-  spellSlot3Button: {fileID: 628309310899085733}
-  SS1Parent: {fileID: 628309310864483639}
-  SS2Parent: {fileID: 628309310135742735}
-  SS3Parent: {fileID: 628309309918221941}
-  HWParent: {fileID: 628309310796259536}
-  MHWParent: {fileID: 628309311661660345}
-  AParent: {fileID: 628309309988594235}
 --- !u!1 &628309310864483639
 GameObject:
   m_ObjectHideFlags: 0

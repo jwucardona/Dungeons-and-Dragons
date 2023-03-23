@@ -5,25 +5,6 @@ using TMPro;
 using System.Linq;
 
 public enum TurnState { start, cleric, wizard, skelHorse, skeleton, win, lose}; //change states to wizard cleric skeleton etc
-/*
-    This is how turns should work.
-    1. create a list of units in order by turn(turns determined by a d20 roll for each unit at the beginning of the game)
-    2. during each units turn they have 3 scenarios: move then attack, attack then move, move then move(again)
-    3. units can only move within their movement range(accessable by getMovement() in the AbstractUnit class)
-    4. units cannot move to a tile with another unit on it, we need to implement a checker which should be isMovePossible(TileScript tileToMoveTo)
-    5. units cannot attack allies, we need to implemet a checker for this as well isAttackPossible(string attackName, AbstractUnit enemy)
-        This should check the team of the enemey unit
-    6. units can only attack based on the range of their spells/melee attacks, we need to implement a checker for this as well inAttackRange(string attackName).
-        This function can be called inside of isAttackPossible().
-    7. if a unit chose to attack for their first move, remove attack from the list of options, we could use a function called attackedFirst() or just use a boolean
-    8. when a unit chooses to attack, if they have spells, give them a list of spells avaliable to use, once they choose a spell(or melee attack) give them a range
-        based off of that attack
-    9. once the unit does 2 interactions, iterate to the next unit in the list of turns
-    10. when all the units have done their turn, restart the list
-    11. if a unit dies, remove it from the list of turns, we can impleemt this in a function public void removeTurn() and call it in the die() function in the AbstractUnit class
-    12. everytime a move is made, check the list if all 'good' or 'bad' units are dead, if this is true then end the game
-*/
-
 
 public class TurnControl : MonoBehaviour
 {
@@ -47,9 +28,11 @@ public class TurnControl : MonoBehaviour
    List<SkeletonUnit> skel = new List<SkeletonUnit>();
    List<AbstractUnit> allUnits = new List<AbstractUnit>();
    private int turnCount = 0;
-   List<AbstractUnit> turnOrder = new List<AbstractUnit>();
+    private int countMoves;
+    List<AbstractUnit> turnOrder = new List<AbstractUnit>();
 
-    public GameObject wizardParentButton, clericParentButton, wizSpellSlotsParent, cleSpellSlotsParent, actionParent, moveParent;
+    public GameObject wizardParentButton, clericParentButton, wizSpellSlotsParent, cleSpellSlotsParent, actionParent, moveParent, SS1Parent, SS2Parent, SS3Parent;
+    string spellChoice = "";
     private bool IsrollDone = false;
 
     public void addSkelHorse(GameObject skH)
@@ -82,6 +65,15 @@ public class TurnControl : MonoBehaviour
         state = TurnState.start;
         StartCoroutine(SettupGame()); //will go to Start battle
         gc = GameControllerScript.getInstance();
+    }
+
+    void Update()
+    {
+        if (countMoves >= 2)
+        {
+            turnCount++;
+            switchTurn();
+        }
     }
     //roll D20 for all abstract Units and sort the list to determine the order
 
@@ -147,6 +139,7 @@ public class TurnControl : MonoBehaviour
     }
     public void switchTurn()
     {
+        countMoves = 0;
         //findPath(turnOrder[0], turnOrder[1]);
         if(turnCount == turnOrder.Count) //start from beginning
         {
@@ -182,7 +175,7 @@ public class TurnControl : MonoBehaviour
             state = TurnState.skelHorse;
             StartCoroutine(SkeletonHorseAction());
         }
-        turnCount++; //incriment the count after it is switched 
+        //turnCount++; //incriment the count after it is switched 
     }
     
     IEnumerator clericAction()
@@ -198,6 +191,7 @@ public class TurnControl : MonoBehaviour
         //always moves towards an enemy unless it can attack immedietly
         instructions.text = "SkeletonHorse's turn ";
         yield return new WaitForSeconds(1f);
+        countMoves = 2;
         //switchTurn();
 
     }
@@ -205,6 +199,7 @@ public class TurnControl : MonoBehaviour
     {
         instructions.text = "Skeleton's turn ";
         yield return new WaitForSeconds(1f);
+        countMoves = 2;
         //switchTurn();
     }
     IEnumerator WizardAction()
@@ -213,6 +208,349 @@ public class TurnControl : MonoBehaviour
          yield return new WaitForSeconds(1f);
         //switchTurn();
     }
+
+    public void FBTaskOnClick()
+    {
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+        WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
+
+        //if the roll is higher than the targets armor class, attack
+        //if (turnRoll > target.getArmor())
+        //{
+            tempWizard.FireBolt();
+        //}
+        wizardParentButton.SetActive(false);
+        countMoves++;
+    }
+
+    public void ROFTaskOnClick()
+    {
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+        WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
+
+        //if the roll is higher than the targets armor class, attack
+        //if (turnRoll > target.getArmor())
+        //{
+            tempWizard.RayOfFrost();
+        //}
+        wizardParentButton.SetActive(false);
+        countMoves++;
+    }
+
+    public void MMTaskOnClick()
+    {
+        spellChoice = "MM";
+
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        //if (turnRoll > target.getArmor())
+        //{
+            wizSpellSlotsParent.SetActive(true);
+            if (turnOrder[turnCount].getSS1() > 0)
+            {
+                SS1Parent.SetActive(true);
+            }
+            else
+            {
+                SS1Parent.SetActive(false);
+            }
+
+            if (turnOrder[turnCount].getSS2() > 0)
+            {
+                SS2Parent.SetActive(true);
+            }
+            else
+            {
+                SS2Parent.SetActive(false);
+            }
+
+            if (turnOrder[turnCount].getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
+        //}
+        wizardParentButton.SetActive(false);
+    }
+
+    public void SRTaskOnClick()
+    {
+        spellChoice = "SR";
+
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        //if (turnRoll > target.getArmor())
+        //{
+            wizSpellSlotsParent.SetActive(true);
+
+
+            SS1Parent.SetActive(false);
+
+            if (turnOrder[turnCount].getSS2() > 0)
+            {
+                SS2Parent.SetActive(true);
+            }
+            else
+            {
+                SS2Parent.SetActive(false);
+            }
+
+            if (turnOrder[turnCount].getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
+        //}
+        wizardParentButton.SetActive(false);
+    }
+
+    public void AttackTaskOnClick()
+    {
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        if (turnOrder[turnCount].tag.Equals("Wiz"))
+        {
+            WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
+            //if the roll is higher than the targets armor class, attack
+            //if (turnRoll > target.getArmor())
+            //{
+                tempWizard.startAttack();
+            //}
+        }
+        else if (turnOrder[turnCount].tag.Equals("Cleric"))
+        {
+            ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
+            //if the roll is higher than the targets armor class, attack
+            //if (turnRoll > target.getArmor())
+            //{
+                tempCleric.startAttack();
+            //}
+        }
+
+        wizardParentButton.SetActive(false);
+        countMoves++;
+    }
+
+    public void HWTaskOnClick()
+    {
+        spellChoice = "HW";
+
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        //if (turnRoll > target.getArmor())
+        //{
+            cleSpellSlotsParent.SetActive(true);
+            if (turnOrder[turnCount].getSS1() > 0)
+            {
+                SS1Parent.SetActive(true);
+            }
+            else
+            {
+                SS1Parent.SetActive(false);
+            }
+
+            if (turnOrder[turnCount].getSS2() > 0)
+            {
+                SS2Parent.SetActive(true);
+            }
+            else
+            {
+                SS2Parent.SetActive(false);
+            }
+
+            if (turnOrder[turnCount].getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
+        //}
+        clericParentButton.SetActive(false);
+    }
+
+    public void MHWTaskOnClick()
+    {
+        spellChoice = "MHW";
+
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        //if (turnRoll > target.getArmor())
+        //{
+            cleSpellSlotsParent.SetActive(true);
+
+            SS1Parent.SetActive(false);
+            SS2Parent.SetActive(false);
+            if (turnOrder[turnCount].getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
+        //}
+        clericParentButton.SetActive(false);
+    }
+
+    public void ATaskOnClick()
+    {
+        spellChoice = "A";
+
+        int turnRoll = Dice.rollD("D20");
+        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        DiceText.text = turnRoll.ToString();
+
+        //if the roll is higher than the targets armor class, attack
+        //if (turnRoll > target.getArmor())
+        //{
+            cleSpellSlotsParent.SetActive(true);
+
+            SS1Parent.SetActive(false);
+            if (turnOrder[turnCount].getSS2() > 0)
+            {
+                SS2Parent.SetActive(true);
+            }
+            else
+            {
+                SS2Parent.SetActive(false);
+            }
+
+            if (turnOrder[turnCount].getSS3() > 0)
+            {
+                SS3Parent.SetActive(true);
+            }
+            else
+            {
+                SS3Parent.SetActive(false);
+            }
+        //}
+        clericParentButton.SetActive(false);
+    }
+
+    public void SS1TaskOnClick()
+    {
+        turnOrder[turnCount].setSS1(turnOrder[turnCount].getSS1() - 1);
+        if (turnOrder[turnCount].tag.Equals("Wiz"))
+        {
+            WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
+            tempWizard.MagicMissile();
+            spellChoice = "";
+        }
+        else if (turnOrder[turnCount].tag.Equals("Cleric"))
+        {
+            ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
+            tempCleric.HealingWord();
+        }
+        countMoves++;
+        wizSpellSlotsParent.SetActive(false);
+        cleSpellSlotsParent.SetActive(false);
+    }
+
+    public void SS2TaskOnClick()
+    {
+        turnOrder[turnCount].setSS2(turnOrder[turnCount].getSS2() - 1);
+        if (turnOrder[turnCount].tag.Equals("Wiz"))
+        {
+            WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
+            if (spellChoice.Equals("MM"))
+            {
+                tempWizard.MagicMissile();
+                spellChoice = "";
+            }
+            else if (spellChoice.Equals("SR"))
+            {
+                tempWizard.ScorchingRay();
+                spellChoice = "";
+            }
+        }
+        else if (turnOrder[turnCount].tag.Equals("Cleric"))
+        {
+            ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
+            if (spellChoice.Equals("HW"))
+            {
+                tempCleric.HealingWord();
+                spellChoice = "";
+            }
+            else if (spellChoice.Equals("A"))
+            {
+                tempCleric.Aid();
+                spellChoice = "";
+            }
+        }
+        countMoves++;
+        wizSpellSlotsParent.SetActive(false);
+        cleSpellSlotsParent.SetActive(false);
+    }
+
+    public void SS3TaskOnClick()
+    {
+        turnOrder[turnCount].setSS3(turnOrder[turnCount].getSS3() - 1);
+
+        if (turnOrder[turnCount].tag.Equals("Wiz"))
+        {
+            WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
+            if (spellChoice.Equals("MM"))
+            {
+                tempWizard.MagicMissile();
+                spellChoice = "";
+            }
+            else if (spellChoice.Equals("SR"))
+            {
+                tempWizard.ScorchingRay();
+                spellChoice = "";
+            }
+        }
+        else if (turnOrder[turnCount].tag.Equals("Cleric"))
+        {
+            ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
+            if (spellChoice.Equals("HW"))
+            {
+                tempCleric.HealingWord();
+                spellChoice = "";
+            }
+            else if (spellChoice.Equals("A"))
+            {
+                tempCleric.Aid();
+                spellChoice = "";
+            }
+            else if (spellChoice.Equals("MHW"))
+            {
+                tempCleric.MassHealingWord();
+                spellChoice = "";
+            }
+        }
+        countMoves++;
+        wizSpellSlotsParent.SetActive(false);
+        cleSpellSlotsParent.SetActive(false);
+    }
+
+
     //each tile is 5 feet
 
     public GameObject getCurrentPlayer() //returns the players turn
@@ -222,20 +560,27 @@ public class TurnControl : MonoBehaviour
 
     void ActionButtonTask()
     {
-        if (getCurrentPlayer().tag.Equals("Wiz"))
+        if (turnOrder[turnCount].tag.Equals("Wiz"))
         {
+            print("wizard");
             wizardParentButton.SetActive(true);
         }
-        else if (getCurrentPlayer().tag.Equals("Cleric"))
+        else if (turnOrder[turnCount].tag.Equals("Cleric"))
         {
+            print("cleric");
             clericParentButton.SetActive(true);
         }
     }
 
-/*    void MoveButtonTask()
+    void MoveButtonTask()
     {
+        //countMoves++;
+    }
 
-    }*/
+    public void setCountMoves(int num)
+    {
+        countMoves = countMoves + num;
+    }
 
 
     private List<TileScript> tq = new List<TileScript>();

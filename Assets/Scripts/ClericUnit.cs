@@ -15,50 +15,18 @@ public class ClericUnit : AbstractUnit
 
     private static ClericUnit theCleric;
 
-    private int ss1, ss2, ss3;
-
     public static ClericUnit getInstance()
     {
         return theCleric;
     }
     //List<string> damage = new List<string>(){"d6", "d6"};
-    public ClericUnit() : base(60, 10, 5, "Cle"){
+    public ClericUnit() : base(60, 10, 5, "Cle", 3, 2, 1){
     }
     
     // Start is called before the first frame update
     void Start()
     {
         theCleric = this;
-        ss1 = 3;
-        ss2 = 2;
-        ss3 = 1;
-    }
-
-    public int getSS1()
-    {
-        return ss1;
-    }
-    public void setSS1(int input)
-    {
-        ss1 = input;
-    }
-
-    public int getSS2()
-    {
-        return ss2;
-    }
-    public void setSS2(int input)
-    {
-        ss2 = input;
-    }
-
-    public int getSS3()
-    {
-        return ss3;
-    }
-    public void setSS3(int input)
-    {
-        ss3 = input;
     }
 
     public void startAttack()

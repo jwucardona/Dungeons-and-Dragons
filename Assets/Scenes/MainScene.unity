@@ -5146,6 +5146,9 @@ MonoBehaviour:
   cleSpellSlotsParent: {fileID: 425686306}
   actionParent: {fileID: 418673633}
   moveParent: {fileID: 530195508}
+  SS1Parent: {fileID: 628309311310760036}
+  SS2Parent: {fileID: 628309311310760035}
+  SS3Parent: {fileID: 628309311310760034}
   state: 0
 --- !u!1001 &1280849273
 PrefabInstance:
@@ -7381,6 +7384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8646472345120885299, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646472345120885299, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1253768112}
@@ -7393,7 +7401,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1753316066}
+      objectReference: {fileID: 418673633}
     - target: {fileID: 8646472345120885299, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -7407,6 +7415,11 @@ PrefabInstance:
     - target: {fileID: 8646472345120885299, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646472345120885299, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8646472345120885299, guid: 5ab577f70cb499549b9ea0876a11ffd9,
@@ -7441,6 +7454,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8646472345120885299, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646472345120885299, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -7457,11 +7475,16 @@ PrefabInstance:
     - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
@@ -7471,7 +7494,17 @@ PrefabInstance:
       objectReference: {fileID: 330585548}
     - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
@@ -7481,22 +7514,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: MoveButtonTask
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerMover, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 9167518454695522890, guid: 5ab577f70cb499549b9ea0876a11ffd9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ab577f70cb499549b9ea0876a11ffd9, type: 3}
---- !u!1 &1753316066 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5818110200599611449, guid: 5ab577f70cb499549b9ea0876a11ffd9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1753316065}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1760498640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9229,6 +9271,76 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 628309309915436815, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309915436815, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309915436815, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309309915436815, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309915436815, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MMTaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309915436815, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309915436815, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309928387685, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309928387685, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309928387685, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309309928387685, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309928387685, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ATaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309928387685, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309309928387685, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 628309309970720226, guid: 256ea428d35d7bd409fd171ac1e06d81,
         type: 3}
       propertyPath: target
@@ -9359,6 +9471,111 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 628309310761758061, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310761758061, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310761758061, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309310761758061, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310761758061, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FBTaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310761758061, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310761758061, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310808411181, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310808411181, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310808411181, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309310808411181, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310808411181, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SS2TaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310808411181, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310808411181, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310829325423, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310829325423, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310829325423, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309310829325423, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310829325423, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AttackTaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310829325423, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310829325423, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 628309310846535771, guid: 256ea428d35d7bd409fd171ac1e06d81,
         type: 3}
       propertyPath: target
@@ -9379,8 +9596,381 @@ PrefabInstance:
       propertyPath: instructions
       value: 
       objectReference: {fileID: 143243996}
+    - target: {fileID: 628309310899085733, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310899085733, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310899085733, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309310899085733, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310899085733, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SS3TaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310899085733, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310899085733, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310928481028, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_Name
+      value: Spell Slots Parent
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310999803827, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310999803827, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310999803827, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309310999803827, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310999803827, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ROFTaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310999803827, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309310999803827, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311004342051, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311004342051, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311004342051, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309311004342051, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311004342051, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SRTaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311004342051, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311004342051, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311100317003, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311100317003, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311100317003, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309311100317003, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311100317003, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HWTaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311100317003, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311100317003, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311293594774, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311293594774, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311293594774, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309311293594774, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311293594774, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SS2TaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311293594774, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311293594774, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311654067601, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311654067601, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311654067601, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309311654067601, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311654067601, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SS1TaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311654067601, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311654067601, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311704389671, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311704389671, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311704389671, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309311704389671, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311704389671, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AttackTaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311704389671, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311704389671, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311810585122, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311810585122, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311810585122, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309311810585122, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311810585122, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MHWTaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311810585122, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311810585122, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311830872699, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311830872699, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311830872699, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309311830872699, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311830872699, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SS3TaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311830872699, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311830872699, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311869326715, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311869326715, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311869326715, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1253768112}
+    - target: {fileID: 628309311869326715, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311869326715, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SS1TaskOnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311869326715, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TurnControl, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 628309311869326715, guid: 256ea428d35d7bd409fd171ac1e06d81,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 256ea428d35d7bd409fd171ac1e06d81, type: 3}
+--- !u!1 &628309311310760034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 628309311082754710, guid: 256ea428d35d7bd409fd171ac1e06d81,
+    type: 3}
+  m_PrefabInstance: {fileID: 628309311310760033}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &628309311310760035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 628309310220081895, guid: 256ea428d35d7bd409fd171ac1e06d81,
+    type: 3}
+  m_PrefabInstance: {fileID: 628309311310760033}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &628309311310760036 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 628309310060189425, guid: 256ea428d35d7bd409fd171ac1e06d81,
+    type: 3}
+  m_PrefabInstance: {fileID: 628309311310760033}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1135896584763371256
 PrefabInstance:
   m_ObjectHideFlags: 0

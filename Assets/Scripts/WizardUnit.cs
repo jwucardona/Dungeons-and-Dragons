@@ -16,8 +16,6 @@ public class WizardUnit : AbstractUnit
 
     private static WizardUnit theWizard;
 
-    private int ss1, ss2, ss3;
-
     public static WizardUnit getInstance()
     {
         return theWizard;
@@ -31,43 +29,13 @@ public class WizardUnit : AbstractUnit
         return WizLoc;
     }*/
     //List<string> damage = new List<string>(){"d4"};
-    public WizardUnit() : base(75, 12, 6, "Wiz"){
+    public WizardUnit() : base(75, 12, 6, "Wiz" , 2, 2, 1){
     }
 
     // Start is called before the first frame update
     void Start()
     {
         theWizard = this;
-        ss1 = 2;
-        ss2 = 2;
-        ss3 = 1;
-    }
-
-    public int getSS1()
-    {
-        return ss1;
-    }
-    public void setSS1(int input)
-    {
-        ss1 = input;
-    }
-
-    public int getSS2()
-    {
-        return ss2;
-    }
-    public void setSS2(int input)
-    {
-        ss2 = input;
-    }
-
-    public int getSS3()
-    {
-        return ss3;
-    }
-    public void setSS3(int input)
-    {
-        ss3 = input;
     }
 
     public void startAttack()

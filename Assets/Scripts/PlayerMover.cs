@@ -116,6 +116,7 @@ public class PlayerMover : MonoBehaviour
 
     public void startMovement()
     {
+        //print("test1");
         startChoosing = true;
     }
 
@@ -179,6 +180,9 @@ public class PlayerMover : MonoBehaviour
             startChoosing = false;
             moveToTile = null;
             startTile = null;
+
+            //print("test");
+            turnControl.setCountMoves(1);
 
             //this is where turn in considered over... we can call to a function in
             //turn control to continue the game?

@@ -9,7 +9,7 @@ public class SkelHorseUnit : AbstractUnit
     private static SkelHorseUnit shu;
     private int SkHLoc;
     //List<string> damage = new List<string>(){"d6", "d6", "4"};
-    public SkelHorseUnit() : base(22, 13, 12, "SkH"){
+    public SkelHorseUnit() : base(22, 13, 12, "SkH", 0, 0, 0){
     }
 
     // Start is called before the first frame update
