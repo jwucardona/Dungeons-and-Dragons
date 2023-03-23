@@ -30,73 +30,78 @@ public class PlayerMover : MonoBehaviour
     {
         gc = GameControllerScript.getInstance();
         startMoving = false;
-        startChoosing = true;
+        startChoosing = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         tilesCopy = gc.getTiles();
-        /*
-        currCharacter = turnControl.getCurrentPlayer();
 
-        //get the current tile that the game object is standing on
         for (int i = 0; i<tilesCopy.Length; i++){
             tilesCopy[i].setColor(Color.white);
             if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
                 currTile = tilesCopy[i];
             }
         }
-        
-
-        // add if enemy or if ally based on tag
-        if(currCharacter.tag == "Skel" || currCharacter.tag == "SkelHorse"){
-            isEnemy = true;
-        } else {
-            isEnemy = false;
-
-        }
-
-        //get the current tile that the game object is standing on
-        for (int i = 0; i<tilesCopy.Length; i++){
-            tilesCopy[i].setColor(Color.white);
-            if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
-                currTile = tilesCopy[i];
-                //save starting tile so it can be set to "not taken" later
-                startTile = currTile;
-            }
-        }*/
+        if(startChoosing){
 
 
-        // create random move(select random tile) for enemies
-        // check if tile is taken
-        // set that tile to moveToTile
-        // startMoving = true;
-        if (startChoosing && isEnemy) {
-            possibleMoves.Clear();
-            //possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
-            int rand = rnd.Next(0, possibleMoves.Count - 1);
-            if (!possibleMoves[rand].getTaken()) {
-                moveToTile = possibleMoves[rand].gameObject;
-                startMoving = true;
-            }
-            movePlayer();
-        }
+            currCharacter = turnControl.getCurrentPlayer();
 
-        //if choosing has commenced?!!
-        if(startChoosing && !isEnemy){
-            possibleMoves.Clear();
-           // possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
-            for(int i=0; i<possibleMoves.Count ; i++){
-                possibleMoves[i].setColor(Color.blue * 2);
+            //get the current tile that the game object is standing on
+
+
+
+            // add if enemy or if ally based on tag
+            if(currCharacter.tag == "Skel" || currCharacter.tag == "SkelHorse"){
+                isEnemy = true;
+            } else {
+                isEnemy = false;
+
             }
 
-            getMoveToTile();
-            if(moveToTile != null){
-                newColor.color = Color.blue;
-                if(Input.GetKeyDown(KeyCode.Return)){
+            //get the current tile that the game object is standing on
+            for (int i = 0; i<tilesCopy.Length; i++){
+                tilesCopy[i].setColor(Color.white);
+                if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
+                    currTile = tilesCopy[i];
+                    //save starting tile so it can be set to "not taken" later
+                    startTile = currTile;
+                }
+            }
+
+
+            // create random move(select random tile) for enemies
+            // check if tile is taken
+            // set that tile to moveToTile
+            // startMoving = true;
+            if (isEnemy) {
+                possibleMoves.Clear();
+                possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
+                int rand = rnd.Next(0, possibleMoves.Count - 1);
+                if (!possibleMoves[rand].getTaken()) {
+                    moveToTile = possibleMoves[rand].gameObject;
                     startMoving = true;
-                    startChoosing = false;
+                }
+                movePlayer();
+            }
+
+            //if choosing has commenced?!!
+            if(!isEnemy){
+                possibleMoves.Clear();
+                possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
+                for(int i=0; i<possibleMoves.Count ; i++){
+                    possibleMoves[i].setColor(Color.blue * 2);
+                }
+
+                getMoveToTile();
+                if(moveToTile != null){
+                    newColor.color = Color.blue;
+                    if(Input.GetKeyDown(KeyCode.Return)){
+                        startMoving = true;
+                        startChoosing = false;
+                    }
                 }
             }
         }
@@ -105,8 +110,8 @@ public class PlayerMover : MonoBehaviour
             gc.computerPath(currTile.GetComponent<TileScript>(), moveToTile.GetComponent<TileScript>());
             newColor.color = Color.gray;
             movePlayer();
-
         }
+
     }
 
     public void startMovement()
@@ -144,10 +149,9 @@ public class PlayerMover : MonoBehaviour
        possibleMoves.Clear();
         for (int i = 0; i < tilesCopy.Length; i++)
         {
-           /*if (Vector3.Distance(currTile.transform.position, tilesCopy[i].transform.position) < currCharacter.GetComponent<AbstractUnit>().getMove()) {
+           if (Vector3.Distance(currTile.transform.position, tilesCopy[i].transform.position) < currCharacter.GetComponent<AbstractUnit>().getMove()) {
                 possibleMoves.Add(tilesCopy[i]);
-            }*/
-
+           }
         }
         for(int i = 0; i < possibleMoves.Count ; i++){
             gc.computerPath(currTile, possibleMoves[i]);
@@ -160,7 +164,7 @@ public class PlayerMover : MonoBehaviour
         if(counter < myPath.Count){
             float x = myPath[counter].transform.position.x;
             float z = myPath[counter].transform.position.z;
-            //currCharacter.transform.position = Vector3.MoveTowards(currCharacter.transform.position, new Vector3(x, 1.25f, z), speed * Time.deltaTime);
+            currCharacter.transform.position = Vector3.MoveTowards(currCharacter.transform.position, new Vector3(x, 1.25f, z), speed * Time.deltaTime);
             if(currTile.transform.position == myPath[counter].transform.position){
                 counter++;
             }
@@ -169,12 +173,12 @@ public class PlayerMover : MonoBehaviour
         if(currTile.transform.position == moveToTile.transform.position){
             //setting taken status of both tiles
             moveToTile.GetComponent<TileScript>().setTaken(true);
-            startTile.GetComponent<TileScript>().setTaken(true);
+            startTile.GetComponent<TileScript>().setTaken(false);
 
             startMoving = false;
+            startChoosing = false;
             moveToTile = null;
             startTile = null;
-            startChoosing = true;
 
             //this is where turn in considered over... we can call to a function in
             //turn control to continue the game?
