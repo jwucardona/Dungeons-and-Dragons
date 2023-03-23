@@ -129,6 +129,7 @@ public class TurnControl : MonoBehaviour
         turnOrder.Reverse(); //reverse the list so it is in the right order
         
         IsrollDone = true;
+        getPlayersInRange(wiz[0],turnOrder,600);
         switchTurn();
         
         
@@ -675,7 +676,30 @@ public class TurnControl : MonoBehaviour
             path.Add(temp[i]);
         }
         instructions.text = path.Count.ToString();
-        return path.Count;
+        return path.Count*5;
+    }
+    List<AbstractUnit> getPlayersInRange(AbstractUnit player, List<AbstractUnit> others, int range)
+    {
+        List<AbstractUnit> playersInRange = new List<AbstractUnit>();;
+	    for(int i = 0; i < others.Count; i++)
+        {
+            if(findPath(player, others[i]) <= range)
+	        {
+		        playersInRange.Add(others[i]);
+	        }
+        }	
+        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < tiles.Length; i++)
+        {
+	        for(int j = 0; j < playersInRange.Count; j++)
+            {
+                if(playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                {
+                    tiles[i].setColor(Color.red*2);
+                }
+            }
+        }
+	    return playersInRange;
     }
     
 }
