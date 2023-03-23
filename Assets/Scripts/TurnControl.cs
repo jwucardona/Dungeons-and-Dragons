@@ -74,6 +74,10 @@ public class TurnControl : MonoBehaviour
             turnCount++;
             switchTurn();
         }
+       /* if(lightUp)
+        {
+            getPlayersInRange(turnOrder[turnCount],turnOrder,turnOrder[turnCount].getRange());
+        }*/
     }
     //roll D20 for all abstract Units and sort the list to determine the order
 
@@ -129,7 +133,7 @@ public class TurnControl : MonoBehaviour
         turnOrder.Reverse(); //reverse the list so it is in the right order
         
         IsrollDone = true;
-        getPlayersInRange(wiz[0],turnOrder,600);
+       // getPlayersInRange(wiz[0],turnOrder,600);
         switchTurn();
         
         
@@ -688,6 +692,7 @@ public class TurnControl : MonoBehaviour
 		        playersInRange.Add(others[i]);
 	        }
         }	
+        //prob add a light up bool or move this to update
         TileScript[] tiles = gc.getTiles();
         for (int i = 0; i < tiles.Length; i++)
         {
@@ -695,7 +700,7 @@ public class TurnControl : MonoBehaviour
             {
                 if(playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
                 {
-                    tiles[i].setColor(Color.red*2);
+                    tiles[i].setColor(Color.red*2); //this needs to be called in an update / be active for a longer time
                 }
             }
         }
