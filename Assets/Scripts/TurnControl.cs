@@ -10,6 +10,8 @@ public class TurnControl : MonoBehaviour
 {
     // Start is called before the first frame update
     //holds player wizard and cleric GameObjects
+    [SerializeField] private UnitStatsHud hud;
+
     public GameObject wizardPrefab;
     public GameObject clericPrefab;
 
@@ -71,6 +73,7 @@ public class TurnControl : MonoBehaviour
         state = TurnState.start;
         StartCoroutine(SettupGame()); //will go to Start battle
         gc = GameControllerScript.getInstance();
+        // hud = GetComponent<UnitStatsHud>();
     }
 
     void Update()
@@ -164,7 +167,7 @@ public class TurnControl : MonoBehaviour
                         instructions.text = "Melee attack!";
                         countMoves++;
                     }
-                    else if (turnRoll + 3 > playerTarget.getArmor())
+                    else if (turnRoll + 3 > playerTarget.getArmorC())
                     {
                         //cast spell
                         if (spellChoice.Equals("FB"))
@@ -448,6 +451,8 @@ public class TurnControl : MonoBehaviour
         //working with turnOrder[count] object -- so can call cleric methods on this object
         instructions.text = "Cleric's turn select move or action ";
         yield return new WaitForSeconds(1f);
+        hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
+        hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
         //switchTurn();
         //do the if statements and looking at tags again to see which turn to switch to next
     }
@@ -457,6 +462,8 @@ public class TurnControl : MonoBehaviour
         instructions.text = "SkeletonHorse's turn ";
         yield return new WaitForSeconds(1f);
         countMoves = 2;
+        hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
+        hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
         //switchTurn();
 
     }
@@ -465,12 +472,16 @@ public class TurnControl : MonoBehaviour
         instructions.text = "Skeleton's turn ";
         yield return new WaitForSeconds(1f);
         countMoves = 2;
+        hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
+        hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
         //switchTurn();
     }
     IEnumerator WizardAction()
     {
         instructions.text = "Wizard's turn select move or action ";
-         yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
+        hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
+        hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
         //switchTurn();
     }
     

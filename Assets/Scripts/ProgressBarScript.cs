@@ -13,9 +13,8 @@ public class ProgressBarScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI amount;
 
     public void setValues(int baseValue, int maxValue){
-        baseValue = baseValue;
-        maxValue = maxValue;
-
+        this.baseValue = baseValue;
+        this.maxValue = maxValue;
         amount.text = baseValue.ToString();
 
         CalculateFillAmount();

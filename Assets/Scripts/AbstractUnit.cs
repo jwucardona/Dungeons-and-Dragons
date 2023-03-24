@@ -15,7 +15,7 @@ public class AbstractUnit : MonoBehaviour
     private string weapon = "None";
     private string armor = "None";
     private string className = "None";
-    public UnitStatsHud hud;
+    //public UnitStatsHud hud;
     private int numLoc;
     private int ss1, ss2, ss3;
 
@@ -68,7 +68,7 @@ public class AbstractUnit : MonoBehaviour
     public void takeDamage(int damageTaken){
         hp -= damageTaken;
 
-        checkHealth();
+        // checkHealth();
         if(hp < 0){
             hp = 0;
             die();
@@ -78,15 +78,7 @@ public class AbstractUnit : MonoBehaviour
     public void addHealth(int amountHealed) {
         hp += amountHealed;
         if(hp > maxHp)  hp = maxHp;
-        checkHealth();
-    }
-
-    private void getReferences(){
-        hud = GetComponent<UnitStatsHud>();
-    }
-
-    public void checkHealth(){
-        hud.UpdateHealth(hp, maxHp);
+        // checkHealth();
     }
 
     public void setDamage(string type){
@@ -117,12 +109,28 @@ public class AbstractUnit : MonoBehaviour
         return hp;
     }
 
-    public int getArmor(){
+    public int getMaxHp(){
+        return maxHp;
+    }
+
+    public int getArmorC(){
         return armorC;
+    }
+
+    public string getWeapon(){
+        return weapon;
+    }
+
+    public string getArmor(){
+        return armor;
     }
 
     public int getMove(){
         return movement;
+    }
+
+    public string getClass(){
+        return className;
     }
 
     public int getSS1()
@@ -176,15 +184,13 @@ public class AbstractUnit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        getReferences();
-        hud.createStats(className, armor, weapon, armorC, movement);
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        checkHealth();
+        
     }
 
 }

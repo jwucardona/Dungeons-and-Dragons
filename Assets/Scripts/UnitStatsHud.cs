@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UnitStatsHud : MonoBehaviour
 {
-    private ProgressBarScript healthBar;
-    private Stats stats;
+    [SerializeField] private ProgressBarScript healthBar;
+    [SerializeField] private Stats stats;
 
     public void UpdateHealth(int currentHealth, int maxHealth){
         healthBar.setValues(currentHealth, maxHealth);
