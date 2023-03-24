@@ -303,7 +303,7 @@ public class TurnControl : MonoBehaviour
                     else if (turnRoll > 5)
                     {
                         //cast spell or attack
-                        else if (spellChoice.Equals("HW"))
+                        if (spellChoice.Equals("HW"))
                         {
                             cleSpellSlotsParent.SetActive(true);
                             if (turnOrder[turnCount].getSS1() > 0)
