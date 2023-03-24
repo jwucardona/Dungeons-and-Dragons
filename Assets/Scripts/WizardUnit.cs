@@ -11,7 +11,7 @@ public class WizardUnit : AbstractUnit
     public Transform wandEnd;
     private int WizLoc;
 
-    public GameObject A, B, arm, target, wand, sword;
+    public GameObject A, B, arm, wand, sword;
     private bool activateAttack, shotFired;
 
     private static WizardUnit theWizard;
@@ -38,8 +38,9 @@ public class WizardUnit : AbstractUnit
         theWizard = this;
     }
 
-    public void startAttack()
+    public void startAttack(GameObject targetInput)
     {
+        target = targetInput;
         activateAttack = true;
     }
 
@@ -89,30 +90,34 @@ public class WizardUnit : AbstractUnit
         }
     }
 
-    GameObject shot;
-    public void FireBolt()
+    GameObject shot, target;
+    public void FireBolt(GameObject targetInput)
     {
+        target = targetInput;
         shot = Instantiate(fireBolt, wandEnd.position, wandEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
     }
 
-    public void RayOfFrost()
+    public void RayOfFrost(GameObject targetInput)
     {
+        target = targetInput;
         shot = Instantiate(rayOfFrost, wandEnd.position, wandEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
     }
 
-    public void MagicMissile()
+    public void MagicMissile(GameObject targetInput)
     {
+        target = targetInput;
         shot = Instantiate(magicMissile, wandEnd.position, wandEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
     }
 
-    public void ScorchingRay()
+    public void ScorchingRay(GameObject targetInput)
     {
+        target = targetInput;
         shot = Instantiate(scorchingRay, wandEnd.position, wandEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;

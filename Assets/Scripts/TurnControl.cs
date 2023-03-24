@@ -39,6 +39,7 @@ public class TurnControl : MonoBehaviour
     List<TileScript> playersInRangeTiles = new List<TileScript>();
     bool lightUp;
     TileScript tileTarget;
+    AbstractUnit playerTarget;
 
     public void addSkelHorse(GameObject skH)
    {
@@ -100,7 +101,7 @@ public class TurnControl : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0))
             {
-                print("test");
+                //print("test");
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -108,16 +109,199 @@ public class TurnControl : MonoBehaviour
                 {
                     if (hit.transform.tag == "Tile")
                     {
-                        print("test1");
+                        //print("test1");
                         print(playersInRangeTiles.Count);
                         if (playersInRangeTiles.Contains(hit.transform.gameObject.GetComponent<TileScript>()))
                         {
-                            print("test2");
+                            //print("test2");
                             tileTarget = hit.transform.gameObject.GetComponent<TileScript>();
+
                             //lightUp = false;
                         }
                     }
                 }
+            }
+            if (tileTarget != null && Input.GetKeyDown(KeyCode.Return))
+            {
+                int turnRoll = Dice.rollD("D20");
+                DiceText.text = turnRoll.ToString();
+
+                for (int j = 0; j < playersInRange.Count; j++)
+                {
+                    if (playersInRange[j].transform.position.x == tileTarget.transform.position.x && playersInRange[j].transform.position.z == tileTarget.transform.position.z)
+                    {
+                        playerTarget = playersInRange[j];
+                    }
+                }
+                if (turnOrder[turnCount].tag.Equals("Wiz"))
+                {
+                    WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
+                    if (spellChoice.Equals("Attack"))
+                    {
+                        tempWizard.startAttack(playerTarget.gameObject);
+                    }
+                    else if (turnRoll + 3 > playerTarget.getArmor())
+                    {
+                        //cast spell
+                        if (spellChoice.Equals("FB"))
+                        {
+                            tempWizard.FireBolt(playerTarget.gameObject);
+                            instructions.text = "FireBolt cast!";
+                            spellChoice = "";
+                            countMoves++;
+                        }
+                        else if (spellChoice.Equals("ROF"))
+                        {
+                            tempWizard.RayOfFrost(playerTarget.gameObject);
+                            instructions.text = "Ray Of Frost cast!";
+                            spellChoice = "";
+                            countMoves++;
+                        }
+                        else if (spellChoice.Equals("MM"))
+                        {
+                            wizSpellSlotsParent.SetActive(true);
+                            if (turnOrder[turnCount].getSS1() > 0)
+                            {
+                                SS1Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS1Parent.SetActive(false);
+                            }
+
+                            if (turnOrder[turnCount].getSS2() > 0)
+                            {
+                                SS2Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS2Parent.SetActive(false);
+                            }
+
+                            if (turnOrder[turnCount].getSS3() > 0)
+                            {
+                                SS3Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS3Parent.SetActive(false);
+                            }
+                        }
+                        else if (spellChoice.Equals("SR"))
+                        {
+                            wizSpellSlotsParent.SetActive(true);
+                            SS1Parent.SetActive(false);
+                            if (turnOrder[turnCount].getSS2() > 0)
+                            {
+                                SS2Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS2Parent.SetActive(false);
+                            }
+
+                            if (turnOrder[turnCount].getSS3() > 0)
+                            {
+                                SS3Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS3Parent.SetActive(false);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        instructions.text = "Spell did not penetrate armor.";
+                        countMoves++;
+                    }
+                }
+                else if (turnOrder[turnCount].tag.Equals("Cleric"))
+                {
+                    ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
+                    if (spellChoice.Equals("Attack"))
+                    {
+                        tempCleric.startAttack(playerTarget.gameObject);
+                    }
+                    else if (turnRoll > 5)
+                    {
+                        //cast spell
+                        if (spellChoice.Equals("HW"))
+                        {
+                            cleSpellSlotsParent.SetActive(true);
+                            if (turnOrder[turnCount].getSS1() > 0)
+                            {
+                                SS1Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS1Parent.SetActive(false);
+                            }
+
+                            if (turnOrder[turnCount].getSS2() > 0)
+                            {
+                                SS2Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS2Parent.SetActive(false);
+                            }
+
+                            if (turnOrder[turnCount].getSS3() > 0)
+                            {
+                                SS3Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS3Parent.SetActive(false);
+                            }
+                        }
+                        else if (spellChoice.Equals("MHW"))
+                        {
+                            cleSpellSlotsParent.SetActive(true);
+
+                            SS1Parent.SetActive(false);
+                            SS2Parent.SetActive(false);
+                            if (turnOrder[turnCount].getSS3() > 0)
+                            {
+                                SS3Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS3Parent.SetActive(false);
+                            }
+                        }
+                        else if (spellChoice.Equals("A"))
+                        {
+                            cleSpellSlotsParent.SetActive(true);
+
+                            SS1Parent.SetActive(false);
+                            if (turnOrder[turnCount].getSS2() > 0)
+                            {
+                                SS2Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS2Parent.SetActive(false);
+                            }
+
+                            if (turnOrder[turnCount].getSS3() > 0)
+                            {
+                                SS3Parent.SetActive(true);
+                            }
+                            else
+                            {
+                                SS3Parent.SetActive(false);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        instructions.text = "Did not roll high enough for healing spell.";
+                        countMoves++;
+                    }
+                }
+                lightUp = false;
             }
         }
     }
@@ -260,10 +444,10 @@ public class TurnControl : MonoBehaviour
     
     public void FBTaskOnClick()
     {
-        int turnRoll = Dice.rollD("D20");
-        //instructions.text = "cleric " + i + " rolls " + turnRoll;
+        spellChoice = "FB";
+/*        int turnRoll = Dice.rollD("D20");
         DiceText.text = turnRoll.ToString();
-        WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
+        WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];*/
 
         //if the roll is higher than the targets armor class, attack
         //if (turnRoll > target.getArmor())
@@ -285,41 +469,69 @@ public class TurnControl : MonoBehaviour
             }
         }
 
-
         //tempWizard.FireBolt();
         //}
         wizardParentButton.SetActive(false);
-        countMoves++;
     }
 
     public void ROFTaskOnClick()
     {
-        int turnRoll = Dice.rollD("D20");
+        spellChoice = "ROF";
+
+/*        int turnRoll = Dice.rollD("D20");
         //instructions.text = "cleric " + i + " rolls " + turnRoll;
         DiceText.text = turnRoll.ToString();
-        WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
+        WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];*/
 
         //if the roll is higher than the targets armor class, attack
         //if (turnRoll > target.getArmor())
         //{
-            tempWizard.RayOfFrost();
+        //tempWizard.RayOfFrost();
         //}
+
+        playersInRange = getPlayersInRange(turnOrder[turnCount], turnOrder, 60);
+        lightUp = true;
+
+        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            for (int j = 0; j < playersInRange.Count; j++)
+            {
+                if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                {
+                    //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                    playersInRangeTiles.Add(tiles[i]);
+                }
+            }
+        }
+
         wizardParentButton.SetActive(false);
-        countMoves++;
     }
 
     public void MMTaskOnClick()
     {
         spellChoice = "MM";
 
-        int turnRoll = Dice.rollD("D20");
-        //instructions.text = "cleric " + i + " rolls " + turnRoll;
-        DiceText.text = turnRoll.ToString();
+        playersInRange = getPlayersInRange(turnOrder[turnCount], turnOrder, 120);
+        lightUp = true;
+
+        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            for (int j = 0; j < playersInRange.Count; j++)
+            {
+                if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                {
+                    //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                    playersInRangeTiles.Add(tiles[i]);
+                }
+            }
+        }
 
         //if the roll is higher than the targets armor class, attack
         //if (turnRoll > target.getArmor())
         //{
-            wizSpellSlotsParent.SetActive(true);
+        /*wizSpellSlotsParent.SetActive(true);
             if (turnOrder[turnCount].getSS1() > 0)
             {
                 SS1Parent.SetActive(true);
@@ -345,7 +557,7 @@ public class TurnControl : MonoBehaviour
             else
             {
                 SS3Parent.SetActive(false);
-            }
+            }*/
         //}
         wizardParentButton.SetActive(false);
     }
@@ -354,14 +566,26 @@ public class TurnControl : MonoBehaviour
     {
         spellChoice = "SR";
 
-        int turnRoll = Dice.rollD("D20");
-        //instructions.text = "cleric " + i + " rolls " + turnRoll;
-        DiceText.text = turnRoll.ToString();
+        playersInRange = getPlayersInRange(turnOrder[turnCount], turnOrder, 120);
+        lightUp = true;
+
+        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            for (int j = 0; j < playersInRange.Count; j++)
+            {
+                if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                {
+                    //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                    playersInRangeTiles.Add(tiles[i]);
+                }
+            }
+        }
 
         //if the roll is higher than the targets armor class, attack
         //if (turnRoll > target.getArmor())
         //{
-            wizSpellSlotsParent.SetActive(true);
+/*        wizSpellSlotsParent.SetActive(true);
             
             
             SS1Parent.SetActive(false);
@@ -382,78 +606,56 @@ public class TurnControl : MonoBehaviour
             else
             {
                 SS3Parent.SetActive(false);
-            }
+            }*/
         //}
         wizardParentButton.SetActive(false);
     }
 
     public void AttackTaskOnClick()
     {
-        int turnRoll = Dice.rollD("D20");
-        //instructions.text = "cleric " + i + " rolls " + turnRoll;
-        DiceText.text = turnRoll.ToString();
+        playersInRange = getPlayersInRange(turnOrder[turnCount], turnOrder, 5);
+        lightUp = true;
 
-        if (turnOrder[turnCount].tag.Equals("Wiz"))
+        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < tiles.Length; i++)
         {
-            WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
-            //if the roll is higher than the targets armor class, attack
-            //if (turnRoll > target.getArmor())
-            //{
-                tempWizard.startAttack();
-            //}
+            for (int j = 0; j < playersInRange.Count; j++)
+            {
+                if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                {
+                    //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                    playersInRangeTiles.Add(tiles[i]);
+                }
+            }
         }
-        else if (turnOrder[turnCount].tag.Equals("Cleric"))
-        {
-            ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
-            //if the roll is higher than the targets armor class, attack
-            //if (turnRoll > target.getArmor())
-            //{
-                tempCleric.startAttack();
-            //}
-        }
-
         wizardParentButton.SetActive(false);
         countMoves++;
     }
 
     public void HWTaskOnClick()
     {
+        print("test");
         spellChoice = "HW";
 
-        int turnRoll = Dice.rollD("D20");
-        //instructions.text = "cleric " + i + " rolls " + turnRoll;
-        DiceText.text = turnRoll.ToString();
+        playersInRange = getPlayersInRange(turnOrder[turnCount], turnOrder, 60);
+        lightUp = true;
+
+        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            for (int j = 0; j < playersInRange.Count; j++)
+            {
+                if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                {
+                    //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                    playersInRangeTiles.Add(tiles[i]);
+                }
+            }
+        }
 
         //if the roll is higher than the targets armor class, attack
         //if (turnRoll > target.getArmor())
         //{
-            cleSpellSlotsParent.SetActive(true);
-            if (turnOrder[turnCount].getSS1() > 0)
-            {
-                SS1Parent.SetActive(true);
-            }
-            else
-            {
-                SS1Parent.SetActive(false);
-            }
-
-            if (turnOrder[turnCount].getSS2() > 0)
-            {
-                SS2Parent.SetActive(true);
-            }
-            else
-            {
-                SS2Parent.SetActive(false);
-            }
-
-            if (turnOrder[turnCount].getSS3() > 0)
-            {
-                SS3Parent.SetActive(true);
-            }
-            else
-            {
-                SS3Parent.SetActive(false);
-            }
         //}
         clericParentButton.SetActive(false);
     }
@@ -462,25 +664,25 @@ public class TurnControl : MonoBehaviour
     {
         spellChoice = "MHW";
 
-        int turnRoll = Dice.rollD("D20");
-        //instructions.text = "cleric " + i + " rolls " + turnRoll;
-        DiceText.text = turnRoll.ToString();
+        playersInRange = getPlayersInRange(turnOrder[turnCount], turnOrder, 60);
+        lightUp = true;
+
+        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            for (int j = 0; j < playersInRange.Count; j++)
+            {
+                if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                {
+                    //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                    playersInRangeTiles.Add(tiles[i]);
+                }
+            }
+        }
 
         //if the roll is higher than the targets armor class, attack
         //if (turnRoll > target.getArmor())
         //{
-            cleSpellSlotsParent.SetActive(true);
-
-            SS1Parent.SetActive(false);
-            SS2Parent.SetActive(false);
-            if (turnOrder[turnCount].getSS3() > 0)
-            {
-                SS3Parent.SetActive(true);
-            }
-            else
-            {
-                SS3Parent.SetActive(false);
-            }
         //}
         clericParentButton.SetActive(false);
     }
@@ -489,33 +691,25 @@ public class TurnControl : MonoBehaviour
     {
         spellChoice = "A";
 
-        int turnRoll = Dice.rollD("D20");
-        //instructions.text = "cleric " + i + " rolls " + turnRoll;
-        DiceText.text = turnRoll.ToString();
+        playersInRange = getPlayersInRange(turnOrder[turnCount], turnOrder, 30);
+        lightUp = true;
+
+        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            for (int j = 0; j < playersInRange.Count; j++)
+            {
+                if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                {
+                    //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                    playersInRangeTiles.Add(tiles[i]);
+                }
+            }
+        }
 
         //if the roll is higher than the targets armor class, attack
         //if (turnRoll > target.getArmor())
         //{
-            cleSpellSlotsParent.SetActive(true);
-
-            SS1Parent.SetActive(false);
-            if (turnOrder[turnCount].getSS2() > 0)
-            {
-                SS2Parent.SetActive(true);
-            }
-            else
-            {
-                SS2Parent.SetActive(false);
-            }
-
-            if (turnOrder[turnCount].getSS3() > 0)
-            {
-                SS3Parent.SetActive(true);
-            }
-            else
-            {
-                SS3Parent.SetActive(false);
-            }
         //}
         clericParentButton.SetActive(false);
     }
@@ -526,13 +720,13 @@ public class TurnControl : MonoBehaviour
         if (turnOrder[turnCount].tag.Equals("Wiz"))
         {
             WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
-            tempWizard.MagicMissile();
+            tempWizard.MagicMissile(playerTarget.gameObject);
             spellChoice = "";
         }
         else if (turnOrder[turnCount].tag.Equals("Cleric"))
         {
             ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
-            tempCleric.HealingWord();
+            tempCleric.HealingWord(playerTarget.gameObject);
         }
         countMoves++;
         wizSpellSlotsParent.SetActive(false);
@@ -547,12 +741,12 @@ public class TurnControl : MonoBehaviour
             WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
             if (spellChoice.Equals("MM"))
             {
-                tempWizard.MagicMissile();
+                tempWizard.MagicMissile(playerTarget.gameObject);
                 spellChoice = "";
             }
             else if (spellChoice.Equals("SR"))
             {
-                tempWizard.ScorchingRay();
+                tempWizard.ScorchingRay(playerTarget.gameObject);
                 spellChoice = "";
             }
         }
@@ -561,12 +755,12 @@ public class TurnControl : MonoBehaviour
             ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
             if (spellChoice.Equals("HW"))
             {
-                tempCleric.HealingWord();
+                tempCleric.HealingWord(playerTarget.gameObject);
                 spellChoice = "";
             }
             else if (spellChoice.Equals("A"))
             {
-                tempCleric.Aid();
+                tempCleric.Aid(playerTarget.gameObject);
                 spellChoice = "";
             }
         }
@@ -584,12 +778,12 @@ public class TurnControl : MonoBehaviour
             WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
             if (spellChoice.Equals("MM"))
             {
-                tempWizard.MagicMissile();
+                tempWizard.MagicMissile(playerTarget.gameObject);
                 spellChoice = "";
             }
             else if (spellChoice.Equals("SR"))
             {
-                tempWizard.ScorchingRay();
+                tempWizard.ScorchingRay(playerTarget.gameObject);
                 spellChoice = "";
             }
         }
@@ -598,17 +792,17 @@ public class TurnControl : MonoBehaviour
             ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
             if (spellChoice.Equals("HW"))
             {
-                tempCleric.HealingWord();
+                tempCleric.HealingWord(playerTarget.gameObject);
                 spellChoice = "";
             }
             else if (spellChoice.Equals("A"))
             {
-                tempCleric.Aid();
+                tempCleric.Aid(playerTarget.gameObject);
                 spellChoice = "";
             }
             else if (spellChoice.Equals("MHW"))
             {
-                tempCleric.MassHealingWord();
+                tempCleric.MassHealingWord(playerTarget.gameObject);
                 spellChoice = "";
             }
         }

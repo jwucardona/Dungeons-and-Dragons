@@ -10,7 +10,7 @@ public class ClericUnit : AbstractUnit
     public Transform staffEnd;
     private int ClerLoc;
 
-    public GameObject A, B, arm, target, sword1, sword2;
+    public GameObject A, B, arm, sword1, sword2;
     private bool activateAttack, shotFired;
 
     private static ClericUnit theCleric;
@@ -29,8 +29,9 @@ public class ClericUnit : AbstractUnit
         theCleric = this;
     }
 
-    public void startAttack()
+    public void startAttack(GameObject targetInput)
     {
+        target = targetInput;
         activateAttack = true;
     }
 
@@ -76,23 +77,26 @@ public class ClericUnit : AbstractUnit
         }
     }
 
-    GameObject shot;
-    public void HealingWord()
+    GameObject shot, target;
+    public void HealingWord(GameObject targetInput)
     {
+        target = targetInput;
         shot = Instantiate(healingWord, staffEnd.position, staffEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
     }
 
-    public void MassHealingWord()
+    public void MassHealingWord(GameObject targetInput)
     {
+        target = targetInput;
         shot = Instantiate(massHealingWord, staffEnd.position, staffEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
     }
 
-    public void Aid()
+    public void Aid(GameObject targetInput)
     {
+        target = targetInput;
         shot = Instantiate(aid, staffEnd.position, staffEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
