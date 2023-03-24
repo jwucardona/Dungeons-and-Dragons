@@ -16,6 +16,9 @@
         public Dropdown enemyDropdownMenu;
         public Dropdown wizardDropdownMenu;
         public Dropdown clericDropdownMenu;
+        public TextMeshProUGUI wizardText;
+        public TextMeshProUGUI clericText;
+        public TextMeshProUGUI enemyText;
         public static int wizardInput = 0;
         public static int clericInput = 0;
         public static int enemyInput = 1;
@@ -41,6 +44,13 @@
             }*/
         }
 
+        void Update ()
+        {
+            wizardText.text = wizardInput.ToString();
+            clericText.text = clericInput.ToString();
+            enemyText.text = enemyInput.ToString();
+        }
+
         public void done()
         {
             SceneManager.LoadScene("MainScene");
@@ -51,10 +61,10 @@
             wizardInput = wizardDropdownMenu.value;
             //Dropdown new_Dropdown = wizardDropdownMenu.GetComponent<wizardDropdownMenu>;
             clericDropdownMenu.ClearOptions();
-            for (int i = 0; i < (5 - wizardInput); i++)
+            for (int i = 0; i < (6 - wizardInput); i++)
             {
                 Dropdown.OptionData NewData = new Dropdown.OptionData();
-                NewData.text = (i + 1).ToString();
+                NewData.text = (i).ToString();
                 clericDropdownMenu.options.Add(NewData);
             }
             print(wizardInput);
@@ -64,13 +74,12 @@
             clericInput = clericDropdownMenu.value;
             //Dropdown new_Dropdown = wizardDropdownMenu.GetComponent<wizardDropdownMenu>;
             wizardDropdownMenu.ClearOptions();
-            for (int i = 0; i < (5 - wizardInput); i++)
+            for (int i = 0; i < (6 - clericInput); i++)
             {
                 Dropdown.OptionData NewData = new Dropdown.OptionData();
-                NewData.text = (i + 1).ToString();
+                NewData.text = (i).ToString();
                 wizardDropdownMenu.options.Add(NewData);
             }
-
             print(clericInput);
         }
         public void setEnemyInput(){
