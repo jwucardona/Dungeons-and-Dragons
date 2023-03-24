@@ -44,6 +44,9 @@ public class TurnControl : MonoBehaviour
     TileScript tileTarget;
     AbstractUnit playerTarget;
 
+    int goodCount = 0;
+    int badCount = 0;
+
     public void addSkelHorse(GameObject skH)
    {
         skelHorse.Add(skH.GetComponent<SkelHorseUnit>());
@@ -85,9 +88,32 @@ public class TurnControl : MonoBehaviour
             {
                 turnOrder.RemoveAt(i);
             }
+            if (turnOrder[i].tag.Equals("Cleric") || turnOrder[i].tag.Equals("Wiz"))
+            {
+                goodCount++;
+            }
+            else if (turnOrder[i].tag.Equals("Skel") || turnOrder[i].tag.Equals("SkelHorse"))
+            {
+                badCount++;
+            }
         }
-            //light up current character's tile
-            TileScript[] tiles = gc.getTiles();
+        if (goodCount == 0)
+        {
+            state = TurnState.lose;
+            //MEG - SWITCH TO LOSE SCREEN
+        }
+        else if (badCount == 0)
+        {
+            state = TurnState.win;
+            //MEG - SWITCH TO WIN SCREEN
+        }
+        else
+        {
+            goodCount = 0;
+            badCount = 0;
+        }
+        //light up current character's tile
+        TileScript[] tiles = gc.getTiles();
         for (int i = 0; i < tiles.Length; i++)
         {
             for (int j = 0; j < turnOrder.Count; j++)
@@ -169,16 +195,16 @@ public class TurnControl : MonoBehaviour
                 if (turnOrder[turnCount].tag.Equals("Wiz"))
                 {
                     WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
-                    if (spellChoice.Equals("Attack"))
+                    if (turnRoll + 3 > playerTarget.getArmorC())
                     {
-                        tempWizard.startAttack(playerTarget.gameObject);
-                        instructions.text = "Melee attack!";
-                        countMoves++;
-                    }
-                    else if (turnRoll + 3 > playerTarget.getArmorC())
-                    {
-                        //cast spell
-                        if (spellChoice.Equals("FB"))
+                        //cast spell or attack
+                        if (spellChoice.Equals("Attack"))
+                        {
+                            tempWizard.startAttack(playerTarget.gameObject);
+                            instructions.text = "Melee attack for (INSERT DAMAGE HERE) damage!";
+                            countMoves++;
+                        }
+                        else if (spellChoice.Equals("FB"))
                         {
                             tempWizard.FireBolt(playerTarget.gameObject);
                             turnRoll = Dice.rollD("D10");
@@ -253,7 +279,7 @@ public class TurnControl : MonoBehaviour
                     }
                     else
                     {
-                        instructions.text = "Spell did not penetrate armor.";
+                        instructions.text = "Attack did not penetrate armor.";
                         countMoves++;
                     }
                 }
@@ -262,13 +288,22 @@ public class TurnControl : MonoBehaviour
                     ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
                     if (spellChoice.Equals("Attack"))
                     {
-                        tempCleric.startAttack(playerTarget.gameObject);
+                        if (turnRoll + 3 > playerTarget.getArmorC())
+                        {
+                            tempCleric.startAttack(playerTarget.gameObject);
+                            instructions.text = "Melee attack for (INSERT DAMAGE HERE) damage!";
+                            countMoves++;
+                        }
+                        else
+                        {
+                            instructions.text = "Attack did not penetrate armor.";
                         countMoves++;
+                        }
                     }
                     else if (turnRoll > 5)
                     {
-                        //cast spell
-                        if (spellChoice.Equals("HW"))
+                        //cast spell or attack
+                        else if (spellChoice.Equals("HW"))
                         {
                             cleSpellSlotsParent.SetActive(true);
                             if (turnOrder[turnCount].getSS1() > 0)
@@ -675,7 +710,11 @@ public class TurnControl : MonoBehaviour
             WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
             tempWizard.MagicMissile(playerTarget.gameObject);
             int turnRoll = Dice.rollD("D4");
-            int temp = 3 * (turnRoll + 3);
+            int temp = (turnRoll + 3);
+            turnRoll = Dice.rollD("D4");
+            temp += (turnRoll + 3);
+            turnRoll = Dice.rollD("D4");
+            temp += (turnRoll + 3);
             DiceText.text = turnRoll.ToString();
             instructions.text = "Magic Missile cast for " + temp.ToString() + " damage.";
             StartCoroutine(playerTarget.takeDamage(temp));
@@ -705,8 +744,12 @@ public class TurnControl : MonoBehaviour
             {
                 tempWizard.MagicMissile(playerTarget.gameObject);
                 int turnRoll = Dice.rollD("D4");
-                int temp = 3 * (turnRoll + 3);
-                DiceText.text = temp.ToString();
+                int temp = (turnRoll + 3);
+                turnRoll = Dice.rollD("D4");
+                temp += (turnRoll + 3);
+                turnRoll = Dice.rollD("D4");
+                temp += (turnRoll + 3);
+                DiceText.text = turnRoll.ToString();
                 instructions.text = "Magic Missile cast for " + temp.ToString() + " damage.";
                 StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
@@ -718,8 +761,15 @@ public class TurnControl : MonoBehaviour
                 int temp = turnRoll;
                 turnRoll = Dice.rollD("D6");
                 temp += turnRoll;
-                temp = temp * 3;
-                DiceText.text = temp.ToString();
+                turnRoll = Dice.rollD("D6");
+                temp += turnRoll;
+                turnRoll = Dice.rollD("D6");
+                temp += turnRoll;
+                turnRoll = Dice.rollD("D6");
+                temp += turnRoll;
+                turnRoll = Dice.rollD("D6");
+                temp += turnRoll;
+                DiceText.text = turnRoll.ToString();
                 instructions.text = "Scorching Ray cast for " + temp.ToString() + " damage.";
                 StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
@@ -761,8 +811,12 @@ public class TurnControl : MonoBehaviour
             {
                 tempWizard.MagicMissile(playerTarget.gameObject);
                 int turnRoll = Dice.rollD("D4");
-                int temp = 3 * (turnRoll + 3);
-                DiceText.text = temp.ToString();
+                int temp = (turnRoll + 3);
+                turnRoll = Dice.rollD("D4");
+                temp += (turnRoll + 3);
+                turnRoll = Dice.rollD("D4");
+                temp += (turnRoll + 3);
+                DiceText.text = turnRoll.ToString();
                 instructions.text = "Magic Missile cast for " + temp.ToString() + " damage.";
                 StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
@@ -774,8 +828,15 @@ public class TurnControl : MonoBehaviour
                 int temp = turnRoll;
                 turnRoll = Dice.rollD("D6");
                 temp += turnRoll;
-                temp = temp * 3;
-                DiceText.text = temp.ToString();
+                turnRoll = Dice.rollD("D6");
+                temp += turnRoll;
+                turnRoll = Dice.rollD("D6");
+                temp += turnRoll;
+                turnRoll = Dice.rollD("D6");
+                temp += turnRoll;
+                turnRoll = Dice.rollD("D6");
+                temp += turnRoll;
+                DiceText.text = turnRoll.ToString();
                 instructions.text = "Scorching Ray cast for " + temp.ToString() + " damage.";
                 StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
@@ -806,7 +867,10 @@ public class TurnControl : MonoBehaviour
                 int turnRoll = Dice.rollD("D4");
                 DiceText.text = turnRoll.ToString();
                 instructions.text = "Mass Healing Word cast for " + turnRoll.ToString() + " healing.";
-                playerTarget.addHealth(turnRoll);
+                for (int i = 0; i < playersInRange.Count; i++)
+                {
+                    playersInRange[i].addHealth(turnRoll);
+                }
                 spellChoice = "";
             }
         }
