@@ -41,16 +41,36 @@
             }*/
         }
 
-        public void done(){
+        public void done()
+        {
             SceneManager.LoadScene("MainScene");
         }
         //store value of wizard guys
-        public void setWizardInput(){
+        public void setWizardInput()
+        {
             wizardInput = wizardDropdownMenu.value;
+            //Dropdown new_Dropdown = wizardDropdownMenu.GetComponent<wizardDropdownMenu>;
+            clericDropdownMenu.ClearOptions();
+            for (int i = 0; i < (5 - wizardInput); i++)
+            {
+                Dropdown.OptionData NewData = new Dropdown.OptionData();
+                NewData.text = (i + 1).ToString();
+                clericDropdownMenu.options.Add(NewData);
+            }
             print(wizardInput);
         }
-        public void setClericInput(){
+        public void setClericInput()
+        {
             clericInput = clericDropdownMenu.value;
+            //Dropdown new_Dropdown = wizardDropdownMenu.GetComponent<wizardDropdownMenu>;
+            wizardDropdownMenu.ClearOptions();
+            for (int i = 0; i < (5 - wizardInput); i++)
+            {
+                Dropdown.OptionData NewData = new Dropdown.OptionData();
+                NewData.text = (i + 1).ToString();
+                wizardDropdownMenu.options.Add(NewData);
+            }
+
             print(clericInput);
         }
         public void setEnemyInput(){

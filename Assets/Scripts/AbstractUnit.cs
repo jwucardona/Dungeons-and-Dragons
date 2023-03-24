@@ -65,7 +65,8 @@ public class AbstractUnit : MonoBehaviour
         }
     }
 
-    public void takeDamage(int damageTaken){
+    public IEnumerator takeDamage(int damageTaken){
+        yield return new WaitForSeconds(1f);
         hp -= damageTaken;
 
         // checkHealth();

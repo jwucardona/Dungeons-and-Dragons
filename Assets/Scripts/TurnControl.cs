@@ -78,8 +78,15 @@ public class TurnControl : MonoBehaviour
 
     void Update()
     {
-        //light up current character's tile
-        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < turnOrder.Count; i++)
+        {
+            if (turnOrder[i] == null)
+            {
+                turnOrder.RemoveAt(i);
+            }
+        }
+            //light up current character's tile
+            TileScript[] tiles = gc.getTiles();
         for (int i = 0; i < tiles.Length; i++)
         {
             for (int j = 0; j < turnOrder.Count; j++)
@@ -176,7 +183,7 @@ public class TurnControl : MonoBehaviour
                             turnRoll = Dice.rollD("D10");
                             DiceText.text = turnRoll.ToString();
                             instructions.text = "FireBolt cast for " + turnRoll.ToString() + " damage.";
-                            //playerTarget.takeDamage(turnRoll);
+                            StartCoroutine(playerTarget.takeDamage(turnRoll));
                             spellChoice = "";
                             countMoves++;
                         }
@@ -186,7 +193,7 @@ public class TurnControl : MonoBehaviour
                             turnRoll = Dice.rollD("D8");
                             DiceText.text = turnRoll.ToString();
                             instructions.text = "Ray Of Frost cast for " + turnRoll.ToString() + " damage.";
-                            //playerTarget.takeDamage(turnRoll);
+                            StartCoroutine(playerTarget.takeDamage(turnRoll));
                             spellChoice = "";
                             countMoves++;
                         }
@@ -589,6 +596,7 @@ public class TurnControl : MonoBehaviour
             }
         }
         wizardParentButton.SetActive(false);
+        clericParentButton.SetActive(false);
     }
 
     public void HWTaskOnClick()
@@ -664,9 +672,9 @@ public class TurnControl : MonoBehaviour
             tempWizard.MagicMissile(playerTarget.gameObject);
             int turnRoll = Dice.rollD("D4");
             int temp = 3 * (turnRoll + 3);
-            DiceText.text = temp.ToString();
+            DiceText.text = turnRoll.ToString();
             instructions.text = "Magic Missile cast for " + temp.ToString() + " damage.";
-            //playerTarget.takeDamage(temp);
+            StartCoroutine(playerTarget.takeDamage(temp));
             spellChoice = "";
         }
         else if (turnOrder[turnCount].tag.Equals("Cleric"))
@@ -676,7 +684,7 @@ public class TurnControl : MonoBehaviour
             int turnRoll = Dice.rollD("D4");
             DiceText.text = turnRoll.ToString();
             instructions.text = "Healing Word cast for " + turnRoll.ToString() + " healing.";
-            //playerTarget.addHealth(turnRoll);
+            playerTarget.addHealth(turnRoll);
         }
         countMoves++;
         wizSpellSlotsParent.SetActive(false);
@@ -696,7 +704,7 @@ public class TurnControl : MonoBehaviour
                 int temp = 3 * (turnRoll + 3);
                 DiceText.text = temp.ToString();
                 instructions.text = "Magic Missile cast for " + temp.ToString() + " damage.";
-                //playerTarget.takeDamage(temp);
+                StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
             }
             else if (spellChoice.Equals("SR"))
@@ -706,9 +714,10 @@ public class TurnControl : MonoBehaviour
                 int temp = turnRoll;
                 turnRoll = Dice.rollD("D6");
                 temp += turnRoll;
+                temp = temp * 3;
                 DiceText.text = temp.ToString();
                 instructions.text = "Scorching Ray cast for " + temp.ToString() + " damage.";
-                //playerTarget.takeDamage(temp);
+                StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
             }
         }
@@ -721,14 +730,14 @@ public class TurnControl : MonoBehaviour
                 int turnRoll = Dice.rollD("D4");
                 DiceText.text = turnRoll.ToString();
                 instructions.text = "Healing Word cast for " + turnRoll.ToString() + " healing.";
-                //playerTarget.addHealth(turnRoll);
+                playerTarget.addHealth(turnRoll);
                 spellChoice = "";
             }
             else if (spellChoice.Equals("A"))
             {
                 tempCleric.Aid(playerTarget.gameObject);
                 instructions.text = "Aid cast for 5 healing.";
-                //playerTarget.addHealth(5);
+                playerTarget.addHealth(5);
                 spellChoice = "";
             }
         }
@@ -751,7 +760,7 @@ public class TurnControl : MonoBehaviour
                 int temp = 3 * (turnRoll + 3);
                 DiceText.text = temp.ToString();
                 instructions.text = "Magic Missile cast for " + temp.ToString() + " damage.";
-                //playerTarget.takeDamage(temp);
+                StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
             }
             else if (spellChoice.Equals("SR"))
@@ -761,9 +770,10 @@ public class TurnControl : MonoBehaviour
                 int temp = turnRoll;
                 turnRoll = Dice.rollD("D6");
                 temp += turnRoll;
+                temp = temp * 3;
                 DiceText.text = temp.ToString();
                 instructions.text = "Scorching Ray cast for " + temp.ToString() + " damage.";
-                //playerTarget.takeDamage(temp);
+                StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
             }
         }
@@ -776,14 +786,14 @@ public class TurnControl : MonoBehaviour
                 int turnRoll = Dice.rollD("D4");
                 DiceText.text = turnRoll.ToString();
                 instructions.text = "Healing Word cast for " + turnRoll.ToString() + " healing.";
-                //playerTarget.addHealth(turnRoll);
+                playerTarget.addHealth(turnRoll);
                 spellChoice = "";
             }
             else if (spellChoice.Equals("A"))
             {
                 tempCleric.Aid(playerTarget.gameObject);
                 instructions.text = "Aid cast for 5 healing.";
-                //playerTarget.addHealth(5);
+                playerTarget.addHealth(5);
                 spellChoice = "";
             }
             else if (spellChoice.Equals("MHW"))
@@ -792,7 +802,7 @@ public class TurnControl : MonoBehaviour
                 int turnRoll = Dice.rollD("D4");
                 DiceText.text = turnRoll.ToString();
                 instructions.text = "Mass Healing Word cast for " + turnRoll.ToString() + " healing.";
-                //playerTarget.addHealth(turnRoll);
+                playerTarget.addHealth(turnRoll);
                 spellChoice = "";
             }
         }
