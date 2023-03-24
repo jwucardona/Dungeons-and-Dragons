@@ -114,7 +114,7 @@ System.Random rnd = new System.Random();
             tc.addCleric(newCleric);
         }
         int howManyEnemies = CharacterMenuScript.getEnemyInput();
-        int enemyTile = 0;
+        //int enemyTile = 0;
         for(int i = 0; i < howManyEnemies; i++){
             int prefabIndex = rnd.Next(2);
             bool validPosition = false;
