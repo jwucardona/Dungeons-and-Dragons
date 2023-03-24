@@ -12,6 +12,7 @@ public class TurnControl : MonoBehaviour
     //holds player wizard and cleric GameObjects
     [SerializeField] private UnitStatsHud hud;
 
+
     public GameObject wizardPrefab;
     public GameObject clericPrefab;
 
@@ -457,9 +458,9 @@ public class TurnControl : MonoBehaviour
     {
         //working with turnOrder[count] object -- so can call cleric methods on this object
         instructions.text = "Cleric's turn select move or action ";
-        yield return new WaitForSeconds(1f);
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
+        yield return new WaitForSeconds(1f);
         //switchTurn();
         //do the if statements and looking at tags again to see which turn to switch to next
     }
@@ -468,16 +469,19 @@ public class TurnControl : MonoBehaviour
         //always moves towards an enemy unless it can attack immedietly
         instructions.text = "SkeletonHorse's turn ";
         yield return new WaitForSeconds(1f);
+        PlayerMover.startMovement();
+        yield return new WaitForSeconds(6f);
         countMoves = 2;
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
         //switchTurn();
-
     }
     IEnumerator SkeletonAction()
     {
         instructions.text = "Skeleton's turn ";
         yield return new WaitForSeconds(1f);
+        PlayerMover.startMovement();
+        yield return new WaitForSeconds(6f);
         countMoves = 2;
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
@@ -486,9 +490,9 @@ public class TurnControl : MonoBehaviour
     IEnumerator WizardAction()
     {
         instructions.text = "Wizard's turn select move or action ";
-        yield return new WaitForSeconds(1f);
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
+        yield return new WaitForSeconds(1f);
         //switchTurn();
     }
     

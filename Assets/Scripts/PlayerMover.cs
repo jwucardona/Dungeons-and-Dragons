@@ -86,11 +86,19 @@ public class PlayerMover : MonoBehaviour
             if (isEnemy) {
                 possibleMoves.Clear();
                 possibleMoves = RangeCalculator.calculateRange(currTile, currCharacter.GetComponent<AbstractUnit>().getMove()-1);
-                int rand = rnd.Next(0, possibleMoves.Count - 1);
-                if (!possibleMoves[rand].getTaken()) {
-                    moveToTile = possibleMoves[rand].gameObject;
-                    startMoving = true;
+                int rand = 0;
+                while(true){
+                    rand = rnd.Next(0, possibleMoves.Count - 1);
+                    if (!possibleMoves[rand].getTaken())
+                    {
+                        break;
+                    }
+                    
                 }
+                moveToTile = possibleMoves[rand].gameObject;
+                newColor = moveToTile.transform.gameObject.GetComponent<Renderer>().material;
+                startMoving = true;
+                startChoosing = false;
                 movePlayer();
             }
 
@@ -102,7 +110,8 @@ public class PlayerMover : MonoBehaviour
                     possibleMoves[i].setColor(Color.blue * 2);
                 }
 
-                getMoveToTile();
+                getMoveToTile(); // this line is the issue
+            
                 if(moveToTile != null){
                     newColor.color = Color.blue;
                     if(Input.GetKeyDown(KeyCode.Return)){
@@ -121,7 +130,7 @@ public class PlayerMover : MonoBehaviour
 
     }
 
-    public void startMovement()
+    public static void startMovement()
     {
         //print("test1");
         startChoosing = true;
