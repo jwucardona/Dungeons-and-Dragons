@@ -54,7 +54,7 @@
             print(clericInput);
         }
         public void setEnemyInput(){
-            enemyInput = enemyDropdownMenu.value + 1;
+            enemyInput = enemyDropdownMenu.value;
             print(enemyInput);
         }
 

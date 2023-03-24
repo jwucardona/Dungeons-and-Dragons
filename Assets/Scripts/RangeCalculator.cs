@@ -28,6 +28,8 @@ public class RangeCalculator : MonoBehaviour
         List<TileScript> rangeTiles = new List<TileScript>();
         List<TileScript> visited = new List<TileScript>();
         Queue<TileScript> queue = new Queue<TileScript>();
+
+        tile.setDistance(0);
         queue.Enqueue(tile);
         visited.Add(tile);
         while (queue.Count != 0) {

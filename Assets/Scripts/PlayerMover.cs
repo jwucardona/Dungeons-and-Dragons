@@ -38,12 +38,19 @@ public class PlayerMover : MonoBehaviour
     {
         tilesCopy = gc.getTiles();
 
-        for (int i = 0; i<tilesCopy.Length; i++){
-            tilesCopy[i].setColor(Color.white);
-            if(currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z){
-                currTile = tilesCopy[i];
+        if (turnControl.rollDone())
+        {
+            currCharacter = turnControl.getCurrentPlayer();
+            for (int i = 0; i < tilesCopy.Length; i++)
+            {
+                tilesCopy[i].setColor(Color.white);
+                if (currCharacter.transform.position.x == tilesCopy[i].transform.position.x && currCharacter.transform.position.z == tilesCopy[i].transform.position.z)
+                {
+                    currTile = tilesCopy[i];
+                }
             }
         }
+        
         if(startChoosing){
 
 

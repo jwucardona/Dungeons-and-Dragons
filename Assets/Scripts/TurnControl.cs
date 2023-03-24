@@ -35,6 +35,11 @@ public class TurnControl : MonoBehaviour
     string spellChoice = "";
     private bool IsrollDone = false;
 
+    List<AbstractUnit> playersInRange = new List<AbstractUnit>();
+    List<TileScript> playersInRangeTiles = new List<TileScript>();
+    bool lightUp;
+    TileScript tileTarget;
+
     public void addSkelHorse(GameObject skH)
    {
         skelHorse.Add(skH.GetComponent<SkelHorseUnit>());
@@ -74,10 +79,47 @@ public class TurnControl : MonoBehaviour
             turnCount++;
             switchTurn();
         }
-       /* if(lightUp)
+       if (lightUp)
         {
-            getPlayersInRange(turnOrder[turnCount],turnOrder,turnOrder[turnCount].getRange());
-        }*/
+            TileScript[] tiles = gc.getTiles();
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                for (int j = 0; j < playersInRange.Count; j++)
+                {
+                    if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                    {
+                        tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                        if (tileTarget != null)
+                        {
+                            tileTarget.setColor(Color.blue * 2);
+                        }
+                        //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                        //playersInRangeTiles.Add(tiles[i]);
+                    }
+                }
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                print("test");
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit, 100.0f))
+                {
+                    if (hit.transform.tag == "Tile")
+                    {
+                        print("test1");
+                        print(playersInRangeTiles.Count);
+                        if (playersInRangeTiles.Contains(hit.transform.gameObject.GetComponent<TileScript>()))
+                        {
+                            print("test2");
+                            tileTarget = hit.transform.gameObject.GetComponent<TileScript>();
+                            //lightUp = false;
+                        }
+                    }
+                }
+            }
+        }
     }
     //roll D20 for all abstract Units and sort the list to determine the order
 
@@ -145,8 +187,10 @@ public class TurnControl : MonoBehaviour
     public void switchTurn()
     {
         countMoves = 0;
+        playersInRange.Clear();
+        playersInRangeTiles.Clear();
         //findPath(turnOrder[0], turnOrder[1]);
-        if(turnCount == turnOrder.Count) //start from beginning
+        if (turnCount == turnOrder.Count) //start from beginning
         {
               turnCount = 0;
         }
@@ -213,7 +257,7 @@ public class TurnControl : MonoBehaviour
          yield return new WaitForSeconds(1f);
         //switchTurn();
     }
-
+    
     public void FBTaskOnClick()
     {
         int turnRoll = Dice.rollD("D20");
@@ -224,7 +268,25 @@ public class TurnControl : MonoBehaviour
         //if the roll is higher than the targets armor class, attack
         //if (turnRoll > target.getArmor())
         //{
-            tempWizard.FireBolt();
+
+        playersInRange = getPlayersInRange(turnOrder[turnCount], turnOrder, 120);
+        lightUp = true;
+
+        TileScript[] tiles = gc.getTiles();
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            for (int j = 0; j < playersInRange.Count; j++)
+            {
+                if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
+                {
+                    //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                    playersInRangeTiles.Add(tiles[i]);
+                }
+            }
+        }
+
+
+        //tempWizard.FireBolt();
         //}
         wizardParentButton.SetActive(false);
         countMoves++;
@@ -300,8 +362,8 @@ public class TurnControl : MonoBehaviour
         //if (turnRoll > target.getArmor())
         //{
             wizSpellSlotsParent.SetActive(true);
-
-
+            
+            
             SS1Parent.SetActive(false);
 
             if (turnOrder[turnCount].getSS2() > 0)
@@ -682,6 +744,7 @@ public class TurnControl : MonoBehaviour
         instructions.text = path.Count.ToString();
         return path.Count*5;
     }
+
     List<AbstractUnit> getPlayersInRange(AbstractUnit player, List<AbstractUnit> others, int range)
     {
         List<AbstractUnit> playersInRange = new List<AbstractUnit>();;
