@@ -503,24 +503,68 @@ public class TurnControl : MonoBehaviour
     {
         //always moves towards an enemy unless it can attack immedietly
         instructions.text = "SkeletonHorse's turn ";
-        yield return new WaitForSeconds(1f);
-        PlayerMover.startMovement();
-        yield return new WaitForSeconds(6f);
-        countMoves = 2;
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
-        //switchTurn();
+        yield return new WaitForSeconds(1f);
+        //PlayerMover.startMovement();
+        //yield return new WaitForSeconds(6f);
+        countMoves = 0;
+        //determine if there is a player in range
+        bool attackedFirst = false;
+        while(countMoves < 2 && turnOrder[turnCount].tag == "SkelHorse"){
+            List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 1);
+            if(enemiesToAttack.Count > 0 || !attackedFirst){
+                instructions.text = "SkeletonHorse is attacking";
+                // attack first enemy in list
+                // attack code here
+                yield return new WaitForSeconds(3f);
+                attackedFirst = true;
+                countMoves++;
+            }
+            else {
+                instructions.text = "SkeletonHorse is moving";
+                PlayerMover.startMovement();
+                yield return new WaitForSeconds(5f);
+                //countMoves++;
+            }
+        }
+
+        //countMoves = 2;
+        switchTurn();
     }
     IEnumerator SkeletonAction()
     {
         instructions.text = "Skeleton's turn ";
-        yield return new WaitForSeconds(1f);
-        PlayerMover.startMovement();
-        yield return new WaitForSeconds(6f);
-        countMoves = 2;
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
-        //switchTurn();
+        yield return new WaitForSeconds(1f);
+        //PlayerMover.startMovement();
+        //yield return new WaitForSeconds(6f);
+        countMoves = 0;
+        // need to fix the attacking
+        // for some reason it always attacks first
+        // this could be because in the enemiesToAttack list, the first enemy is the player
+        bool attackedFirst = false;
+        while(countMoves < 2 && turnOrder[turnCount].tag == "Skel"){
+            List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 1);
+            if(enemiesToAttack.Count > 0 || !attackedFirst){
+                instructions.text = "Skeleton is attacking";
+                // attack first enemy in list
+                // attack code here
+                yield return new WaitForSeconds(3f);
+                attackedFirst = true;
+                countMoves++;
+            }
+            else {
+                instructions.text = "Skeleton is moving";
+                PlayerMover.startMovement();
+                yield return new WaitForSeconds(5f);
+                //countMoves++;
+            }
+        }
+
+        //countMoves = 2;
+        switchTurn();
     }
     IEnumerator WizardAction()
     {
@@ -1007,7 +1051,7 @@ public class TurnControl : MonoBehaviour
         List<AbstractUnit> playersInRange = new List<AbstractUnit>();;
 	    for(int i = 0; i < others.Count; i++)
         {
-            if(findPath(player, others[i]) <= range)
+            if(findPath(player, others[i]) <= range && others[i] != player)
 	        {
 		        playersInRange.Add(others[i]);
 	        }
