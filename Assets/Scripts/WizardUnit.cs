@@ -16,6 +16,8 @@ public class WizardUnit : AbstractUnit
 
     private static WizardUnit theWizard;
 
+    private GameObject MMParent, SRParent;
+
     public static WizardUnit getInstance()
     {
         return theWizard;
@@ -42,6 +44,8 @@ public class WizardUnit : AbstractUnit
     {
         target = targetInput;
         cam = camInput;
+        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
+        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         activateAttack = true;
     }
 
@@ -60,21 +64,34 @@ public class WizardUnit : AbstractUnit
         {
             destroyShot();
         }
+
+        if (getSS1() == 0 && getSS2() == 0 && getSS3() == 0)
+        {
+            MMParent.SetActive(false);
+        }
+        if (getSS2() == 0 && getSS3() == 0)
+        {
+            SRParent.SetActive(false);
+        }
+    }
+
+    public void setMMParent(GameObject input)
+    {
+        MMParent = input;
+    }
+    public void setSRParent(GameObject input)
+    {
+        SRParent = input;
     }
 
     void attack()
     {
-        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
-        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         wand.SetActive(false);
         sword.SetActive(true);
         float time = Mathf.PingPong(Time.time * 2f, 1);
         arm.transform.rotation = Quaternion.Lerp(A.transform.rotation, B.transform.rotation, time);
 
         StartCoroutine(resetCoroutine());
-
-        cam.transform.position = new Vector3(8, 24, 12);
-        cam.transform.rotation = Quaternion.Euler(90, -90, 0);
     }
 
     IEnumerator resetCoroutine()
@@ -84,6 +101,9 @@ public class WizardUnit : AbstractUnit
         wand.SetActive(true);
         sword.SetActive(false);
         transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        cam.transform.position = new Vector3(8, 24, 12);
+        cam.transform.rotation = Quaternion.Euler(90, -90, 0);
     }
 
     void destroyShot()

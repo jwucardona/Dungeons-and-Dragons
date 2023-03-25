@@ -35,7 +35,7 @@ public class TurnControl : MonoBehaviour
     private int countMoves;
     List<AbstractUnit> turnOrder = new List<AbstractUnit>();
 
-    public GameObject wizardParentButton, clericParentButton, wizSpellSlotsParent, cleSpellSlotsParent, actionParent, moveParent, SS1Parent, SS2Parent, SS3Parent;
+    public GameObject wizardParentButton, clericParentButton, wizSpellSlotsParent, cleSpellSlotsParent, actionParent, moveParent, SS1Parent, SS2Parent, SS3Parent, MMParent, SRParent, HWParent, MHWParent, AParent;
     string spellChoice = "";
     private bool IsrollDone = false;
 
@@ -94,8 +94,19 @@ public class TurnControl : MonoBehaviour
                     turnOrder.RemoveAt(i);
                     turnCount = turnCount - 1;
                 }
-                if (turnOrder[i].tag.Equals("Cleric") || turnOrder[i].tag.Equals("Wiz"))
+                if (turnOrder[i].tag.Equals("Cleric"))
                 {
+                    ClericUnit tempCleric = (ClericUnit)turnOrder[i];
+                    tempCleric.setHWParent(HWParent);
+                    tempCleric.setMHWParent(MHWParent);
+                    tempCleric.setAParent(AParent);
+                    goodCount++;
+                }
+                else if (turnOrder[i].tag.Equals("Wiz"))
+                {
+                    WizardUnit tempWizard = (WizardUnit)turnOrder[i];
+                    tempWizard.setMMParent(MMParent);
+                    tempWizard.setSRParent(SRParent);
                     goodCount++;
                 }
                 else if (turnOrder[i].tag.Equals("Skel") || turnOrder[i].tag.Equals("SkelHorse"))
@@ -308,7 +319,7 @@ public class TurnControl : MonoBehaviour
                         else
                         {
                             instructions.text = "Attack did not penetrate armor.";
-                        countMoves++;
+                            countMoves++;
                         }
                     }
                     else if (turnRoll > 5)
