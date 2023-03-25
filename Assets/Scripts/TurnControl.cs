@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public enum TurnState { start, cleric, wizard, skelHorse, skeleton, win, lose}; //change states to wizard cleric skeleton etc
 
@@ -44,6 +45,8 @@ public class TurnControl : MonoBehaviour
     TileScript tileTarget;
     AbstractUnit playerTarget;
 
+    public Camera cam;
+
     int goodCount = 0;
     int badCount = 0;
 
@@ -82,35 +85,43 @@ public class TurnControl : MonoBehaviour
 
     void Update()
     {
-        for (int i = 0; i < turnOrder.Count; i++)
+        if (IsrollDone)
         {
-            if (turnOrder[i] == null)
+            for (int i = 0; i < turnOrder.Count; i++)
             {
-                turnOrder.RemoveAt(i);
+                if (turnOrder[i] == null)
+                {
+                    turnOrder.RemoveAt(i);
+                    turnCount = turnCount - 1;
+                }
+                if (turnOrder[i].tag.Equals("Cleric") || turnOrder[i].tag.Equals("Wiz"))
+                {
+                    goodCount++;
+                }
+                else if (turnOrder[i].tag.Equals("Skel") || turnOrder[i].tag.Equals("SkelHorse"))
+                {
+                    badCount++;
+                }
             }
-            if (turnOrder[i].tag.Equals("Cleric") || turnOrder[i].tag.Equals("Wiz"))
+            if (goodCount == 0)
             {
-                goodCount++;
+                state = TurnState.lose;
+                print("LOSE");
+                //SceneManager.LoadScene("LoseEnding");
+                //MEG - SWITCH TO LOSE SCREEN
             }
-            else if (turnOrder[i].tag.Equals("Skel") || turnOrder[i].tag.Equals("SkelHorse"))
+            else if (badCount == 0)
             {
-                badCount++;
+                state = TurnState.win;
+                print("WIN");
+                //SceneManager.LoadScene("WinEnding");
+                //MEG - SWITCH TO WIN SCREEN
             }
-        }
-        if (goodCount == 0)
-        {
-            state = TurnState.lose;
-            //MEG - SWITCH TO LOSE SCREEN
-        }
-        else if (badCount == 0)
-        {
-            state = TurnState.win;
-            //MEG - SWITCH TO WIN SCREEN
-        }
-        else
-        {
-            goodCount = 0;
-            badCount = 0;
+            else
+            {
+                goodCount = 0;
+                badCount = 0;
+            }
         }
         //light up current character's tile
         TileScript[] tiles = gc.getTiles();
@@ -200,13 +211,13 @@ public class TurnControl : MonoBehaviour
                         //cast spell or attack
                         if (spellChoice.Equals("Attack"))
                         {
-                            tempWizard.startAttack(playerTarget.gameObject);
+                            tempWizard.startAttack(playerTarget.gameObject, cam);
                             instructions.text = "Melee attack for (INSERT DAMAGE HERE) damage!";
                             countMoves++;
                         }
                         else if (spellChoice.Equals("FB"))
                         {
-                            tempWizard.FireBolt(playerTarget.gameObject);
+                            tempWizard.FireBolt(playerTarget.gameObject, cam);
                             turnRoll = Dice.rollD("D10");
                             DiceText.text = turnRoll.ToString();
                             instructions.text = "FireBolt cast for " + turnRoll.ToString() + " damage.";
@@ -216,7 +227,7 @@ public class TurnControl : MonoBehaviour
                         }
                         else if (spellChoice.Equals("ROF"))
                         {
-                            tempWizard.RayOfFrost(playerTarget.gameObject);
+                            tempWizard.RayOfFrost(playerTarget.gameObject, cam);
                             turnRoll = Dice.rollD("D8");
                             DiceText.text = turnRoll.ToString();
                             instructions.text = "Ray Of Frost cast for " + turnRoll.ToString() + " damage.";
@@ -290,7 +301,7 @@ public class TurnControl : MonoBehaviour
                     {
                         if (turnRoll + 3 > playerTarget.getArmorC())
                         {
-                            tempCleric.startAttack(playerTarget.gameObject);
+                            tempCleric.startAttack(playerTarget.gameObject, cam);
                             instructions.text = "Melee attack for (INSERT DAMAGE HERE) damage!";
                             countMoves++;
                         }
@@ -752,7 +763,7 @@ public class TurnControl : MonoBehaviour
         if (turnOrder[turnCount].tag.Equals("Wiz"))
         {
             WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
-            tempWizard.MagicMissile(playerTarget.gameObject);
+            tempWizard.MagicMissile(playerTarget.gameObject, cam);
             int turnRoll = Dice.rollD("D4");
             int temp = (turnRoll + 3);
             turnRoll = Dice.rollD("D4");
@@ -767,7 +778,7 @@ public class TurnControl : MonoBehaviour
         else if (turnOrder[turnCount].tag.Equals("Cleric"))
         {
             ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
-            tempCleric.HealingWord(playerTarget.gameObject);
+            tempCleric.HealingWord(playerTarget.gameObject, cam);
             int turnRoll = Dice.rollD("D4");
             DiceText.text = turnRoll.ToString();
             instructions.text = "Healing Word cast for " + turnRoll.ToString() + " healing.";
@@ -786,7 +797,7 @@ public class TurnControl : MonoBehaviour
             WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
             if (spellChoice.Equals("MM"))
             {
-                tempWizard.MagicMissile(playerTarget.gameObject);
+                tempWizard.MagicMissile(playerTarget.gameObject, cam);
                 int turnRoll = Dice.rollD("D4");
                 int temp = (turnRoll + 3);
                 turnRoll = Dice.rollD("D4");
@@ -800,7 +811,7 @@ public class TurnControl : MonoBehaviour
             }
             else if (spellChoice.Equals("SR"))
             {
-                tempWizard.ScorchingRay(playerTarget.gameObject);
+                tempWizard.ScorchingRay(playerTarget.gameObject, cam);
                 int turnRoll = Dice.rollD("D6");
                 int temp = turnRoll;
                 turnRoll = Dice.rollD("D6");
@@ -824,7 +835,7 @@ public class TurnControl : MonoBehaviour
             ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
             if (spellChoice.Equals("HW"))
             {
-                tempCleric.HealingWord(playerTarget.gameObject);
+                tempCleric.HealingWord(playerTarget.gameObject, cam);
                 int turnRoll = Dice.rollD("D4");
                 DiceText.text = turnRoll.ToString();
                 instructions.text = "Healing Word cast for " + turnRoll.ToString() + " healing.";
@@ -833,7 +844,7 @@ public class TurnControl : MonoBehaviour
             }
             else if (spellChoice.Equals("A"))
             {
-                tempCleric.Aid(playerTarget.gameObject);
+                tempCleric.Aid(playerTarget.gameObject, cam);
                 instructions.text = "Aid cast for 5 healing.";
                 playerTarget.addHealth(5);
                 spellChoice = "";
@@ -853,7 +864,7 @@ public class TurnControl : MonoBehaviour
             WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
             if (spellChoice.Equals("MM"))
             {
-                tempWizard.MagicMissile(playerTarget.gameObject);
+                tempWizard.MagicMissile(playerTarget.gameObject, cam);
                 int turnRoll = Dice.rollD("D4");
                 int temp = (turnRoll + 3);
                 turnRoll = Dice.rollD("D4");
@@ -867,7 +878,7 @@ public class TurnControl : MonoBehaviour
             }
             else if (spellChoice.Equals("SR"))
             {
-                tempWizard.ScorchingRay(playerTarget.gameObject);
+                tempWizard.ScorchingRay(playerTarget.gameObject, cam);
                 int turnRoll = Dice.rollD("D6");
                 int temp = turnRoll;
                 turnRoll = Dice.rollD("D6");
@@ -891,7 +902,7 @@ public class TurnControl : MonoBehaviour
             ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
             if (spellChoice.Equals("HW"))
             {
-                tempCleric.HealingWord(playerTarget.gameObject);
+                tempCleric.HealingWord(playerTarget.gameObject, cam);
                 int turnRoll = Dice.rollD("D4");
                 DiceText.text = turnRoll.ToString();
                 instructions.text = "Healing Word cast for " + turnRoll.ToString() + " healing.";
@@ -900,14 +911,14 @@ public class TurnControl : MonoBehaviour
             }
             else if (spellChoice.Equals("A"))
             {
-                tempCleric.Aid(playerTarget.gameObject);
+                tempCleric.Aid(playerTarget.gameObject, cam);
                 instructions.text = "Aid cast for 5 healing.";
                 playerTarget.addHealth(5);
                 spellChoice = "";
             }
             else if (spellChoice.Equals("MHW"))
             {
-                tempCleric.MassHealingWord(playerTarget.gameObject);
+                tempCleric.MassHealingWord(playerTarget.gameObject, cam);
                 int turnRoll = Dice.rollD("D4");
                 DiceText.text = turnRoll.ToString();
                 instructions.text = "Mass Healing Word cast for " + turnRoll.ToString() + " healing.";

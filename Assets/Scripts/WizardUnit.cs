@@ -38,9 +38,10 @@ public class WizardUnit : AbstractUnit
         theWizard = this;
     }
 
-    public void startAttack(GameObject targetInput)
+    public void startAttack(GameObject targetInput, Camera camInput)
     {
         target = targetInput;
+        cam = camInput;
         activateAttack = true;
     }
 
@@ -63,6 +64,8 @@ public class WizardUnit : AbstractUnit
 
     void attack()
     {
+        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
+        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         wand.SetActive(false);
         sword.SetActive(true);
         float time = Mathf.PingPong(Time.time * 2f, 1);
@@ -70,6 +73,8 @@ public class WizardUnit : AbstractUnit
 
         StartCoroutine(resetCoroutine());
 
+        cam.transform.position = new Vector3(8, 24, 12);
+        cam.transform.rotation = Quaternion.Euler(90, -90, 0);
     }
 
     IEnumerator resetCoroutine()
@@ -85,39 +90,54 @@ public class WizardUnit : AbstractUnit
     {
         if (shot.transform.position.x < (target.transform.position.x + 1) && shot.transform.position.x > (target.transform.position.x - 1) && shot.transform.position.z < (target.transform.position.z + 1) && shot.transform.position.z > (target.transform.position.z - 1))
         {
+            cam.transform.position = new Vector3(8, 24, 12);
+            cam.transform.rotation = Quaternion.Euler(90, -90, 0);
             Destroy(shot);
             shotFired = false;
         }
     }
 
     GameObject shot, target;
-    public void FireBolt(GameObject targetInput)
+    Camera cam;
+    public void FireBolt(GameObject targetInput, Camera camInput)
     {
         target = targetInput;
+        cam = camInput;
+        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
+        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         shot = Instantiate(fireBolt, wandEnd.position, wandEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
     }
 
-    public void RayOfFrost(GameObject targetInput)
+    public void RayOfFrost(GameObject targetInput, Camera camInput)
     {
         target = targetInput;
+        cam = camInput;
+        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
+        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         shot = Instantiate(rayOfFrost, wandEnd.position, wandEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
     }
 
-    public void MagicMissile(GameObject targetInput)
+    public void MagicMissile(GameObject targetInput, Camera camInput)
     {
         target = targetInput;
+        cam = camInput;
+        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
+        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         shot = Instantiate(magicMissile, wandEnd.position, wandEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
     }
 
-    public void ScorchingRay(GameObject targetInput)
+    public void ScorchingRay(GameObject targetInput, Camera camInput)
     {
         target = targetInput;
+        cam = camInput;
+        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
+        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         shot = Instantiate(scorchingRay, wandEnd.position, wandEnd.rotation);
         shot.GetComponent<Rigidbody>().AddForce((target.transform.position - transform.position) * 50);
         shotFired = true;
