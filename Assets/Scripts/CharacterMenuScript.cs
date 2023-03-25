@@ -33,15 +33,6 @@
             clericDropdownMenu.onValueChanged.AddListener(delegate{
                 setClericInput();
             });
-
-            //Trying to gray out options based on other gameobjects selected
-            /*Toggle toggle = wizardDropdownMenu.GetComponent<Toggle>();
-            Debug.Log(toggle);
-            print(Int32.Parse(toggle.name))
-            if (toggle != null && Int32.Parse(toggle.name) > 5-clericInput)
-            {
-                toggle.interactable = false;
-            }*/
         }
 
         void Update ()
@@ -59,7 +50,6 @@
         public void setWizardInput()
         {
             wizardInput = wizardDropdownMenu.value;
-            //Dropdown new_Dropdown = wizardDropdownMenu.GetComponent<wizardDropdownMenu>;
             clericDropdownMenu.ClearOptions();
             for (int i = 0; i < (6 - wizardInput); i++)
             {
@@ -72,7 +62,6 @@
         public void setClericInput()
         {
             clericInput = clericDropdownMenu.value;
-            //Dropdown new_Dropdown = wizardDropdownMenu.GetComponent<wizardDropdownMenu>;
             wizardDropdownMenu.ClearOptions();
             for (int i = 0; i < (6 - clericInput); i++)
             {
@@ -83,7 +72,7 @@
             print(clericInput);
         }
         public void setEnemyInput(){
-            enemyInput = enemyDropdownMenu.value;
+            enemyInput = enemyDropdownMenu.value + 1;
             print(enemyInput);
         }
 
