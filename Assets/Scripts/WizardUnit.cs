@@ -16,8 +16,6 @@ public class WizardUnit : AbstractUnit
 
     private static WizardUnit theWizard;
 
-    private GameObject MMParent, SRParent;
-
     public static WizardUnit getInstance()
     {
         return theWizard;
@@ -64,24 +62,6 @@ public class WizardUnit : AbstractUnit
         {
             destroyShot();
         }
-
-        if (getSS1() == 0 && getSS2() == 0 && getSS3() == 0)
-        {
-            MMParent.SetActive(false);
-        }
-        if (getSS2() == 0 && getSS3() == 0)
-        {
-            SRParent.SetActive(false);
-        }
-    }
-
-    public void setMMParent(GameObject input)
-    {
-        MMParent = input;
-    }
-    public void setSRParent(GameObject input)
-    {
-        SRParent = input;
     }
 
     void attack()

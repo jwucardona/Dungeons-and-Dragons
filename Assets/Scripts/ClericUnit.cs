@@ -15,8 +15,6 @@ public class ClericUnit : AbstractUnit
 
     private static ClericUnit theCleric;
 
-    private GameObject HWParent, MHWParent, AParent;
-
     public static ClericUnit getInstance()
     {
         return theCleric;
@@ -35,8 +33,6 @@ public class ClericUnit : AbstractUnit
     {
         target = targetInput;
         cam = camInput;
-        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
-        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         activateAttack = true;
     }
 
@@ -51,41 +47,21 @@ public class ClericUnit : AbstractUnit
         {
             destroyShot();
         }
-        if (getSS1() == 0 && getSS2() == 0 && getSS3() == 0)
-        {
-            HWParent.SetActive(false);
-        }
-        if (getSS2() == 0 && getSS3() == 0)
-        {
-            AParent.SetActive(false);
-        }
-        if (getSS3() == 0)
-        {
-            MHWParent.SetActive(false);
-        }
-    }
-
-    public void setHWParent(GameObject input)
-    {
-        HWParent = input;
-    }
-    public void setMHWParent(GameObject input)
-    {
-        MHWParent = input;
-    }
-    public void setAParent(GameObject input)
-    {
-        AParent = input;
     }
 
     void attack()
     {
+        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
+        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         sword1.SetActive(false);
         sword2.SetActive(true);
         float time = Mathf.PingPong(Time.time * 2f, 1);
         arm.transform.rotation = Quaternion.Lerp(A.transform.rotation, B.transform.rotation, time);
 
         StartCoroutine(resetCoroutine());
+
+        cam.transform.position = new Vector3(8, 24, 12);
+        cam.transform.rotation = Quaternion.Euler(90, -90, 0);
     }
 
     IEnumerator resetCoroutine()
@@ -95,9 +71,6 @@ public class ClericUnit : AbstractUnit
         sword1.SetActive(true);
         sword2.SetActive(false);
         transform.rotation = new Quaternion(0, 0, 0, 0);
-
-        cam.transform.position = new Vector3(8, 24, 12);
-        cam.transform.rotation = Quaternion.Euler(90, -90, 0);
     }
 
     void destroyShot()

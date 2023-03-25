@@ -94,19 +94,8 @@ public class TurnControl : MonoBehaviour
                     turnOrder.RemoveAt(i);
                     turnCount = turnCount - 1;
                 }
-                if (turnOrder[i].tag.Equals("Cleric"))
+                if (turnOrder[i].tag.Equals("Cleric") || turnOrder[i].tag.Equals("Wiz"))
                 {
-                    ClericUnit tempCleric = (ClericUnit)turnOrder[i];
-                    tempCleric.setHWParent(HWParent);
-                    tempCleric.setMHWParent(MHWParent);
-                    tempCleric.setAParent(AParent);
-                    goodCount++;
-                }
-                else if (turnOrder[i].tag.Equals("Wiz"))
-                {
-                    WizardUnit tempWizard = (WizardUnit)turnOrder[i];
-                    tempWizard.setMMParent(MMParent);
-                    tempWizard.setSRParent(SRParent);
                     goodCount++;
                 }
                 else if (turnOrder[i].tag.Equals("Skel") || turnOrder[i].tag.Equals("SkelHorse"))
@@ -959,11 +948,32 @@ public class TurnControl : MonoBehaviour
         {
             print("wizard");
             wizardParentButton.SetActive(true);
+
+            if (turnOrder[turnCount].getSS1() == 0 && turnOrder[turnCount].getSS2() == 0 && turnOrder[turnCount].getSS3() == 0)
+            {
+                MMParent.SetActive(false);
+            }
+            if (turnOrder[turnCount].getSS2() == 0 && turnOrder[turnCount].getSS3() == 0)
+            {
+                SRParent.SetActive(false);
+            }
         }
         else if (turnOrder[turnCount].tag.Equals("Cleric"))
         {
             print("cleric");
             clericParentButton.SetActive(true);
+            if (turnOrder[turnCount].getSS1() == 0 && turnOrder[turnCount].getSS2() == 0 && turnOrder[turnCount].getSS3() == 0)
+            {
+                HWParent.SetActive(false);
+            }
+            if (turnOrder[turnCount].getSS2() == 0 && turnOrder[turnCount].getSS3() == 0)
+            {
+                AParent.SetActive(false);
+            }
+            if (turnOrder[turnCount].getSS3() == 0)
+            {
+                MHWParent.SetActive(false);
+            }
         }
     }
 
