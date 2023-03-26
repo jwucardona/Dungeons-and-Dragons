@@ -524,7 +524,8 @@ public class TurnControl : MonoBehaviour
         bool attackedFirst = false;
         while(countMoves < 2 && turnOrder[turnCount].tag == "SkelHorse"){
             List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 1);
-            if(enemiesToAttack.Count > 0 || !attackedFirst){
+            print("enemies to attack: " + enemiesToAttack.Count);
+            if(enemiesToAttack.Count > 0 && !attackedFirst){
                 instructions.text = "SkeletonHorse is attacking";
                 // attack first enemy in list
                 // attack code here
@@ -557,8 +558,9 @@ public class TurnControl : MonoBehaviour
         // this could be because in the enemiesToAttack list, the first enemy is the player
         bool attackedFirst = false;
         while(countMoves < 2 && turnOrder[turnCount].tag == "Skel"){
-            List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 1);
-            if(enemiesToAttack.Count > 0 || !attackedFirst){
+            List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 2);
+            print("enemies to attack: " + enemiesToAttack.Count);
+            if(enemiesToAttack.Count > 0 && !attackedFirst){
                 instructions.text = "Skeleton is attacking";
                 // attack first enemy in list
                 // attack code here
