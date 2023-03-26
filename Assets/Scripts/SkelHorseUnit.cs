@@ -8,6 +8,10 @@ public class SkelHorseUnit : AbstractUnit
     public bool activateAttack;
     private static SkelHorseUnit shu;
     private int SkHLoc;
+
+    GameObject target;
+    Camera cam;
+
     //List<string> damage = new List<string>(){"d6", "d6", "4"};
     public SkelHorseUnit() : base(22, 13, 12, "SkH", 0, 0, 0){
     }
@@ -32,14 +36,19 @@ public class SkelHorseUnit : AbstractUnit
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.T))
-        {
-            activateAttack = true;
-        }
         if (activateAttack)
         {
             attack();
         }
+    }
+
+    public void startAttack(GameObject targetInput, Camera camInput)
+    {
+        target = targetInput;
+        cam = camInput;
+        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
+        cam.transform.rotation = Quaternion.Euler(28, 180, 0);
+        activateAttack = true;
     }
 
     void attack()
@@ -56,6 +65,9 @@ public class SkelHorseUnit : AbstractUnit
         yield return new WaitForSeconds(1f);
         activateAttack = false;
         transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        cam.transform.position = new Vector3(8, 24, 12);
+        cam.transform.rotation = Quaternion.Euler(90, -90, 0);
     }
 
     public override void die() {

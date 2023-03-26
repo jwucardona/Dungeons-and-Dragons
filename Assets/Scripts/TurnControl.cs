@@ -522,13 +522,16 @@ public class TurnControl : MonoBehaviour
         countMoves = 0;
         //determine if there is a player in range
         bool attackedFirst = false;
-        while(countMoves < 2 && turnOrder[turnCount].tag == "SkelHorse"){
-            List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 1);
+        while(countMoves < 2 && turnOrder[turnCount].tag == "SkelHorse")
+        {
+            SkelHorseUnit tempSkelHorse = (SkelHorseUnit)turnOrder[turnCount];
+            List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 10);
             print("enemies to attack: " + enemiesToAttack.Count);
             if(enemiesToAttack.Count > 0 && !attackedFirst){
                 instructions.text = "SkeletonHorse is attacking";
                 // attack first enemy in list
                 // attack code here
+                //tempSkelHorse.startAttack(enemiesToAttack(0).gameObject, cam);
                 yield return new WaitForSeconds(3f);
                 attackedFirst = true;
                 countMoves++;
@@ -537,7 +540,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "SkeletonHorse is moving";
                 PlayerMover.startMovement();
                 yield return new WaitForSeconds(5f);
-                //countMoves++;
+                countMoves++;
             }
         }
 
@@ -558,12 +561,14 @@ public class TurnControl : MonoBehaviour
         // this could be because in the enemiesToAttack list, the first enemy is the player
         bool attackedFirst = false;
         while(countMoves < 2 && turnOrder[turnCount].tag == "Skel"){
-            List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 2);
+            SkeletonUnit tempSkel = (SkeletonUnit)turnOrder[turnCount];
+            List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 10);
             print("enemies to attack: " + enemiesToAttack.Count);
             if(enemiesToAttack.Count > 0 && !attackedFirst){
                 instructions.text = "Skeleton is attacking";
                 // attack first enemy in list
                 // attack code here
+                //tempSkel.startAttack(enemiesToAttack(0).gameObject, cam);
                 yield return new WaitForSeconds(3f);
                 attackedFirst = true;
                 countMoves++;
@@ -572,7 +577,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Skeleton is moving";
                 PlayerMover.startMovement();
                 yield return new WaitForSeconds(5f);
-                //countMoves++;
+                countMoves++;
             }
         }
 
@@ -1087,6 +1092,8 @@ public class TurnControl : MonoBehaviour
         {
             if(findPath(player, others[i]) <= range && others[i] != player)
 	        {
+                print(findPath(player, others[i]));
+                print(range);
 		        playersInRange.Add(others[i]);
 	        }
         }	
