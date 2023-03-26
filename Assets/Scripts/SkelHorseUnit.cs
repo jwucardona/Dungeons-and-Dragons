@@ -47,7 +47,7 @@ public class SkelHorseUnit : AbstractUnit
         target = targetInput;
         cam = camInput;
         cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
-        cam.transform.rotation = Quaternion.Euler(28, 180, 0);
+        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         activateAttack = true;
     }
 

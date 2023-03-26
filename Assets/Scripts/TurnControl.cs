@@ -531,7 +531,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "SkeletonHorse is attacking";
                 // attack first enemy in list
                 // attack code here
-                //tempSkelHorse.startAttack(enemiesToAttack(0).gameObject, cam);
+                tempSkelHorse.startAttack(enemiesToAttack[0].gameObject, cam);
                 yield return new WaitForSeconds(3f);
                 attackedFirst = true;
                 countMoves++;
@@ -545,7 +545,7 @@ public class TurnControl : MonoBehaviour
         }
 
         //countMoves = 2;
-        switchTurn();
+        //switchTurn();
     }
     IEnumerator SkeletonAction()
     {
@@ -568,7 +568,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Skeleton is attacking";
                 // attack first enemy in list
                 // attack code here
-                //tempSkel.startAttack(enemiesToAttack(0).gameObject, cam);
+                tempSkel.startAttack(enemiesToAttack[0].gameObject, cam);
                 yield return new WaitForSeconds(3f);
                 attackedFirst = true;
                 countMoves++;
@@ -582,7 +582,7 @@ public class TurnControl : MonoBehaviour
         }
 
         //countMoves = 2;
-        switchTurn();
+        //switchTurn();
     }
     IEnumerator WizardAction()
     {
