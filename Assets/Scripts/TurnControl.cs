@@ -70,6 +70,38 @@ public class TurnControl : MonoBehaviour
        wiz.Add(wizard.GetComponent<WizardUnit>());
        allUnits.Add(wizard.GetComponent<WizardUnit>());
    }
+   void addRandWeapon(AbstractUnit unit)
+   {
+       int rand = Random.Range(0, 3);
+       if (rand == 0)
+       {
+           unit.addWeapon("Club");
+       }
+       else if (rand == 1)
+       {
+           unit.addWeapon("HandAxe");
+       }
+       else if (rand == 2)
+       {
+           unit.addWeapon("GreatClub");
+       }
+   }
+   void addRandArmor(AbstractUnit unit)
+   {
+       int rand = Random.Range(0, 3);
+       if (rand == 0)
+       {
+           unit.addArmor("Padded");
+       }
+       else if (rand == 1)
+       {
+           unit.addArmor("Studded Leather");
+       }
+       else if (rand == 2)
+       {
+           unit.addArmor("Leather");
+       }
+   }
    public TurnState state;
     
     void Start()
@@ -408,6 +440,8 @@ public class TurnControl : MonoBehaviour
             DiceText.text = turnRoll.ToString();
             //string whichUnit = "cleric" + i.ToString();
             turnDict.Add(cleric[i], turnRoll);
+            addRandArmor(cleric[i]);
+            addRandWeapon(cleric[i]);
             yield return new WaitForSeconds(1f);
         }
         for(int i = 0; i< wiz.Count; i++)
@@ -417,6 +451,8 @@ public class TurnControl : MonoBehaviour
             DiceText.text = turnRoll.ToString();
             string whichUnit = "Wizard" + i.ToString();
             turnDict.Add(wiz[i], turnRoll);
+            addRandArmor(wiz[i]);
+            addRandWeapon(wiz[i]);
             yield return new WaitForSeconds(1f);
         }
         for(int i = 0; i< skel.Count; i++)
@@ -426,6 +462,8 @@ public class TurnControl : MonoBehaviour
             DiceText.text = turnRoll.ToString();
             string whichUnit = "Skeleton" + i.ToString();
             turnDict.Add(skel[i], turnRoll);
+            addRandArmor(skel[i]);
+            addRandWeapon(skel[i]);
             yield return new WaitForSeconds(1f);
         }
         for(int i = 0; i< skelHorse.Count; i++)
@@ -435,6 +473,8 @@ public class TurnControl : MonoBehaviour
             DiceText.text = turnRoll.ToString();
             string whichUnit = "SkeletonHorse" + i.ToString();
             turnDict.Add(skelHorse[i], turnRoll);
+            addRandArmor(skelHorse[i]);
+            addRandWeapon(skelHorse[i]);
             yield return new WaitForSeconds(1f);
         }
         
