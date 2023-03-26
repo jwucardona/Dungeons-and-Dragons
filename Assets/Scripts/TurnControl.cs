@@ -107,15 +107,13 @@ public class TurnControl : MonoBehaviour
             {
                 state = TurnState.lose;
                 print("LOSE");
-                //SceneManager.LoadScene("LoseEnding");
-                //MEG - SWITCH TO LOSE SCREEN
+                SceneManager.LoadScene("LossEnding");
             }
             else if (badCount == 0)
             {
                 state = TurnState.win;
                 print("WIN");
-                //SceneManager.LoadScene("WinEnding");
-                //MEG - SWITCH TO WIN SCREEN
+                SceneManager.LoadScene("WinEnding");
             }
             else
             {
