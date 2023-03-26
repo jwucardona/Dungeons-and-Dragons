@@ -242,7 +242,10 @@ public class TurnControl : MonoBehaviour
                         if (spellChoice.Equals("Attack"))
                         {
                             tempWizard.startAttack(playerTarget.gameObject, cam);
-                            instructions.text = "Melee attack for (INSERT DAMAGE HERE) damage!";
+                            turnRoll = Dice.rollD(turnOrder[turnCount].getDamageDice());
+                            DiceText.text = turnRoll.ToString();
+                            instructions.text = "Melee attack for " + turnRoll.ToString() + " damage!";
+                            StartCoroutine(playerTarget.takeDamage(turnRoll));
                             countMoves++;
                         }
                         else if (spellChoice.Equals("FB"))
@@ -332,7 +335,11 @@ public class TurnControl : MonoBehaviour
                         if (turnRoll + 3 > playerTarget.getArmorC())
                         {
                             tempCleric.startAttack(playerTarget.gameObject, cam);
-                            instructions.text = "Melee attack for (INSERT DAMAGE HERE) damage!";
+                            turnRoll = Dice.rollD(turnOrder[turnCount].getDamageDice());
+                            DiceText.text = turnRoll.ToString();
+                            turnRoll += Dice.rollD(turnOrder[turnCount].getDamageDice());
+                            instructions.text = "Melee attack for " + turnRoll.ToString() + " damage!";
+                            StartCoroutine(playerTarget.takeDamage(turnRoll));
                             countMoves++;
                         }
                         else
@@ -570,6 +577,12 @@ public class TurnControl : MonoBehaviour
                 // attack first enemy in list
                 // attack code here
                 tempSkelHorse.startAttack(enemiesToAttack[0].gameObject, cam);
+                int turnRoll = Dice.rollD(turnOrder[turnCount].getDamageDice());
+                DiceText.text = turnRoll.ToString();
+                turnRoll += Dice.rollD(turnOrder[turnCount].getDamageDice());
+                turnRoll += 4;
+                instructions.text = "Melee attack for " + turnRoll.ToString() + " damage!";
+                StartCoroutine(enemiesToAttack[0].takeDamage(turnRoll));
                 yield return new WaitForSeconds(3f);
                 attackedFirst = true;
                 countMoves++;
@@ -578,7 +591,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "SkeletonHorse is moving";
                 PlayerMover.startMovement();
                 yield return new WaitForSeconds(5f);
-                countMoves++;
+                //don't need countMoves++ because it is already counted in playermover
             }
         }
 
@@ -607,6 +620,11 @@ public class TurnControl : MonoBehaviour
                 // attack first enemy in list
                 // attack code here
                 tempSkel.startAttack(enemiesToAttack[0].gameObject, cam);
+                int turnRoll = Dice.rollD(turnOrder[turnCount].getDamageDice());
+                DiceText.text = turnRoll.ToString();
+                turnRoll += 2;
+                instructions.text = "Melee attack for " + turnRoll.ToString() + " damage!";
+                StartCoroutine(enemiesToAttack[0].takeDamage(turnRoll));
                 yield return new WaitForSeconds(3f);
                 attackedFirst = true;
                 countMoves++;
@@ -615,7 +633,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Skeleton is moving";
                 PlayerMover.startMovement();
                 yield return new WaitForSeconds(5f);
-                countMoves++;
+                //don't need countMoves++ because it is already counted in playermover
             }
         }
 

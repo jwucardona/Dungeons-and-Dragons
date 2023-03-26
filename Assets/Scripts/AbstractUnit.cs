@@ -11,7 +11,8 @@ public class AbstractUnit : MonoBehaviour
     private int armorC;
     private int movement;
     private string type;
-    private List<string> damage;
+    //private List<string> damage;
+    protected string damageDice;
     private string weapon = "None";
     private string armor = "None";
     private string className = "None";
@@ -32,21 +33,24 @@ public class AbstractUnit : MonoBehaviour
         this.ss1 = ss1;
         this.ss2 = ss2;
         this.ss3 = ss3;
-        damage = new List<string>();
+        //damage = new List<string>();
         setDamage(type);
     }
     public void addWeapon(string weapon){
         if (weapon.Equals("Club")) {
             this.weapon = "Club";
-            damage.Add("d4");
+            damageDice = "D4";
+            //damage.Add("d4");
         }
         if (weapon.Equals("HandAxe")) {
             this.weapon = "HandAxe";
-            damage.Add("d6");
+            damageDice = "D6";
+            //damage.Add("d6");
         }
         if (weapon.Equals("GreatClub")) {
             this.weapon = "GreatClub";
-            damage.Add("d8");
+            damageDice = "D8";
+            //damage.Add("d8");
         }
     }
 
@@ -84,26 +88,38 @@ public class AbstractUnit : MonoBehaviour
 
     public void setDamage(string type){
         if (type.Equals("Wiz")){
-            damage.Add("d4");
+            damageDice = "D4";
+            //damage.Add("d4");
             className = "Wizard";
         }
             
-        if (type.Equals("Cle")) {
-            damage.Add("d6");
-            damage.Add("d6");
+        if (type.Equals("Cle"))
+        {
+            damageDice = "D6";
+            //damage.Add("d6");
+            //damage.Add("d6");
             className = "Cleric";
         }
-        if (type.Equals("Sk")) {
-            damage.Add("d6");
-            damage.Add("2");
+        if (type.Equals("Sk"))
+        {
+            damageDice = "D6";
+            //damage.Add("d6");
+            //damage.Add("2");
             className = "Skeleton";
         }
-        if (type.Equals("SkH")) {
-            damage.Add("d6");
-            damage.Add("d6");
-            damage.Add("4");
+        if (type.Equals("SkH"))
+        {
+            damageDice = "D6";
+            //damage.Add("d6");
+            //damage.Add("d6");
+            //damage.Add("4");
             className = "Skel Horse";
         }
+    }
+
+    public string getDamageDice()
+    {
+        return damageDice;
     }
 
     public int getHp(){
@@ -164,23 +180,9 @@ public class AbstractUnit : MonoBehaviour
     public virtual void die(){
     }
     
-    public void rollForAttack()
+    public virtual int rollForAttack()
     {
-        //iterate through damage list
-        for(int i = 0; i < damage.Count; i++)
-        {
-            int totalDam = 0;
-            if(damage[i].Equals("d4"))
-                totalDam += rs.rollD("D4");
-            else if(damage[i].Equals("d6"))
-                totalDam += rs.rollD("D6");
-            else if(damage[i].Equals("d8"))
-                totalDam += rs.rollD("D8");
-            else if(damage[i].Equals("2"))
-                totalDam += 2;
-            else if(damage[i].Equals("4"))
-                totalDam += 4;
-        }
+        return 0;
     }
     // Start is called before the first frame update
     void Start()

@@ -33,6 +33,8 @@ public class ClericUnit : AbstractUnit
     {
         target = targetInput;
         cam = camInput;
+        cam.transform.position = new Vector3(transform.position.x, 4, transform.position.z - 3);
+        cam.transform.rotation = Quaternion.Euler(28, 0, 0);
         activateAttack = true;
     }
 
@@ -59,9 +61,6 @@ public class ClericUnit : AbstractUnit
         arm.transform.rotation = Quaternion.Lerp(A.transform.rotation, B.transform.rotation, time);
 
         StartCoroutine(resetCoroutine());
-
-        cam.transform.position = new Vector3(8, 24, 12);
-        cam.transform.rotation = Quaternion.Euler(90, -90, 0);
     }
 
     IEnumerator resetCoroutine()
@@ -71,6 +70,9 @@ public class ClericUnit : AbstractUnit
         sword1.SetActive(true);
         sword2.SetActive(false);
         transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        cam.transform.position = new Vector3(8, 24, 12);
+        cam.transform.rotation = Quaternion.Euler(90, -90, 0);
     }
 
     void destroyShot()
