@@ -49,7 +49,7 @@ public class TurnControl : MonoBehaviour
 
     int goodCount = 0;
     int badCount = 0;
-
+    
     public void addSkelHorse(GameObject skH)
    {
         skelHorse.Add(skH.GetComponent<SkelHorseUnit>());
@@ -69,6 +69,11 @@ public class TurnControl : MonoBehaviour
    {
        wiz.Add(wizard.GetComponent<WizardUnit>());
        allUnits.Add(wizard.GetComponent<WizardUnit>());
+   }
+   bool PMoveDone = false;
+   public void setPMove(bool pMove)
+   {
+      PMoveDone = pMove;
    }
    void addRandWeapon(AbstractUnit unit)
    {
@@ -183,7 +188,8 @@ public class TurnControl : MonoBehaviour
                 {
                     if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
                     {
-                        tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
+                        instructions.text = "select a red enemy tile and hit ENTER to attack";
+                        tiles[i].setColor(Color.red * 2);
                         if (tileTarget != null)
                         {
                             tileTarget.setColor(Color.blue * 2);
@@ -193,6 +199,12 @@ public class TurnControl : MonoBehaviour
                     }
                 }
             }
+             if (playersInRange.Count == 0)
+             {
+                    instructions.text = "No units in range! Select move for second turn";
+                    countMoves++;
+                    lightUp = false;
+             }
             if (Input.GetMouseButtonDown(0))
             {
                 //print("test");
@@ -217,14 +229,9 @@ public class TurnControl : MonoBehaviour
             }
             if (tileTarget != null && Input.GetKeyDown(KeyCode.Return))
             {
+                instructions.text = "Rolling for attack ";
                 int turnRoll = Dice.rollD("D20");
                 DiceText.text = turnRoll.ToString();
-
-                if (playersInRange.Count == 0)
-                {
-                    instructions.text = "No units in range!";
-                    countMoves++;
-                }
 
                 for (int j = 0; j < playersInRange.Count; j++)
                 {
@@ -484,7 +491,8 @@ public class TurnControl : MonoBehaviour
             addRandWeapon(skelHorse[i]);
             yield return new WaitForSeconds(1f);
         }
-        
+        //clear dice 
+        DiceText.text = " ";
         foreach (KeyValuePair<AbstractUnit,int> item in turnDict.OrderBy(key => key.Value)) //sort based on the rolls
         { 
            turnOrder.Add(item.Key);
@@ -544,7 +552,18 @@ public class TurnControl : MonoBehaviour
         }
         //turnCount++; //incriment the count after it is switched 
     }
-    
+    public void onMoveButton()
+    {
+        StartCoroutine(MoveText());
+    }
+    IEnumerator MoveText()
+    {
+        instructions.text = "Select a tile and hit enter to move! ";
+        yield return new WaitForSeconds(1f);
+        if(PMoveDone)
+            instructions.text = "Now choose move or action";
+        yield return new WaitForSeconds(1f);
+    }
     IEnumerator clericAction()
     {
         //working with turnOrder[count] object -- so can call cleric methods on this object
@@ -573,10 +592,16 @@ public class TurnControl : MonoBehaviour
             List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 10);
             print("enemies to attack: " + enemiesToAttack.Count);
             if(enemiesToAttack.Count > 0 && !attackedFirst){
-                instructions.text = "SkeletonHorse is attacking";
+                 if(countMoves == 0)
+                    instructions.text = "SkeletonHorse attacks for first turn";
+                else if(countMoves == 1)
+                    instructions.text = "SkeletonHorse attacks for its second turn";
                 // attack first enemy in list
                 // attack code here
                 tempSkelHorse.startAttack(enemiesToAttack[0].gameObject, cam);
+                yield return new WaitForSeconds(1f);
+                instructions.text = "rolling for damage";
+                yield return new WaitForSeconds(1f);
                 int turnRoll = Dice.rollD(turnOrder[turnCount].getDamageDice());
                 DiceText.text = turnRoll.ToString();
                 turnRoll += Dice.rollD(turnOrder[turnCount].getDamageDice());
@@ -588,7 +613,10 @@ public class TurnControl : MonoBehaviour
                 countMoves++;
             }
             else {
-                instructions.text = "SkeletonHorse is moving";
+                if(countMoves == 0)
+                    instructions.text = "SkeletonHorse moves for first turn";
+                else if(countMoves == 1)
+                    instructions.text = "SkeletonHorse moves for its second turn";
                 PlayerMover.startMovement();
                 yield return new WaitForSeconds(5f);
                 //don't need countMoves++ because it is already counted in playermover
@@ -616,7 +644,10 @@ public class TurnControl : MonoBehaviour
             List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 10);
             print("enemies to attack: " + enemiesToAttack.Count);
             if(enemiesToAttack.Count > 0 && !attackedFirst){
-                instructions.text = "Skeleton is attacking";
+                if(countMoves == 0)
+                    instructions.text = "Skeleton attacks for first turn";
+                else if(countMoves == 1)
+                    instructions.text = "Skeleton attacks for its second turn";
                 // attack first enemy in list
                 // attack code here
                 tempSkel.startAttack(enemiesToAttack[0].gameObject, cam);
@@ -630,7 +661,10 @@ public class TurnControl : MonoBehaviour
                 countMoves++;
             }
             else {
-                instructions.text = "Skeleton is moving";
+                if(countMoves == 0)
+                    instructions.text = "Skeleton moves for first turn";
+                else if(countMoves == 1)
+                    instructions.text = "Skeleton moves for its second turn";
                 PlayerMover.startMovement();
                 yield return new WaitForSeconds(5f);
                 //don't need countMoves++ because it is already counted in playermover
@@ -1066,12 +1100,12 @@ public class TurnControl : MonoBehaviour
             if(p1.transform.position.x == tile[i].transform.position.x && p1.transform.position.z == tile[i].transform.position.z)
             {
                 start = tile[i];
-                print("setting start to " + i);
+                //print("setting start to " + i);
             }
             if(p2.transform.position.x == tile[i].transform.position.x && p2.transform.position.z == tile[i].transform.position.z)
             {
                 end = tile[i];
-                print("setting end to " + i);
+               // print("setting end to " + i);
             }
         }
         TileScript current;
@@ -1137,7 +1171,8 @@ public class TurnControl : MonoBehaviour
         {
             path.Add(temp[i]);
         }
-        instructions.text = path.Count.ToString();
+        
+        //instructions.text = path.Count.ToString();
         return path.Count*5;
     }
 
