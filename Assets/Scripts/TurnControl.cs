@@ -49,6 +49,7 @@ public class TurnControl : MonoBehaviour
 
     int goodCount = 0;
     int badCount = 0;
+    bool nextTurnText = true;
     
     public void addSkelHorse(GameObject skH)
    {
@@ -173,9 +174,14 @@ public class TurnControl : MonoBehaviour
                 }
             }
         }
-
+        if(countMoves == 1 && nextTurnText)
+        {
+           if( turnOrder[turnCount].tag.Equals("Cleric") || turnOrder[turnCount].tag.Equals("Wiz"))
+              instructions.text = "choose next move";
+        }
         if (countMoves >= 2)
         {
+            nextTurnText = true;
             turnCount++;
             switchTurn();
         }
@@ -201,6 +207,7 @@ public class TurnControl : MonoBehaviour
             }
              if (playersInRange.Count == 0)
              {
+                    nextTurnText = false;
                     instructions.text = "No units in range! Select move for second turn";
                     countMoves++;
                     lightUp = false;
@@ -229,6 +236,7 @@ public class TurnControl : MonoBehaviour
             }
             if (tileTarget != null && Input.GetKeyDown(KeyCode.Return))
             {
+                nextTurnText = false;
                 instructions.text = "Rolling for attack ";
                 int turnRoll = Dice.rollD("D20");
                 DiceText.text = turnRoll.ToString();
@@ -501,7 +509,7 @@ public class TurnControl : MonoBehaviour
         
         IsrollDone = true;
        // getPlayersInRange(wiz[0],turnOrder,600);
-        switchTurn();
+       switchTurn();
         
         
     }
@@ -554,15 +562,16 @@ public class TurnControl : MonoBehaviour
     }
     public void onMoveButton()
     {
+        nextTurnText = false;
         StartCoroutine(MoveText());
     }
+
     IEnumerator MoveText()
     {
         instructions.text = "Select a tile and hit enter to move! ";
-        yield return new WaitForSeconds(1f);
-        if(PMoveDone)
-            instructions.text = "Now choose move or action";
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
+        //instructions.text = " ";
+        nextTurnText = true;
     }
     IEnumerator clericAction()
     {
@@ -618,7 +627,7 @@ public class TurnControl : MonoBehaviour
                 else if(countMoves == 1)
                     instructions.text = "SkeletonHorse moves for its second turn";
                 PlayerMover.startMovement();
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(3f);
                 //don't need countMoves++ because it is already counted in playermover
             }
         }
@@ -666,7 +675,7 @@ public class TurnControl : MonoBehaviour
                 else if(countMoves == 1)
                     instructions.text = "Skeleton moves for its second turn";
                 PlayerMover.startMovement();
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(3f);
                 //don't need countMoves++ because it is already counted in playermover
             }
         }
