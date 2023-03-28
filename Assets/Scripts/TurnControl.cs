@@ -1,4 +1,3 @@
-//hi
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -145,13 +144,11 @@ public class TurnControl : MonoBehaviour
             if (goodCount == 0)
             {
                 state = TurnState.lose;
-                print("LOSE");
                 SceneManager.LoadScene("LossEnding");
             }
             else if (badCount == 0)
             {
                 state = TurnState.win;
-                print("WIN");
                 SceneManager.LoadScene("WinEnding");
             }
             else
@@ -204,8 +201,6 @@ public class TurnControl : MonoBehaviour
                         {
                             tileTarget.setColor(Color.blue * 2);
                         }
-                        //tiles[i].setColor(Color.red * 2); //this needs to be called in an update / be active for a longer time
-                        //playersInRangeTiles.Add(tiles[i]);
                     }
                 }
             }
@@ -218,7 +213,6 @@ public class TurnControl : MonoBehaviour
              }
             if (Input.GetMouseButtonDown(0))
             {
-                //print("test");
                 RaycastHit hit;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -226,14 +220,9 @@ public class TurnControl : MonoBehaviour
                 {
                     if (hit.transform.tag == "Tile")
                     {
-                        //print("test1");
-                        print(playersInRangeTiles.Count);
                         if (playersInRangeTiles.Contains(hit.transform.gameObject.GetComponent<TileScript>()))
                         {
-                            //print("test2");
                             tileTarget = hit.transform.gameObject.GetComponent<TileScript>();
-
-                            //lightUp = false;
                         }
                     }
                 }
@@ -479,7 +468,6 @@ public class TurnControl : MonoBehaviour
             int turnRoll = Dice.rollD("D20");
             instructions.text = "cleric " + i + " rolls " + turnRoll;
             DiceText.text = turnRoll.ToString();
-            //string whichUnit = "cleric" + i.ToString();
             turnDict.Add(cleric[i], turnRoll);
             addRandArmor(cleric[i]);
             addRandWeapon(cleric[i]);
@@ -527,7 +515,6 @@ public class TurnControl : MonoBehaviour
         turnOrder.Reverse(); //reverse the list so it is in the right order
         
         IsrollDone = true;
-       // getPlayersInRange(wiz[0],turnOrder,600);
        switchTurn();
         
         
@@ -547,14 +534,12 @@ public class TurnControl : MonoBehaviour
         {
               turnCount = 0;
         }
-        //instructions.text = turnOrder[turnCount].tag + " turn";
         if(turnOrder[turnCount].tag.Equals("Cleric"))
         {
             actionParent.SetActive(true);
             moveParent.SetActive(true);
             state = TurnState.cleric;
             StartCoroutine(clericAction());
-            //clericAction();
         }
         if(turnOrder[turnCount].tag.Equals("Skel"))
         {
@@ -577,7 +562,6 @@ public class TurnControl : MonoBehaviour
             state = TurnState.skelHorse;
             StartCoroutine(SkeletonHorseAction());
         }
-        //turnCount++; //incriment the count after it is switched 
     }
     public void onMoveButton()
     {
@@ -588,8 +572,12 @@ public class TurnControl : MonoBehaviour
     IEnumerator MoveText()
     {
         instructions.text = "Select a tile and hit enter to move! ";
+<<<<<<< HEAD
         yield return new WaitForSeconds(2f);
         //instructions.text = " ";
+=======
+        yield return new WaitForSeconds(3f);
+>>>>>>> f1f4431008abdd81ab650dc32a2685e870dba95b
         nextTurnText = true;
     }
     IEnumerator wait2Sec(string outText)
@@ -617,7 +605,6 @@ public class TurnControl : MonoBehaviour
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
         yield return new WaitForSeconds(1f);
-        //switchTurn();
         //do the if statements and looking at tags again to see which turn to switch to next
     }
     IEnumerator SkeletonHorseAction()
@@ -627,8 +614,6 @@ public class TurnControl : MonoBehaviour
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
         yield return new WaitForSeconds(1f);
-        //PlayerMover.startMovement();
-        //yield return new WaitForSeconds(6f);
         countMoves = 0;
         //determine if there is a player in range
         bool attackedFirst = false;
@@ -636,7 +621,7 @@ public class TurnControl : MonoBehaviour
         {
             SkelHorseUnit tempSkelHorse = (SkelHorseUnit)turnOrder[turnCount];
             List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 10);
-            print("enemies to attack: " + enemiesToAttack.Count);
+            //print("enemies to attack: " + enemiesToAttack.Count);
             if(enemiesToAttack.Count > 0 && !attackedFirst){
                  if(countMoves == 0)
                     instructions.text = "SkeletonHorse attacks for first turn";
@@ -679,8 +664,6 @@ public class TurnControl : MonoBehaviour
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
         yield return new WaitForSeconds(1f);
-        //PlayerMover.startMovement();
-        //yield return new WaitForSeconds(6f);
         countMoves = 0;
         // need to fix the attacking
         // for some reason it always attacks first
@@ -689,7 +672,7 @@ public class TurnControl : MonoBehaviour
         while(countMoves < 2 && turnOrder[turnCount].tag == "Skel"){
             SkeletonUnit tempSkel = (SkeletonUnit)turnOrder[turnCount];
             List<AbstractUnit> enemiesToAttack = getPlayersInRange(turnOrder[turnCount], turnOrder, 10);
-            print("enemies to attack: " + enemiesToAttack.Count);
+            //print("enemies to attack: " + enemiesToAttack.Count);
             if(enemiesToAttack.Count > 0 && !attackedFirst){
                 if(countMoves == 0)
                     instructions.text = "Skeleton attacks for first turn";
@@ -721,9 +704,6 @@ public class TurnControl : MonoBehaviour
                 //don't need countMoves++ because it is already counted in playermover
             }
         }
-
-        //countMoves = 2;
-        //switchTurn();
     }
     IEnumerator WizardAction()
     {
@@ -731,7 +711,6 @@ public class TurnControl : MonoBehaviour
         hud.UpdateHealth(turnOrder[turnCount].getHp(), turnOrder[turnCount].getMaxHp());
         hud.createStats(turnOrder[turnCount].getClass(), turnOrder[turnCount].getArmor(), turnOrder[turnCount].getWeapon(), turnOrder[turnCount].getArmorC(), turnOrder[turnCount].getMove());
         yield return new WaitForSeconds(1f);
-        //switchTurn();
     }
     
     public void FBTaskOnClick()
@@ -843,7 +822,6 @@ public class TurnControl : MonoBehaviour
 
     public void HWTaskOnClick()
     {
-        print("test");
         spellChoice = "HW";
 
         playersInRange = getPlayersInRange(turnOrder[turnCount], turnOrder, 60);
@@ -1105,7 +1083,6 @@ public class TurnControl : MonoBehaviour
     {
         if (turnOrder[turnCount].tag.Equals("Wiz"))
         {
-            print("wizard");
             wizardParentButton.SetActive(true);
 
             if (turnOrder[turnCount].getSS1() == 0 && turnOrder[turnCount].getSS2() == 0 && turnOrder[turnCount].getSS3() == 0)
@@ -1119,7 +1096,6 @@ public class TurnControl : MonoBehaviour
         }
         else if (turnOrder[turnCount].tag.Equals("Cleric"))
         {
-            print("cleric");
             clericParentButton.SetActive(true);
             if (turnOrder[turnCount].getSS1() == 0 && turnOrder[turnCount].getSS2() == 0 && turnOrder[turnCount].getSS3() == 0)
             {
@@ -1162,12 +1138,10 @@ public class TurnControl : MonoBehaviour
             if(p1.transform.position.x == tile[i].transform.position.x && p1.transform.position.z == tile[i].transform.position.z)
             {
                 start = tile[i];
-                //print("setting start to " + i);
             }
             if(p2.transform.position.x == tile[i].transform.position.x && p2.transform.position.z == tile[i].transform.position.z)
             {
                 end = tile[i];
-               // print("setting end to " + i);
             }
         }
         TileScript current;
@@ -1234,7 +1208,6 @@ public class TurnControl : MonoBehaviour
             path.Add(temp[i]);
         }
         
-        //instructions.text = path.Count.ToString();
         return path.Count*5;
     }
 
@@ -1245,8 +1218,6 @@ public class TurnControl : MonoBehaviour
         {
             if(findPath(player, others[i]) <= range && others[i] != player)
 	        {
-                print(findPath(player, others[i]));
-                print(range);
 		        playersInRange.Add(others[i]);
 	        }
         }	
