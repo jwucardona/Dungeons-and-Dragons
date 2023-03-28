@@ -572,12 +572,7 @@ public class TurnControl : MonoBehaviour
     IEnumerator MoveText()
     {
         instructions.text = "Select a tile and hit enter to move! ";
-<<<<<<< HEAD
         yield return new WaitForSeconds(2f);
-        //instructions.text = " ";
-=======
-        yield return new WaitForSeconds(3f);
->>>>>>> f1f4431008abdd81ab650dc32a2685e870dba95b
         nextTurnText = true;
     }
     IEnumerator wait2Sec(string outText)
