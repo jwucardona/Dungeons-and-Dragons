@@ -627,7 +627,7 @@ public class TurnControl : MonoBehaviour
                 else if(countMoves == 1)
                     instructions.text = "SkeletonHorse moves for its second turn";
                 PlayerMover.startMovement();
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(6f);
                 //don't need countMoves++ because it is already counted in playermover
             }
         }
@@ -675,7 +675,7 @@ public class TurnControl : MonoBehaviour
                 else if(countMoves == 1)
                     instructions.text = "Skeleton moves for its second turn";
                 PlayerMover.startMovement();
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(6f);
                 //don't need countMoves++ because it is already counted in playermover
             }
         }
