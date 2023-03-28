@@ -132,7 +132,6 @@ public class PlayerMover : MonoBehaviour
 
     public static void startMovement()
     {
-        //print("test1");
         startChoosing = true;
     }
 
@@ -197,7 +196,6 @@ public class PlayerMover : MonoBehaviour
             moveToTile = null;
             startTile = null;
 
-            //print("test");
             //turnControl.setInstructions();
             turnControl.setCountMoves(1);
             //this is where turn in considered over... we can call to a function in

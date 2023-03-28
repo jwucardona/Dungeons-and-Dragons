@@ -57,7 +57,7 @@
                 NewData.text = (i).ToString();
                 clericDropdownMenu.options.Add(NewData);
             }
-            print(wizardInput);
+            //print(wizardInput);
         }
         public void setClericInput()
         {
@@ -69,11 +69,11 @@
                 NewData.text = (i).ToString();
                 wizardDropdownMenu.options.Add(NewData);
             }
-            print(clericInput);
+            //print(clericInput);
         }
         public void setEnemyInput(){
             enemyInput = enemyDropdownMenu.value + 1;
-            print(enemyInput);
+            //print(enemyInput);
         }
 
         public static int getWizardInput(){
