@@ -178,7 +178,10 @@ public class TurnControl : MonoBehaviour
         if(countMoves == 1 && nextTurnText)
         {
            if( turnOrder[turnCount].tag.Equals("Cleric") || turnOrder[turnCount].tag.Equals("Wiz"))
+           {
+              //StartCoroutine(wait2Sec("choose next move"));
               instructions.text = "choose next move";
+           }
         }
         if (countMoves >= 2)
         {
@@ -195,7 +198,7 @@ public class TurnControl : MonoBehaviour
                 {
                     if (playersInRange[j].transform.position.x == tiles[i].transform.position.x && playersInRange[j].transform.position.z == tiles[i].transform.position.z)
                     {
-                        instructions.text = "select a red enemy tile and hit ENTER to attack";
+                        instructions.text = "select a red tile and hit ENTER to activate";
                         tiles[i].setColor(Color.red * 2);
                         if (tileTarget != null)
                         {
@@ -240,6 +243,7 @@ public class TurnControl : MonoBehaviour
                 nextTurnText = false;
                 instructions.text = "Rolling for attack ";
                 int turnRoll = Dice.rollD("D20");
+
                 DiceText.text = turnRoll.ToString();
 
                 for (int j = 0; j < playersInRange.Count; j++)
@@ -251,6 +255,7 @@ public class TurnControl : MonoBehaviour
                 }
                 if (turnOrder[turnCount].tag.Equals("Wiz"))
                 {
+                    StartCoroutine(spellText());
                     WizardUnit tempWizard = (WizardUnit)turnOrder[turnCount];
                     if (turnRoll + 3 > playerTarget.getArmorC())
                     {
@@ -263,6 +268,7 @@ public class TurnControl : MonoBehaviour
                             instructions.text = "Melee attack for " + turnRoll.ToString() + " damage!";
                             StartCoroutine(playerTarget.takeDamage(turnRoll));
                             countMoves++;
+                            StartCoroutine(nextMove());
                         }
                         else if (spellChoice.Equals("FB"))
                         {
@@ -273,6 +279,7 @@ public class TurnControl : MonoBehaviour
                             StartCoroutine(playerTarget.takeDamage(turnRoll));
                             spellChoice = "";
                             countMoves++;
+                            StartCoroutine(nextMove());
                         }
                         else if (spellChoice.Equals("ROF"))
                         {
@@ -283,6 +290,7 @@ public class TurnControl : MonoBehaviour
                             StartCoroutine(playerTarget.takeDamage(turnRoll));
                             spellChoice = "";
                             countMoves++;
+                            StartCoroutine(nextMove());
                         }
                         else if (spellChoice.Equals("MM"))
                         {
@@ -339,12 +347,17 @@ public class TurnControl : MonoBehaviour
                     }
                     else
                     {
+                        nextTurnText = false;
                         instructions.text = "Attack did not penetrate armor.";
+                        //StartCoroutine(wait2Sec("Attack did not penetrate armor"));
                         countMoves++;
+                        StartCoroutine(nextMove());
                     }
                 }
                 else if (turnOrder[turnCount].tag.Equals("Cleric"))
                 {
+                    StartCoroutine(spellText());
+                    nextTurnText = false;
                     ClericUnit tempCleric = (ClericUnit)turnOrder[turnCount];
                     if (spellChoice.Equals("Attack"))
                     {
@@ -357,11 +370,14 @@ public class TurnControl : MonoBehaviour
                             instructions.text = "Melee attack for " + turnRoll.ToString() + " damage!";
                             StartCoroutine(playerTarget.takeDamage(turnRoll));
                             countMoves++;
+                            StartCoroutine(nextMove());
                         }
                         else
                         {
                             instructions.text = "Attack did not penetrate armor.";
+                            //StartCoroutine(wait2Sec("Attack did not penetrate armor"));
                             countMoves++;
+                            StartCoroutine(nextMove());
                         }
                     }
                     else if (turnRoll > 5)
@@ -438,8 +454,10 @@ public class TurnControl : MonoBehaviour
                     }
                     else
                     {
+                        //StartCoroutine(wait2Sec("Did not roll high enough for healing spell."));
                         instructions.text = "Did not roll high enough for healing spell.";
                         countMoves++;
+                        StartCoroutine(nextMove());
                     }
                 }
                 lightUp = false;
@@ -570,9 +588,27 @@ public class TurnControl : MonoBehaviour
     IEnumerator MoveText()
     {
         instructions.text = "Select a tile and hit enter to move! ";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         //instructions.text = " ";
         nextTurnText = true;
+    }
+    IEnumerator wait2Sec(string outText)
+    {
+        yield return new WaitForSeconds(2f);
+        instructions.text = outText;
+    }
+    IEnumerator spellText()
+    {
+        yield return new WaitForSeconds(2f);
+        DiceText.text = " ";
+        instructions.text = "roll is greater than armor class, select spell to cast";
+    }
+    IEnumerator nextMove()
+    {
+        yield return new WaitForSeconds(2f);
+        DiceText.text = " ";
+        if(countMoves == 1)
+            instructions.text = "Select move for your next turn!";
     }
     IEnumerator clericAction()
     {
@@ -609,9 +645,9 @@ public class TurnControl : MonoBehaviour
                 // attack first enemy in list
                 // attack code here
                 tempSkelHorse.startAttack(enemiesToAttack[0].gameObject, cam);
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(2f);
                 instructions.text = "rolling for damage";
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(2f);
                 int turnRoll = Dice.rollD(turnOrder[turnCount].getDamageDice());
                 DiceText.text = turnRoll.ToString();
                 turnRoll += Dice.rollD(turnOrder[turnCount].getDamageDice());
@@ -619,6 +655,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Melee attack for " + turnRoll.ToString() + " damage!";
                 StartCoroutine(enemiesToAttack[0].takeDamage(turnRoll));
                 yield return new WaitForSeconds(3f);
+                DiceText.text = " ";
                 attackedFirst = true;
                 countMoves++;
             }
@@ -660,14 +697,18 @@ public class TurnControl : MonoBehaviour
                     instructions.text = "Skeleton attacks for its second turn";
                 // attack first enemy in list
                 // attack code here
+                yield return new WaitForSeconds(2f);
                 tempSkel.startAttack(enemiesToAttack[0].gameObject, cam);
+                instructions.text = "rolling for damage!";
                 int turnRoll = Dice.rollD(turnOrder[turnCount].getDamageDice());
                 DiceText.text = turnRoll.ToString();
                 turnRoll += 2;
+                yield return new WaitForSeconds(2f);
                 instructions.text = "Melee attack for " + turnRoll.ToString() + " damage!";
                 StartCoroutine(enemiesToAttack[0].takeDamage(turnRoll));
                 yield return new WaitForSeconds(3f);
                 attackedFirst = true;
+                DiceText.text = " ";
                 countMoves++;
             }
             else {
@@ -881,6 +922,7 @@ public class TurnControl : MonoBehaviour
             instructions.text = "Magic Missile cast for " + temp.ToString() + " damage.";
             StartCoroutine(playerTarget.takeDamage(temp));
             spellChoice = "";
+            StartCoroutine(nextMove());
         }
         else if (turnOrder[turnCount].tag.Equals("Cleric"))
         {
@@ -890,6 +932,7 @@ public class TurnControl : MonoBehaviour
             DiceText.text = turnRoll.ToString();
             instructions.text = "Healing Word cast for " + turnRoll.ToString() + " healing.";
             playerTarget.addHealth(turnRoll);
+            StartCoroutine(nextMove());
         }
         countMoves++;
         wizSpellSlotsParent.SetActive(false);
@@ -915,6 +958,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Magic Missile cast for " + temp.ToString() + " damage.";
                 StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
+                StartCoroutine(nextMove());
             }
             else if (spellChoice.Equals("SR"))
             {
@@ -935,6 +979,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Scorching Ray cast for " + temp.ToString() + " damage.";
                 StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
+                StartCoroutine(nextMove());
             }
         }
         else if (turnOrder[turnCount].tag.Equals("Cleric"))
@@ -948,6 +993,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Healing Word cast for " + turnRoll.ToString() + " healing.";
                 playerTarget.addHealth(turnRoll);
                 spellChoice = "";
+                StartCoroutine(nextMove());
             }
             else if (spellChoice.Equals("A"))
             {
@@ -955,6 +1001,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Aid cast for 5 healing.";
                 playerTarget.addHealth(5);
                 spellChoice = "";
+                StartCoroutine(nextMove());
             }
         }
         countMoves++;
@@ -982,6 +1029,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Magic Missile cast for " + temp.ToString() + " damage.";
                 StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
+                StartCoroutine(nextMove());
             }
             else if (spellChoice.Equals("SR"))
             {
@@ -1002,6 +1050,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Scorching Ray cast for " + temp.ToString() + " damage.";
                 StartCoroutine(playerTarget.takeDamage(temp));
                 spellChoice = "";
+                StartCoroutine(nextMove());
             }
         }
         else if (turnOrder[turnCount].tag.Equals("Cleric"))
@@ -1015,6 +1064,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Healing Word cast for " + turnRoll.ToString() + " healing.";
                 playerTarget.addHealth(turnRoll);
                 spellChoice = "";
+                StartCoroutine(nextMove());
             }
             else if (spellChoice.Equals("A"))
             {
@@ -1022,6 +1072,7 @@ public class TurnControl : MonoBehaviour
                 instructions.text = "Aid cast for 5 healing.";
                 playerTarget.addHealth(5);
                 spellChoice = "";
+                StartCoroutine(nextMove());
             }
             else if (spellChoice.Equals("MHW"))
             {
@@ -1034,6 +1085,7 @@ public class TurnControl : MonoBehaviour
                     playersInRange[i].addHealth(turnRoll);
                 }
                 spellChoice = "";
+                StartCoroutine(nextMove());
             }
         }
         countMoves++;
